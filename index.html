@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>Cirrus | Apartments in Seattle, WA | </title>
+    <title>Interactive Site Map</title>
     <meta name="description" content="Check out photos, floor plans, amenities, rental rates & availability at Cirrus, Seattle, WA and submit your lease application today!" />
     <meta name="referrer" content="always" />
     <meta name="keywords" content="Cirrus, apartments, rentals, apartment guide, apartment finder, apartment search, apartment locator, apartments for rent, apartment listings" />
@@ -527,15 +527,13 @@
 	<section id="map-header">
 		<h1>Community Viewer</h1>
 		
-		<div class="btn-group bedrooms-dropdown">
-			<button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Any Bedrooms &nbsp; <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#">Studio</a></li>
-				<li><a href="#">1 Bedroom</a></li>
-				<li><a href="#">2 Bedroom</a></li>
-			</ul>
-		</div>
+			<select id="filter-bedrooms">
+				<option value="all">Any Bedrooms</option>
+				<option value="0">Studio</option>
+				<option value="1">1 Bedroom</option>
+				<option value="2">2 Bedrooms</option>
+			</select>
+
 		
 		<button id="more-filters-btn" class="btn btn-inverse">+ More Filters</button>
 		

@@ -3,6 +3,7 @@
 
 #innerpage #ctmcontentcontainer {
 	padding: 38px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 @media (max-width: 1300px) {
@@ -22,7 +23,8 @@
 	
 }
 
-#interactive-map-container {
+#interactive-map-container,
+#interactive-map-container select {
 	color: #424242;
 	font-family: 'Open Sans', sans-serif;
     font-size: 12px;
@@ -72,6 +74,7 @@
     align-items: center;
     background: #ececec;
     padding: 15px 25px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 #map-header h1 {
@@ -79,14 +82,16 @@
 	text-transform: none;
 	font-size: 2vw;
 	margin-right: 5%;
+	font-family: 'Open Sans', sans-serif;
 }
 
 #map-header h1::after {
 	content: none;
 }
 
-#map-header .bedrooms-dropdown {
-	margin-right: 2%;
+#filter-bedrooms {
+	margin: 0 2%;
+	width: 110px;
 }
 
 
