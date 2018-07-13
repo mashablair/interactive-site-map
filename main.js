@@ -1,14 +1,16 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabs, expandBtn, filtersContainer, clearFiltersBtn;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer;
 	
 	function init() {
 		moreFilters = $('#more-filters');
-		tabs = $('#map-tabs');
+//		tabs = $('#map-tabs');
+		tabsBtns = $('.nav-icon');
 		expandBtn = $('#more-filters-btn');
 		filtersContainer = $('.more-filters-container');
 		clearFiltersBtn = $('#clear-all-filters');
+		mapsContainer = $('#interactive-site-map');
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -20,8 +22,19 @@
 			
 			// header tabs navigation
 			navigateTabs: function() {
-				$('#map-tabs .nav-icon').removeClass('active-tab');
+				tabsBtns.removeClass('active-tab');
 				$(this).addClass('active-tab');
+				
+				// change view
+				function onViewChange() {
+					mapsContainer.toggleClass('view-change');
+				}
+				
+				if ($(this).hasClass('first-view-btn')) {
+					onViewChange();
+				} else if ($(this).hasClass('second-view-btn')) {
+					onViewChange();
+				}
 			},
 			
 			// more filters button
@@ -52,9 +65,13 @@
 		}; // end of 'commands' var
 		
 		// all events handlers
-		tabs.on('click', '.nav-icon', commands.navigateTabs);
+		tabsBtns.on('click', commands.navigateTabs);
 		expandBtn.on('click', commands.expandFilters);
-		clearFiltersBtn.on('click', commands.resetFilters);
+		clearFiltersBtn.on('click', commands.resetFilters);	
+		
+		
+		
+		
 	
 	} // end of 'init' function
 	

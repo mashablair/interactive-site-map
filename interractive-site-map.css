@@ -293,3 +293,48 @@
 
 
 
+/* INTERACTIVE MAP */
+#interactive-site-map {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.views {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	will-change: transform;
+	transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.first-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+.second-view, .third-view {
+	transform: translateX(100%);
+}
+
+.view-change .first-view {
+	transform: translateX(-100%);
+}
+
+.view-change .second-view {
+	transform: translateX(0);
+}
+
+
+
+/* 1st View */
+
+
+
+
