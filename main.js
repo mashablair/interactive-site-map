@@ -40,8 +40,8 @@ $(function() {
 	
 	// reset all filters
 	$('#clear-all-filters').on('click', function() {
-//		moreFilters.find("input[type=text]").val("");
-		moreFilters.find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
+		$("#map-header, #more-filters").find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
+		$("#any-ba").prop('checked', true);
 	});
 	
 });
