@@ -323,14 +323,23 @@
 	transform: translateX(100%);
 }
 
-.view-change .first-view {
+/* when stacks btn clicked */
+.view-change-1 .first-view {
 	transform: translateX(-100%);
 }
 
-.view-change .second-view {
+.view-change-1 .second-view {
 	transform: translateX(0);
 }
 
+/* when one-stack btn clicked */
+.view-change-2 .second-view {
+	transform: translateX(-100%);
+}
+
+.view-change-2 .third-view {
+	transform: translateX(0);
+}
 
 
 /* 1st View */

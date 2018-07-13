@@ -25,15 +25,14 @@
 				tabsBtns.removeClass('active-tab');
 				$(this).addClass('active-tab');
 				
-				// change view
-				function onViewChange() {
-					mapsContainer.toggleClass('view-change');
-				}
-				
+				// change view by toggling CSS classes that create a slider
+				// effect with a transition
 				if ($(this).hasClass('first-view-btn')) {
-					onViewChange();
+					mapsContainer.removeClass('view-change-1 view-change-2');
 				} else if ($(this).hasClass('second-view-btn')) {
-					onViewChange();
+					mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+				} else if ($(this).hasClass('third-view-btn')) {
+					mapsContainer.addClass('view-change-1 view-change-2');
 				}
 			},
 			
