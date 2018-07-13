@@ -37,12 +37,6 @@
 	text-align: center;
 }
 
-#interactive-map-container .dropdown-menu>li>a {
-	color: #424242;
-	padding: 3px 20px;
-	font-size: 12px;
-}
-
 
 /* buttons */
 #interactive-map-container button:hover,
@@ -91,7 +85,13 @@
 
 #filter-bedrooms {
 	margin: 0 2%;
-	width: 110px;
+	width: 120px;
+/*
+	border: 0;
+	outline: 1px solid #CCC;
+    background-color: white;
+    background: #ececec;
+*/
 }
 
 
@@ -192,10 +192,6 @@
 	border: 1px solid;
 }
 
-.filters-first-row .dropdown {
-	padding: 0;
-}
-
 
 /* 2nd row */
 .filters-second-row {
@@ -239,6 +235,44 @@
     max-height: 199px;
     flex-wrap: wrap;
 }
+
+/* replaced from Bootstrap 2 button-groups */
+.buttonCheckbox-label, 
+.buttonRadio-label {
+    font-size: 12px;
+	color: #424242;
+    transition: all .3s ease-out;
+    padding: 5px 15px;
+    border: 1px solid #d8d8d8;
+    border-right: 0px;
+    display: table-cell;
+    background: #fff;
+    text-align: center;
+}
+
+.buttonCheckbox-label:last-of-type, 
+.buttonRadio-label:last-of-type {
+    border-right: 1px solid #d8d8d8;
+}
+
+.buttonCheckbox input[type=checkbox], 
+.buttonRadios input[type=radio] { 
+	display:none; 
+} /* to hide the checkbox/radio itself */
+
+.buttonCheckbox input[type=checkbox] + label:hover, 
+.buttonRadios input[type=radio] + label:hover {
+	color:#0088cc;  
+	border-color: #d8d8d8; 
+	cursor:pointer; 
+}     
+
+.buttonCheckbox input[type=checkbox]:checked + label, 
+.buttonRadios input[type=radio]:checked + label {
+	background-color: #0088cc; 
+	color: #fff; 
+	border-color: #fff;
+}   
 
 
 

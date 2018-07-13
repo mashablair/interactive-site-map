@@ -527,13 +527,12 @@
 	<section id="map-header">
 		<h1>Community Viewer</h1>
 		
-			<select id="filter-bedrooms">
-				<option value="all">Any Bedrooms</option>
-				<option value="0">Studio</option>
-				<option value="1">1 Bedroom</option>
-				<option value="2">2 Bedrooms</option>
-			</select>
-
+		<select id="filter-bedrooms">
+			<option value="all">Any Bedrooms</option>
+			<option value="0">Studio</option>
+			<option value="1">1 Bedroom</option>
+			<option value="2">2 Bedrooms</option>
+		</select>
 		
 		<button id="more-filters-btn" class="btn btn-inverse">+ More Filters</button>
 		
@@ -546,7 +545,7 @@
 	</section>
 	
 	<!--  MORE FILTERS  -->
-	<section id="more-filters" class="" tabindex="-1">
+	<section id="more-filters" tabindex="-1">
 		<div class="more-filters-container">
 		<!-- 1st row -->
 		<div class="filters-first-row">
@@ -558,12 +557,15 @@
 			</div>
 			
 			<div>
-				<div>
+				<div id="filter-baths">
 					<p>Bathrooms</p>
-					<div class="btn-group" role="group" id="bedrooms">
-						<button type="button" class="btn btn-default active btn-primary"> Any</button>
-						<button type="button" class="btn btn-default"> 1+</button>
-						<button type="button" class="btn btn-default"> 2+</button>
+					<div class="buttonRadios">
+						<input class="buttonRadio" id="any" name="baths" type="radio" data-filter="baths" value="0" checked />
+						<label for="any" class="buttonRadio-label">Any</label>
+						<input class="buttonRadio" id="1ba" name="baths" type="radio" data-filter="baths" value="1" />
+						<label for="1ba" class="buttonRadio-label">1+</label>
+						<input class="buttonRadio" id="2ba" name="baths" type="radio" data-filter="baths" value="2" />
+						<label for="2ba" class="buttonRadio-label">2+</label>
 					</div>
 				</div>
 			</div>
