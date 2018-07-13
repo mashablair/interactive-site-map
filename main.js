@@ -1,16 +1,18 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn;
 	
 	function init() {
 		moreFilters = $('#more-filters');
-//		tabs = $('#map-tabs');
 		tabsBtns = $('.nav-icon');
 		expandBtn = $('#more-filters-btn');
 		filtersContainer = $('.more-filters-container');
 		clearFiltersBtn = $('#clear-all-filters');
 		mapsContainer = $('#interactive-site-map');
+		firstViewBtn = $('.first-view-btn');
+		secondViewBtn = $('.second-view-btn');
+		thirdViewBtn = $('.third-view-btn');
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -20,20 +22,24 @@
 		
 		var commands = {
 			
-			// header tabs navigation
+			// header tabs navigation -- appearance only
 			navigateTabs: function() {
 				tabsBtns.removeClass('active-tab');
 				$(this).addClass('active-tab');
-				
-				// change view by toggling CSS classes that create a slider
-				// effect with a transition
-				if ($(this).hasClass('first-view-btn')) {
-					mapsContainer.removeClass('view-change-1 view-change-2');
-				} else if ($(this).hasClass('second-view-btn')) {
-					mapsContainer.addClass('view-change-1').removeClass('view-change-2');
-				} else if ($(this).hasClass('third-view-btn')) {
-					mapsContainer.addClass('view-change-1 view-change-2');
-				}
+			},
+			
+			// 3 methods below change Interactive Site Map view by toggling 
+			// CSS classes that create a slider effect with a transition
+			navigateToFirstView: function() {
+				mapsContainer.removeClass('view-change-1 view-change-2');
+			},
+			
+			navigateToSecondView: function() {
+				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+			},
+			
+			navigateToThirdView: function() {
+				mapsContainer.addClass('view-change-1 view-change-2');
 			},
 			
 			// more filters button
@@ -66,8 +72,10 @@
 		// all events handlers
 		tabsBtns.on('click', commands.navigateTabs);
 		expandBtn.on('click', commands.expandFilters);
-		clearFiltersBtn.on('click', commands.resetFilters);	
-		
+		clearFiltersBtn.on('click', commands.resetFilters);
+		firstViewBtn.on('click', commands.navigateToFirstView);
+		secondViewBtn.on('click', commands.navigateToSecondView);
+		thirdViewBtn.on('click', commands.navigateToThirdView);
 		
 		
 		
