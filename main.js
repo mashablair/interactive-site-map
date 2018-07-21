@@ -77,6 +77,19 @@
 		secondViewBtn.on('click', commands.navigateToSecondView);
 		thirdViewBtn.on('click', commands.navigateToThirdView);
 		
+		$('[data-toggle="popover"]').popover('show'); 
+		
+		$('.link-for-blocks').on({
+			'hover' : function() {
+				$('.popover-title').addClass('in-focus');
+			},
+			'mouseout' : function() {
+				$('.popover-title').removeClass('in-focus');
+			}
+		});
+		
+		$('a[rel=popover]').addClass('my-super-popover');
+
 		
 		
 	

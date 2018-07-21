@@ -1,9 +1,11 @@
 /* mobile view layout to 100vw FOR CIRRUS THEME ONLY */
 
+h1, h2, h3, p, select, button, input, label, a {
+	font-family: 'Open Sans', sans-serif;
+}
 
 #innerpage #ctmcontentcontainer {
 	padding: 38px;
-	font-family: 'Open Sans', sans-serif;
 }
 
 @media (max-width: 1300px) {
@@ -23,16 +25,18 @@
 	
 }
 
+#interactive-map-container {
+	border: 1px solid #ececec;
+}
+
 #interactive-map-container,
 #interactive-map-container select {
 	color: #424242;
-	font-family: 'Open Sans', sans-serif;
     font-size: 12px;
 }
 
 #interactive-map-container button,
 #more-filters input {
-	font-family: 'Open Sans', sans-serif;
     font-size: 12px;
 	text-align: center;
 }
@@ -68,7 +72,6 @@
     align-items: center;
     background: #ececec;
     padding: 15px 25px;
-	font-family: 'Open Sans', sans-serif;
 }
 
 #map-header h1 {
@@ -76,7 +79,6 @@
 	text-transform: none;
 	font-size: 2vw;
 	margin-right: 5%;
-	font-family: 'Open Sans', sans-serif;
 }
 
 #map-header h1::after {
@@ -201,7 +203,6 @@
 }
 
 .filters-second-row label {
-	font-family: 'Open Sans', sans-serif;
 	font-size: 11px;
     margin-bottom: 0;
 }
@@ -301,6 +302,10 @@
 	position: relative;
 }
 
+#interactive-site-map h2 {
+	margin-left: 25px;
+}
+
 .views {
 	width: 100%;
 	height: 100%;
@@ -315,9 +320,11 @@
 .first-view {
     width: 100%;
     height: 100%;
+	min-width: 50vw;
+	min-height: 70vh;
     position: relative;
     -webkit-overflow-scrolling: touch;
-}
+} /* this will create proper width and height to all other views */
 
 .second-view, .third-view {
 	transform: translateX(100%);
@@ -343,7 +350,49 @@
 
 
 /* 1st View */
+#interactive-site-map svg {
+	max-width: 500px;
+}
+
+.building-blocks:hover,
+.link-for-blocks:focus .building-blocks {
+	opacity: .5;
+}
+
+.link-for-blocks:hover,
+.link-for-blocks:focus {
+	outline: none !important;
+}
+
+/* hard-coded CSS -- REMOVE LATER */
+.svg-container {
+	width: 500px;
+	margin: 0 auto;
+}
 
 
+/* POPOVERS */
+.popover-title {
+	color: #8a8989;
+	text-align: center;
+}
+
+.popover-title.in-focus {
+	background: #2BA6CB;
+    color: white;
+}
+
+.popover-content {
+	text-align: center;
+}
+
+.popover-availability {
+	font-weight: bold;
+	font-size: 1.3rem;
+}
+
+.popover-price {
+	font-weight: bold;
+}
 
 
