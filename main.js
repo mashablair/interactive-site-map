@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -13,12 +13,19 @@
 		firstViewBtn = $('.first-view-btn');
 		secondViewBtn = $('.second-view-btn');
 		thirdViewBtn = $('.third-view-btn');
+		popovers = null;
+		blockLinks = $('.link-for-blocks');
+		firstViewPopovers = null;
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
 		
+		// initialize and show all popovers
+		$('[data-toggle="popover"]').popover('show'); 
+		
 		
 		loadData();
+		setPopovers();
 		
 		var commands = {
 			
@@ -32,14 +39,30 @@
 			// CSS classes that create a slider effect with a transition
 			navigateToFirstView: function() {
 				mapsContainer.removeClass('view-change-1 view-change-2');
+				commands.showPopovers();
+				commands.navigateTabs();
+				firstViewBtn.addClass('active-tab');
 			},
 			
 			navigateToSecondView: function() {
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+				commands.hidePopovers();
+				commands.navigateTabs();
+				secondViewBtn.addClass('active-tab');
 			},
 			
 			navigateToThirdView: function() {
 				mapsContainer.addClass('view-change-1 view-change-2');
+				commands.hidePopovers();
+				thirdViewBtn.addClass('active-tab');
+			},
+			
+			showPopovers: function() {
+				firstViewPopovers.addClass('in');
+			},
+			
+			hidePopovers: function() {
+				firstViewPopovers.removeClass('in');
 			},
 			
 			// more filters button
@@ -49,15 +72,17 @@
 						opacity: 0
 					}, 200, function() {
 						moreFilters.removeClass('open');
+						commands.showPopovers();
 					});
 					$(this).text('+ More Filters');
-					moreFilters.find(":focusable").attr( "tabindex", "-1" );			
+					moreFilters.find(":focusable").attr( "tabindex", "-1" );
 				} else {
 					moreFilters.addClass('open').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
 					$(this).text('- Less Filters');
 					filtersContainer.delay(200).animate({
 						opacity: 1
 					}, 200);
+					commands.hidePopovers();
 				}
 			},
 			
@@ -77,23 +102,23 @@
 		secondViewBtn.on('click', commands.navigateToSecondView);
 		thirdViewBtn.on('click', commands.navigateToThirdView);
 		
-		$('[data-toggle="popover"]').popover('show'); 
-		
-		$('.link-for-blocks').on({
+		blockLinks.on({
 			'hover' : function() {
-				$('.popover-title').addClass('in-focus');
+				// find related popover and add 'in-focus' class to it
+				var thisId = $(this).attr('id');
+				var lastNum = thisId.substr(thisId.length -1);
+				$('#popover' + lastNum).find('.popover-title').addClass('in-focus');
 			},
 			'mouseout' : function() {
 				$('.popover-title').removeClass('in-focus');
 			}
 		});
 		
-		$('a[rel=popover]').addClass('my-super-popover');
-
-		
-		
+		blockLinks.on('click', commands.navigateToSecondView);
+		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);		
 	
 	} // end of 'init' function
+	
 	
 	
 	// Loads data from JSON to create 1st view:
@@ -117,6 +142,24 @@
 //
 //        });
     }
+	
+	// set up popovers
+	function setPopovers() {
+		
+		// FIRST VIEW POPOVERS
+		// since all popovers are attached to <body>, we need to connect them with their <a>
+		// so when user hovers over particular <a>, related popover gets highlighted 
+		popovers = $('.popover');
+		firstViewPopovers = popovers.addClass('first-view-popovers');
+		
+		blockLinks.each(function(i) {
+			$(this).attr('id', 'link' + i);
+		});
+		
+		firstViewPopovers.each(function(i) {
+			$(this).attr('id', 'popover' +i);
+		});
+	}
 	
 	$(document).ready(init);
 })(jQuery);

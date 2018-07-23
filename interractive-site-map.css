@@ -377,9 +377,11 @@ h1, h2, h3, p, select, button, input, label, a {
 	text-align: center;
 }
 
-.popover-title.in-focus {
+.popover-title.in-focus,
+.popover-title:hover {
 	background: #2BA6CB;
     color: white;
+	cursor: pointer;
 }
 
 .popover-content {
