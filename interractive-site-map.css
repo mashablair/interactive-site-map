@@ -1,5 +1,9 @@
 /* mobile view layout to 100vw FOR CIRRUS THEME ONLY */
 
+body #interactive-map-container {
+	font-family: 'Open Sans', sans-serif;
+}
+
 h1, h2, h3, p, select, button, input, label, a {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -61,6 +65,13 @@ h1, h2, h3, p, select, button, input, label, a {
 #interactive-map-container .btn-inverse:hover {
 	background-position: 0 0;
 	background: #636363;
+}
+
+.slider-btns {
+	color: white;
+    background: #424242;
+    border: none;
+    font-size: 20px !important;
 }
 
     
@@ -365,7 +376,7 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 /* hard-coded CSS -- REMOVE LATER */
-.svg-container {
+.first-view .svg-container {
 	width: 500px;
 	margin: 0 auto;
 }
@@ -396,5 +407,13 @@ h1, h2, h3, p, select, button, input, label, a {
 .popover-price {
 	font-weight: bold;
 }
+
+
+/* 2nd View */
+.second-view header {
+	display: flex;
+}
+
+
 
 

@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -16,6 +16,7 @@
 		popovers = null;
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = null;
+		backBtn = $('.back-btn');
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -101,7 +102,6 @@
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		secondViewBtn.on('click', commands.navigateToSecondView);
 		thirdViewBtn.on('click', commands.navigateToThirdView);
-		
 		blockLinks.on({
 			'hover' : function() {
 				// find related popover and add 'in-focus' class to it
@@ -110,12 +110,12 @@
 				$('#popover' + lastNum).find('.popover-title').addClass('in-focus');
 			},
 			'mouseout' : function() {
-				$('.popover-title').removeClass('in-focus');
+				$('.first-view-popovers .popover-title').removeClass('in-focus');
 			}
 		});
-		
 		blockLinks.on('click', commands.navigateToSecondView);
-		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);		
+		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);	
+		backBtn.on('click', commands.navigateToFirstView);
 	
 	} // end of 'init' function
 	
