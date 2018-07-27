@@ -414,6 +414,21 @@ h1, h2, h3, p, select, button, input, label, a {
 	display: flex;
 }
 
+.second-view .svg-container {
+	perspective: 140em;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	perspective-origin: 25%;
+}
+
+.second-view .svg-container img {
+	position: absolute;
+	width: 80%;
+	transform: rotateX(83deg);
+
+}
+
 
 
 

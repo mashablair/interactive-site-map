@@ -116,6 +116,17 @@
 		blockLinks.on('click', commands.navigateToSecondView);
 		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);	
 		backBtn.on('click', commands.navigateToFirstView);
+		
+		
+		var topNum = 0;
+		$('.second-view img').each(function() {
+			topNum -= 30;
+			var top = topNum + "px";
+			$(this).css('top', top);
+		});
+		
+		
+		
 	
 	} // end of 'init' function
 	
