@@ -383,6 +383,14 @@ h1, h2, h3, p, select, button, input, label, a {
 
 
 /* POPOVERS */
+.first-view-popovers {
+	display: none !important;
+}
+
+.first-view-popovers.in {
+	display: block !important;
+}
+
 .popover-title {
 	color: #8a8989;
 	text-align: center;
@@ -422,13 +430,14 @@ h1, h2, h3, p, select, button, input, label, a {
 	perspective-origin: 25%;
 }
 
-.second-view .svg-container img {
+.floor-plate {
 	position: absolute;
-	width: 80%;
-	transform: rotateX(83deg);
-
+	transform: rotateX(83deg) scale(2);
 }
 
-
+.floor-plate:hover {
+	fill: green;
+	cursor: pointer;
+}
 
 

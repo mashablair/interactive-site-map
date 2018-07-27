@@ -119,7 +119,7 @@
 		
 		
 		var topNum = 0;
-		$('.second-view img').each(function() {
+		$('.floor-plate').each(function() {
 			topNum -= 30;
 			var top = topNum + "px";
 			$(this).css('top', top);
