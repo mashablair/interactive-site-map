@@ -117,13 +117,16 @@
 		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);	
 		backBtn.on('click', commands.navigateToFirstView);
 		
+		// DELETE AFTER DONE W/ DEMO:
+		commands.navigateToSecondView();
 		
-		var topNum = 0;
-		$('.floor-plate').each(function() {
-			topNum -= 30;
-			var top = topNum + "px";
-			$(this).css('top', top);
-		});
+		
+//		var topNum = 0;
+//		$('.floor-plate').each(function() {
+//			topNum -= 30;
+//			var top = topNum + "px";
+//			$(this).css('top', top);
+//		});
 		
 		
 		
