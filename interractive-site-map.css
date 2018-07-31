@@ -503,17 +503,18 @@ h1, h2, h3, p, select, button, input, label, a {
 	white-space: nowrap;
 	color: #7d7d86;
 	transform: rotateZ(45deg) rotateX(-70deg) translateZ(5vmin);
+/*
 	transition: transform 1s, color 0.3s;
 	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+*/
 }
 
-.level:hover::after,
-.level--current::after {
+.level:hover::after {
 	color: #04b5fd;
 }
 
 .level--current::after {
-	transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg) translateZ(5vmin) translateX(5vmin) translateY(-10vmin);
+	display: none;
 }
 
 .level--1::after {
@@ -550,6 +551,8 @@ h1, h2, h3, p, select, button, input, label, a {
 	transform: translateZ(30vmin);
 }
 
+
+/* HARD-CODED CLICK AREA ON SVG -- DELETE/CHANGE LATER*/
 #place-to-click {
 	fill: #b5e8fd;
 	transition: fill .3s;
@@ -560,7 +563,6 @@ h1, h2, h3, p, select, button, input, label, a {
 	cursor: pointer;
 	fill: #6ed2fb;
 }
-
 
 
 

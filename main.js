@@ -196,7 +196,7 @@
 			
 			// update header
 			secondViewStackedHeader = secondViewHeader.text();
-			secondViewHeader.text('Floor ' + selectedLevel);
+			secondViewHeader.text('Floor ' + selectedLevel).css('color', '#04b5fd');
 			
 			// show navigation arrows
 			levelNav.removeClass('levelnav--hidden');
@@ -245,7 +245,7 @@
 			secondViewBtn.addClass('active-tab');
 			
 			// update header back to stacked
-			secondViewHeader.text(secondViewStackedHeader);
+			secondViewHeader.text(secondViewStackedHeader).css('color', '');
 
 		}
 
@@ -302,6 +302,9 @@
 
 			levelsContainer.removeClass('levels--selected-' + prevSelectedLevel);
 			levelsContainer.addClass('levels--selected-' + selectedLevel);
+			
+			// update header
+			secondViewHeader.text('Floor ' + selectedLevel);
 
 			isNavigating = false;
 
@@ -309,7 +312,6 @@
 		
 		// open detail area 
 		$('#place-to-click').on('click', function() {
-			 
 			// add class to .svg-container
 			$('.svg-container').addClass('svg-container--content-open');
 			
@@ -321,7 +323,6 @@
 		
 		// close detail area
 		$('.content__button').on('click', function() {
-			 
 			// add class to .svg-container
 			$('.svg-container').removeClass('svg-container--content-open');
 			
