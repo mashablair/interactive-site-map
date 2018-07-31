@@ -167,7 +167,6 @@
 		
 		var levelsContainer = $('.levels');
 		var levels = $('.level');
-		var num;
 		var secondViewStackedHeader; 
 		
 		levels.on('click', function() {
@@ -176,9 +175,8 @@
 			// current .level should receive .level--current
 			$(this).addClass('level--current');
 			// get last digit
-			num = $(this).attr('data-levelnum');
-			selectedLevel = num.length;
-			console.log(selectedLevel);
+			selectedLevel = parseInt($(this).attr('data-levelnum'), 10);
+			console.log("selectedLevel is " + selectedLevel);
 			
 			showLevel();
 						
@@ -190,7 +188,7 @@
 			levelsTotal = $('[data-levelnum]').length;
 			
 			// .levels should receive classes: levels--selected-4 levels--open
-			levelsContainer.addClass('levels--open levels--selected-' + num);
+			levelsContainer.addClass('levels--open levels--selected-' + selectedLevel);
 			
 			// activate 3rd tab
 			commands.navigateTabs();
@@ -198,7 +196,7 @@
 			
 			// update header
 			secondViewStackedHeader = secondViewHeader.text();
-			secondViewHeader.text('Floor ' + num);
+			secondViewHeader.text('Floor ' + selectedLevel);
 			
 			// show navigation arrows
 			levelNav.removeClass('levelnav--hidden');
@@ -213,8 +211,8 @@
 		
 		// Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
 		function setNavigationState() {
-			console.log(selectedLevel);
-			console.log(levelsTotal);
+			console.log("selectedLevel is " + selectedLevel);
+			console.log("levelsTotal is " + levelsTotal);
 			if ( selectedLevel === 1 ) {
 				levelDownCtrl.addClass('boxbutton--disabled');
 			} else {
@@ -236,7 +234,7 @@
 			}
 			isExpanded = false;
 
-			levelsContainer.removeClass('levels--open levels--selected-' + num);
+			levelsContainer.removeClass('levels--open levels--selected-' + selectedLevel);
 			$('.level--current').removeClass('level--current');
 
 			// show navigation arrows
@@ -252,62 +250,63 @@
 		}
 
 //		// navigating through the levels
-//		levelUpCtrl.on('click', function() { navigate('Down'); });
-//		levelDownCtrl.on('click', function() { navigate('Up'); });
-//		
-//		function navigate(direction) {
-//			if( !isExpanded ) {
-//				return false;
-//			}
-//			isNavigating = true;
-//
-//			var prevSelectedLevel = selectedLevel;
-//
-//			// current level
-//			var currentLevel = mallLevels[prevSelectedLevel-1];
-//
-//			if( direction === 'Up' && prevSelectedLevel > 1 ) {
-//				--selectedLevel;
-//			}
-//			else if( direction === 'Down' && prevSelectedLevel < mallLevelsTotal ) {
-//				++selectedLevel;
-//			}
-//			else {
-//				isNavigating = false;	
-//				return false;
-//			}
-//
-//			// control navigation controls state (enabled/disabled)
-//			setNavigationState();
-//			// transition direction class
-//			classie.add(currentLevel, 'level--moveOut' + direction);
-//			// next level element
-//			var nextLevel = mallLevels[selectedLevel-1]
-//			// ..becomes the current one
-//			classie.add(nextLevel, 'level--current');
-//
-//			// when the transition ends..
-//			onEndTransition(currentLevel, function() {
-//				classie.remove(currentLevel, 'level--moveOut' + direction);
-//				// solves rendering bug for the SVG opacity-fill property
-//				setTimeout(function() {classie.remove(currentLevel, 'level--current');}, 60);
-//
-//				classie.remove(mallLevelsEl, 'levels--selected-' + prevSelectedLevel);
-//				classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
-//
-//				// show the current level´s pins
-//				showPins();
-//
-//				isNavigating = false;
-//			});
-//
-//			// filter the spaces for this level
-//			showLevelSpaces();
-//
-//			// hide the previous level´s pins
-//			removePins(currentLevel);
-//		}
-//		
+		levelUpCtrl.on('click', function() { navigate('Down'); });
+		levelDownCtrl.on('click', function() { navigate('Up'); });
+		
+		function navigate(direction) {
+			if( !isExpanded ) {
+				return false;
+			}
+			isNavigating = true;
+
+			console.log("selectedLevel is " + selectedLevel);
+			var prevSelectedLevel = selectedLevel;
+			console.log("prevSelectedLevel " + prevSelectedLevel); // --> should be 4
+			console.log(levels); // --> array like object of levels
+
+			// current level
+			var currentLevel = $('.level--' + selectedLevel);
+			console.log(currentLevel); // --> .level.level--4
+
+			if( direction === 'Up' && prevSelectedLevel > 1 ) {
+				--selectedLevel;
+				console.log("selectedLevel-- is " + selectedLevel); // --> 3
+			}
+			else if( direction === 'Down' && prevSelectedLevel < levelsTotal ) {
+				++selectedLevel;
+				console.log("selectedLevel++ is " + selectedLevel); 
+			}
+			else {
+				isNavigating = false;	
+				return false;
+			}
+
+			// control navigation controls state (enabled/disabled)
+			setNavigationState();
+			// transition direction class
+			currentLevel.addClass('level--moveOut' + direction);
+			// next level element
+			var nextLevelNum = selectedLevel; // --> ??? should be '3'
+			console.log('nextLevelNum is ' + nextLevelNum);
+			var nextLevel = $('.level--' + nextLevelNum); 
+			console.log(nextLevel);  // --> should be .level.level--3
+			// ..becomes the current one
+			nextLevel.addClass('level--current');
+			
+			// moves levels out of view, updates the container's classes
+			currentLevel.removeClass('level--moveOut' + direction);
+			// solves rendering bug for the SVG opacity-fill property
+			setTimeout(function() {
+				currentLevel.removeClass('level--current');
+			}, 60);
+
+			levelsContainer.removeClass('levels--selected-' + prevSelectedLevel);
+			levelsContainer.addClass('levels--selected-' + selectedLevel);
+
+			isNavigating = false;
+
+		}
+		
 	
 	} // end of 'init' function
 	
