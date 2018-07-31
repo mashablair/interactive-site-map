@@ -155,7 +155,7 @@
 				   
 		
 		// DELETE AFTER DONE W/ DEMO:
-		commands.navigateToSecondView();
+//		commands.navigateToSecondView();
 		
 		
 //		var topNum = 0;
@@ -306,6 +306,30 @@
 			isNavigating = false;
 
 		}
+		
+		// open detail area 
+		$('#place-to-click').on('click', function() {
+			 
+			// add class to .svg-container
+			$('.svg-container').addClass('svg-container--content-open');
+			
+			// add class to .content
+			$('.content').addClass('content--open');
+			$('.content__item').addClass('content__item--current');
+			$('.content__button').removeClass('content__button--hidden');
+		});
+		
+		// close detail area
+		$('.content__button').on('click', function() {
+			 
+			// add class to .svg-container
+			$('.svg-container').removeClass('svg-container--content-open');
+			
+			// add class to .content
+			$('.content').removeClass('content--open');
+			$('.content__item').removeClass('content__item--current');
+			$('.content__button').addClass('content__button--hidden');
+		});
 		
 	
 	} // end of 'init' function

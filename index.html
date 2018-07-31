@@ -888,12 +888,14 @@
 				<button class="slider-btns back-btn btn-inverse"><i class="iconm-arrow-left4"></i></button>
 				<h2 class="second-view-header">Floors <span class="floors-range">1 - 4</span> <span class="building-portion"><small>(bottom first)</small></span></h2>
 			</header>
+			
+			<nav class="levelnav levelnav--hidden">
+				<button class="boxbutton btn-inverse levelnav__button--up" aria-label="Go up"><i class="iconm-arrow-up4"></i></button>
+				<button class="boxbutton btn-inverse levelnav__button--down" aria-label="Go down"><i class="iconm-arrow-down4"></i></button>
+			</nav>
+			
+			<!-- to open detail section, add .svg-container--content-open to this container-->
 			<div class="svg-container">
-				
-				<nav class="levelnav levelnav--hidden">
-					<button class="boxbutton btn-inverse levelnav__button--up" aria-label="Go up"><i class="iconm-arrow-up4"></i></button>
-					<button class="boxbutton btn-inverse levelnav__button--down" aria-label="Go down"><i class="iconm-arrow-down4"></i></button>
-				</nav>
 				
 				<!-- levels -->
 				<div class="levels">
@@ -919,7 +921,7 @@
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
-							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
+							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" id="place-to-click" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
@@ -1122,6 +1124,26 @@
 				<!-- /levels -->
 			</div>
 			<!-- /svg-container -->
+			
+			<div class="content content--open">
+					<!-- to show detail, add .content__item--current -->
+					<div class="content__item container" data-space="1.01" data-category="1">
+						<h3 class="content__item-title">Apartment #4608</h3>
+							
+						<div class="col-xs-6">
+							<p><strong>Opening Hours:</strong> 6:30AM — 11:30PM</p>
+							<p><strong>Phone:</strong> (0) 66 5738902</p>
+							<p>Burdock celery - salsify, tomatillo. Bitter gourd horseradish leaves radicchio, celeriac miner's lettuce kurrat arugula fluted pumpkin turnip, arracacha water spinach nopal.</p>
+						</div>
+
+						<div class="col-xs-6">
+							<img src="assets/details-shot.png" alt="" style="height:300px">
+						</div>
+						
+					</div>
+
+					<button class="boxbutton btn-inverse content__button content__button--hidden" aria-label="Close details"><i class="iconm-cross2"></i></button>
+				</div>
 		</div>
 		<!-- /second-view -->
 		
