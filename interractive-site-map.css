@@ -47,14 +47,14 @@ h1, h2, h3, p, select, button, input, label, a {
     font-size: 12px;
 }
 
-#interactive-map-container button,
+#more-filters button,
 #more-filters input {
     font-size: 12px;
 	text-align: center;
 }
 
 
-/* buttons */
+/* BUTTONS */
 #interactive-map-container button:hover,
 #interactive-map-container button:active,
 #interactive-map-container button:focus {
@@ -66,20 +66,57 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 #interactive-map-container .btn-inverse {
-	background: #8a8989;
+	background: #717171;
 	transition: background .3s ease-out;
 }
 
 #interactive-map-container .btn-inverse:hover {
 	background-position: 0 0;
-	background: #636363;
+	background: #404040;
 }
 
 .slider-btns {
 	color: white;
-    background: #424242;
     border: none;
-    font-size: 20px !important;
+    font-size: 20px;
+}
+
+
+/* Level nav and Box buttons */
+.levelnav {
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+	transition: opacity 0.8s;
+}
+
+.levelnav--hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.boxbutton {
+	font-size: 2em;
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	border: 0;
+}
+
+.boxbutton:nth-child(2) {
+	border-top: 1px solid;
+}
+
+.boxbutton--disabled,
+.boxbutton--disabled:focus,
+.boxbutton--disabled:hover {
+	cursor: default;
+	pointer-events: none;
+	opacity: 0.2;
 }
 
     
@@ -135,7 +172,7 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 #map-tabs .active-tab > i {
-	color: #8a8989;
+	color: #717171;
 }
 
 #map-tabs i {
@@ -145,7 +182,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 /* MORE FILTERS  */
 #more-filters {
-	background: #8a8989;
+	background: #717171;
 	height: 0px;
 	transition: height .2s;
 	color: white;
@@ -324,6 +361,7 @@ h1, h2, h3, p, select, button, input, label, a {
 	position: absolute;
 	left: 0;
 	top: 0;
+	z-index: 1000; /* to place it on top of social media block */
 	
 	will-change: transform;
 	transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
@@ -386,7 +424,7 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 .first-view-popovers.in {
-	z-index: 1;
+	z-index: 1001;
 }
 
 .popover-title {
@@ -429,7 +467,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .svg-container {
 	width: 100%;
 	height: 100%;
-	pointer-events: none;
+/*	pointer-events: none;*/
 	perspective: 3500px;
 	perspective-origin: 0% 50%;
 	transition: transform 0.8s;
@@ -478,23 +516,19 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 .level--1::after {
-	content: 'L1';
+	content: 'Floor 1';
 }
 
 .level--2::after {
-	content: 'L2';
+	content: 'Floor 2';
 }
 
 .level--3::after {
-	content: 'L3';
+	content: 'Floor 3';
 }
 
 .level--4::after {
-	content: 'L4';
-}
-
-.level--5::after {
-	content: 'L5';
+	content: 'Floor 4';
 }
 
 .level:not(:first-child) {
@@ -513,10 +547,6 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .level--4 {
 	transform: translateZ(30vmin);
-}
-
-.level--5 {
-	transform: translateZ(40vmin);
 }
 
 
@@ -627,52 +657,9 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 
-/* Level nav */
-.mallnav {
-	position: absolute;
-	top: 0;
-	right: 0;
-	text-align: center;
-	transition: opacity 0.8s;
-}
 
-.mallnav--hidden {
-	pointer-events: none;
-	opacity: 0;
-}
 
-/* Box button */
-.boxbutton {
-	font-size: 2em;
-	display: block;
-	width: 2em;
-	height: 2em;
-	margin: 0;
-	padding: 0;
-	color: #fff;
-	border: 0;
-	background: #d7d7dc;
-}
 
-.boxbutton--dark {
-	background: #c4c4c7;
-}
-
-.boxbutton--darker {
-	background: #2c2c2f;
-}
-
-.boxbutton--alt {
-	background: #3d1975;
-}
-
-.boxbutton--disabled,
-.boxbutton--disabled:focus,
-.boxbutton--disabled:hover {
-	cursor: default;
-	pointer-events: none;
-	opacity: 0.2;
-}
 
 /* Level map */
 

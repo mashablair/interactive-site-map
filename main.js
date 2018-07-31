@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -12,11 +12,22 @@
 		mapsContainer = $('#interactive-site-map');
 		firstViewBtn = $('.first-view-btn');
 		secondViewBtn = $('.second-view-btn');
+		secondExpandedViewBtn = $('.second-expanded-view-btn');
 		thirdViewBtn = $('.third-view-btn');
 		popovers = null;
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = null;
 		backBtn = $('.back-btn');
+		secondViewHeader = $('.second-view-header');
+		firstLevel = $('.level--1');
+		// levels navigation up/down ctrls
+		levelNav = $('.levelnav');
+		levelUpCtrl = $('.levelnav__button--up');
+		levelDownCtrl = $('.levelnav__button--down');
+		selectedLevel = null;
+		levelsTotal = null;
+		isExpanded = false;
+		isNavigating = false;
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -52,10 +63,19 @@
 				secondViewBtn.addClass('active-tab');
 			},
 			
+			navigateToSecondExpandedView: function() {
+				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+				commands.navigateTabs();
+				secondExpandedViewBtn.addClass('active-tab');
+				commands.hidePopovers();
+				firstLevel.trigger('click');
+			},
+			
 			navigateToThirdView: function() {
 				mapsContainer.addClass('view-change-1 view-change-2');
-				commands.hidePopovers();
+				commands.navigateTabs();
 				thirdViewBtn.addClass('active-tab');
+				commands.hidePopovers();
 			},
 			
 			showPopovers: function() {
@@ -100,7 +120,14 @@
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);
 		firstViewBtn.on('click', commands.navigateToFirstView);
-		secondViewBtn.on('click', commands.navigateToSecondView);
+		secondViewBtn.on('click', function() {
+			if (isExpanded) {
+				showStackedLevels();
+			} else {
+				commands.navigateToSecondView();
+			}
+		});
+		secondExpandedViewBtn.on('click', commands.navigateToSecondExpandedView);
 		thirdViewBtn.on('click', commands.navigateToThirdView);
 		blockLinks.on({
 			'hover' : function() {
@@ -115,7 +142,17 @@
 		});
 		blockLinks.on('click', commands.navigateToSecondView);
 		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);	
-		backBtn.on('click', commands.navigateToFirstView);
+		
+		backBtn.on('click', function() {
+			
+			if (isExpanded) {
+				showStackedLevels();
+			} else {
+				commands.navigateToFirstView();
+			}
+		});
+				   
+				   
 		
 		// DELETE AFTER DONE W/ DEMO:
 		commands.navigateToSecondView();
@@ -128,8 +165,149 @@
 //			$(this).css('top', top);
 //		});
 		
+		var levelsContainer = $('.levels');
+		var levels = $('.level');
+		var num;
+		var secondViewStackedHeader; 
+		
+		levels.on('click', function() {
+			console.log($(this)); // --> .level.level--1
+			
+			// current .level should receive .level--current
+			$(this).addClass('level--current');
+			// get last digit
+			num = $(this).attr('data-levelnum');
+			selectedLevel = num.length;
+			console.log(selectedLevel);
+			
+			showLevel();
+						
+		});
 		
 		
+		function showLevel() {
+			// calculate levelsTotal
+			levelsTotal = $('[data-levelnum]').length;
+			
+			// .levels should receive classes: levels--selected-4 levels--open
+			levelsContainer.addClass('levels--open levels--selected-' + num);
+			
+			// activate 3rd tab
+			commands.navigateTabs();
+			secondExpandedViewBtn.addClass('active-tab');
+			
+			// update header
+			secondViewStackedHeader = secondViewHeader.text();
+			secondViewHeader.text('Floor ' + num);
+			
+			// show navigation arrows
+			levelNav.removeClass('levelnav--hidden');
+				
+			// check if .boxbutton--disabled needs to be applied
+			setNavigationState();
+			
+			isExpanded = true;
+			
+		}
+		
+		
+		// Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
+		function setNavigationState() {
+			console.log(selectedLevel);
+			console.log(levelsTotal);
+			if ( selectedLevel === 1 ) {
+				levelDownCtrl.addClass('boxbutton--disabled');
+			} else {
+				levelDownCtrl.removeClass('boxbutton--disabled');
+			}
+
+			if ( selectedLevel === levelsTotal ) {
+				levelUpCtrl.addClass('boxbutton--disabled');
+			} else {
+				levelUpCtrl.removeClass('boxbutton--disabled');
+			}
+		}
+
+		
+		// show the stacked view 
+		function showStackedLevels() {
+			if( !isExpanded ) {
+				return false;
+			}
+			isExpanded = false;
+
+			levelsContainer.removeClass('levels--open levels--selected-' + num);
+			$('.level--current').removeClass('level--current');
+
+			// show navigation arrows
+			levelNav.addClass('levelnav--hidden');
+			
+			// activate 2nd tab
+			commands.navigateTabs();
+			secondViewBtn.addClass('active-tab');
+			
+			// update header back to stacked
+			secondViewHeader.text(secondViewStackedHeader);
+
+		}
+
+//		// navigating through the levels
+//		levelUpCtrl.on('click', function() { navigate('Down'); });
+//		levelDownCtrl.on('click', function() { navigate('Up'); });
+//		
+//		function navigate(direction) {
+//			if( !isExpanded ) {
+//				return false;
+//			}
+//			isNavigating = true;
+//
+//			var prevSelectedLevel = selectedLevel;
+//
+//			// current level
+//			var currentLevel = mallLevels[prevSelectedLevel-1];
+//
+//			if( direction === 'Up' && prevSelectedLevel > 1 ) {
+//				--selectedLevel;
+//			}
+//			else if( direction === 'Down' && prevSelectedLevel < mallLevelsTotal ) {
+//				++selectedLevel;
+//			}
+//			else {
+//				isNavigating = false;	
+//				return false;
+//			}
+//
+//			// control navigation controls state (enabled/disabled)
+//			setNavigationState();
+//			// transition direction class
+//			classie.add(currentLevel, 'level--moveOut' + direction);
+//			// next level element
+//			var nextLevel = mallLevels[selectedLevel-1]
+//			// ..becomes the current one
+//			classie.add(nextLevel, 'level--current');
+//
+//			// when the transition ends..
+//			onEndTransition(currentLevel, function() {
+//				classie.remove(currentLevel, 'level--moveOut' + direction);
+//				// solves rendering bug for the SVG opacity-fill property
+//				setTimeout(function() {classie.remove(currentLevel, 'level--current');}, 60);
+//
+//				classie.remove(mallLevelsEl, 'levels--selected-' + prevSelectedLevel);
+//				classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
+//
+//				// show the current level´s pins
+//				showPins();
+//
+//				isNavigating = false;
+//			});
+//
+//			// filter the spaces for this level
+//			showLevelSpaces();
+//
+//			// hide the previous level´s pins
+//			removePins(currentLevel);
+//		}
+//		
 	
 	} // end of 'init' function
 	
