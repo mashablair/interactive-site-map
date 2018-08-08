@@ -116,7 +116,7 @@
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/interractive-site-map-min-min.css",
 		"oF": 0,
 		"oS": 3
@@ -135,9 +135,9 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/main-tympanus-min.js",
-		"oF": 0,
+		"oF": 1,
 		"sC": 3,
 		"tS": 0
 		},
@@ -145,11 +145,11 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "\/main-min.js",
 		"oF": 1,
-		"sC": 3,
-		"tS": 1
+		"sC": 0,
+		"tS": 0
 		}
 	},
 "hooks": [
