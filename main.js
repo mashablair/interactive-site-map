@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -28,16 +28,31 @@
 		levelsTotal = null;
 		isExpanded = false;
 		isNavigating = false;
+		numberViewPopovers = null;
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
+		
+		
+		
+		loadData();
 		
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
 		
 		
-		loadData();
-		setPopovers();
+		// add classes and id's to popovers for :hover highlighting
+		setPopovers("first-view");
+		
+		$('.first-view svg').on('click', function() {
+			// target should be <a>, not .popover
+			$('.first-view .link-for-blocks').popover('hide'); 
+		});
+		
+		$('.first-view h2').on('click', function() {
+			// target should be <a>, not .popover
+			$('.first-view .link-for-blocks').popover('show'); 
+		});
 		
 		var commands = {
 			
@@ -360,19 +375,19 @@
     }
 	
 	// set up popovers
-	function setPopovers() {
+	function setPopovers(numberView) {
 		
-		// FIRST VIEW POPOVERS
-		// since all popovers are attached to <body>, we need to connect them with their <a>
+		// FIRST VIEW POPOVERS (unless we change 'blockLinks')
+		// since all popovers are attached .svg-container, we need to connect them with their <a>
 		// so when user hovers over particular <a>, related popover gets highlighted 
-		popovers = $('.popover');
-		firstViewPopovers = popovers.addClass('first-view-popovers');
+		numberViewPopovers = $('.' + numberView).find('.popover').addClass('first-view-popovers');
 		
+		// ***to make this function universal, 'blockLinks' should also be param/argument (currently, this will only work for .first-view)
 		blockLinks.each(function(i) {
 			$(this).attr('id', 'link' + i);
 		});
 		
-		firstViewPopovers.each(function(i) {
+		numberViewPopovers.each(function(i) {
 			$(this).attr('id', 'popover' +i);
 		});
 	}

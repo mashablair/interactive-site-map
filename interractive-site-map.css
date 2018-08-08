@@ -399,6 +399,48 @@ h1, h2, h3, p, select, button, input, label, a {
 	transform: translateX(0);
 }
 
+/* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
+@media (min-width: 1400px) {
+	.container-bs3 {
+		width: 95%;
+	}
+	
+	.views {
+		width: 50%;
+	}
+	
+	.first-view {
+		min-width: 40vw;
+	}
+	
+	.third-view {
+		transform: translateX(200%);
+	}
+	
+	/* when stacks btn clicked */
+	.view-change-1 .first-view {
+		transform: translateX(0);
+	}
+
+	.view-change-1 .second-view {
+		transform: translateX(100%);
+	}
+	
+	/* when one-stack btn clicked */
+	.view-change-2 .first-view {
+		transform: translateX(-100%);
+	}
+	
+	.view-change-2 .second-view {
+		transform: translateX(0);
+	}
+
+	.view-change-2 .third-view {
+		transform: translateX(100%);
+	}
+}
+
+
 
 /* 1st View */
 
@@ -414,7 +456,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 /* hard-coded CSS -- REMOVE LATER */
 .first-view .svg-container {
-	width: 500px;
+	width: 400px;
 	margin: 0 auto;
 }
 
@@ -563,6 +605,9 @@ h1, h2, h3, p, select, button, input, label, a {
 	cursor: pointer;
 	fill: #6ed2fb;
 }
+
+
+
 
 
 
