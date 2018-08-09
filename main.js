@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -14,6 +14,8 @@
 		secondViewBtn = $('.second-view-btn');
 		secondExpandedViewBtn = $('.second-expanded-view-btn');
 		thirdViewBtn = $('.third-view-btn');
+		views = $('.views');
+		buildingBlocks = $('.first-view svg');
 		popovers = null;
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = $('.first-view .link-for-blocks');
@@ -44,26 +46,20 @@
 		// add classes and id's to popovers for :hover highlighting
 		setPopovers("first-view");
 		
-		$('.first-view svg').on('click', function() {
-			// target should be <a>, not .popover
-			firstViewPopovers.popover('hide'); 
-		});
 		
+		// DELETE LATER
 		$('.first-view h2').on('click', function() {
-			// target should be <a>, not .popover
-			firstViewPopovers.popover('show'); 
+			commands.showPopovers();
 		});
 		
 		// to reposition popovers on screen resize
 		// needed b/c popovers are set on SVG parts, and not on regular elems
 		$(window).resize(function() {
-			firstViewPopovers.popover('hide'); 
+			commands.hidePopovers();
 			clearTimeout(window.resizedFinished);
 			window.resizedFinished = setTimeout(function() {
-				console.log('Resize finished.');
-				firstViewPopovers.popover('show'); 
+				commands.showPopovers();
 			}, 800);  
-			
 		}); 
 		
 		var commands = {
@@ -74,6 +70,16 @@
 				$(this).addClass('active-tab');
 			},
 			
+			splitViewMode: function() {
+				views.addClass('split-view');
+				commands.repositionPopovers();
+			},
+			
+			noSplitViewMode: function() {
+				views.removeClass('split-view');
+				commands.repositionPopovers();
+			},
+			
 			// 3 methods below change Interactive Site Map view by toggling 
 			// CSS classes that create a slider effect with a transition
 			navigateToFirstView: function() {
@@ -81,13 +87,18 @@
 				commands.showPopovers();
 				commands.navigateTabs();
 				firstViewBtn.addClass('active-tab');
+				if ( $(window).width() >= 1400 ) {
+					commands.noSplitViewMode();
+				}
 			},
 			
 			navigateToSecondView: function() {
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
-				commands.hidePopovers();
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
+				if ( $(window).width() >= 1400 ) {
+					commands.splitViewMode();
+				}
 			},
 			
 			navigateToSecondExpandedView: function() {
@@ -111,6 +122,13 @@
 			
 			hidePopovers: function() {
 				firstViewPopovers.popover('hide');
+			},
+			
+			repositionPopovers: function() {
+				this.hidePopovers();
+				setTimeout(function() {
+					commands.showPopovers();
+				}, 500);  
 			},
 			
 			// more filters button
@@ -146,6 +164,7 @@
 		tabsBtns.on('click', commands.navigateTabs);
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);
+		buildingBlocks.on('click', commands.splitViewMode);
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		secondViewBtn.on('click', function() {
 			if (isExpanded) {
@@ -171,7 +190,6 @@
 		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability').on('click', commands.navigateToSecondView);	
 		
 		backBtn.on('click', function() {
-			
 			if (isExpanded) {
 				showStackedLevels();
 			} else {

@@ -377,7 +377,7 @@ h1, h2, h3, p, select, button, input, label, a {
 @media (min-width: 1400px) {
   .container-bs3 {
     width: 95%; }
-  .views {
+  .views.split-view {
     width: 50%; }
   .first-view {
     min-width: 40vw; }

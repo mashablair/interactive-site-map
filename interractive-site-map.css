@@ -405,7 +405,7 @@ h1, h2, h3, p, select, button, input, label, a {
 		width: 95%;
 	}
 	
-	.views {
+	.views.split-view {
 		width: 50%;
 	}
 	
