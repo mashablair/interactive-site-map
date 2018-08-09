@@ -105,7 +105,6 @@
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
 				secondExpandedViewBtn.addClass('active-tab');
-				commands.hidePopovers();
 				firstLevel.trigger('click');
 			},
 			
@@ -113,7 +112,10 @@
 				mapsContainer.addClass('view-change-1 view-change-2');
 				commands.navigateTabs();
 				thirdViewBtn.addClass('active-tab');
-				commands.hidePopovers();
+				// when clicked on .nav-icon.third-view-btn OR clicked on interactive plate portion
+				// add .expanded-view-with-detail
+				$('.second-view').addClass('expanded-view-with-detail');
+				
 			},
 			
 			showPopovers: function() {
@@ -160,7 +162,8 @@
 			
 		}; // end of 'commands' var
 		
-		// all events handlers
+		
+		// ALL EVENT HANDLERS
 		tabsBtns.on('click', commands.navigateTabs);
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);

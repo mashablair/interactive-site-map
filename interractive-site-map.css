@@ -365,7 +365,9 @@ h1, h2, h3, p, select, button, input, label, a {
 	z-index: 1000; /* to place it on top of social media block */
 	
 	will-change: transform;
-	transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+	transition: 
+		transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946), 
+		width 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
 }
 
 .first-view {
@@ -437,6 +439,16 @@ h1, h2, h3, p, select, button, input, label, a {
 
 	.view-change-2 .third-view {
 		transform: translateX(100%);
+	}
+	
+	/* when detail view is open, expanded plate should become small */
+	.view-change-2 .expanded-view-with-detail {
+		width: 30%
+	}
+	
+	.view-change-2 .third-view.split-view {
+		width: 70%;
+    	transform: translateX(43%);
 	}
 }
 
