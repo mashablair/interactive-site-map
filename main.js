@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -15,6 +15,7 @@
 		secondExpandedViewBtn = $('.second-expanded-view-btn');
 		thirdViewBtn = $('.third-view-btn');
 		views = $('.views');
+		secondView = $('.second-view');
 		buildingBlocks = $('.first-view svg');
 		popovers = null;
 		blockLinks = $('.link-for-blocks');
@@ -33,14 +34,25 @@
 		numberViewPopovers = null;
 		levelsContainer = $('.levels');
 		levels = $('.level');
-		secondViewStackedHeader = null; 
+		secondViewStackedHeader = null;
+		availableUnit = $('.available-unit');
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
 		
-		
-		
 		loadData();
+		
+		
+		var loc = location.href;
+		console.log(loc);
+		
+	//	if (loc.indexOf("?") === -1) {
+	//  	loc += "?";
+	//	} else {
+	//      loc += "&";
+	//	}
+	//  location.href = loc + "ts=true";
+		
 		
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
@@ -108,6 +120,7 @@
 				commands.navigateTabs();
 				secondExpandedViewBtn.addClass('active-tab');
 				firstLevel.trigger('click');
+				$('[data-toggle="popover"]').popover('show'); 
 			},
 			
 			// when clicked on .nav-icon.third-view-btn OR clicked on interactive plate portion
@@ -115,8 +128,7 @@
 				mapsContainer.addClass('view-change-1 view-change-2');
 				commands.navigateTabs();
 				thirdViewBtn.addClass('active-tab');
-				$('.second-view').addClass('expanded-view-with-detail');
-				
+				secondView.addClass('expanded-view-with-detail');
 			},
 			
 			showPopovers: function() {
@@ -154,7 +166,8 @@
 
 				// check if .boxbutton--disabled needs to be applied
 				commands.setNavigationState();
-
+				
+				// means only 1 floor plate is visible (we are in 2nd Expanded View)
 				isExpanded = true;
 			},
 			
@@ -194,7 +207,6 @@
 
 				// update header back to stacked
 				secondViewHeader.text(secondViewStackedHeader).css('color', '');
-
 			},
 			
 			// navigate through levels
@@ -327,8 +339,13 @@
 		backBtn.on('click', function() {
 			if (isExpanded) {
 				commands.showStackedLevels();
+			} else if ( $(window).width() >= 1400 ) {
+				commands.navigateToSecondView();
+				secondView.removeClass('expanded-view-with-detail');
+				
 			} else {
 				commands.navigateToFirstView();
+				secondView.removeClass('expanded-view-with-detail');
 			}
 		});
 		// for wide screens only close detail area, when user clicks 'back btn'
@@ -353,7 +370,7 @@
 		levelDownCtrl.on('click', function() { commands.navigate('Up'); });
 		
 		// clicking on SVG hot spot
-		$('#place-to-click').on('click', function(e) {
+		availableUnit.on('click', function(e) {
 			e.stopPropagation(); // to prevent showLevel() invokation 
 			$('.second-view').addClass('expanded-view-with-detail');
 			commands.navigateToThirdView();

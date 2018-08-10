@@ -401,56 +401,6 @@ h1, h2, h3, p, select, button, input, label, a {
 	transform: translateX(0);
 }
 
-/* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
-@media (min-width: 1400px) {
-	.container-bs3 {
-		width: 95%;
-	}
-	
-	.views.split-view {
-		width: 50%;
-	}
-	
-	.first-view {
-		min-width: 40vw;
-	}
-	
-	.third-view {
-		transform: translateX(200%);
-	}
-	
-	/* when stacks btn clicked */
-	.view-change-1 .first-view {
-		transform: translateX(0);
-	}
-
-	.view-change-1 .second-view {
-		transform: translateX(100%);
-	}
-	
-	/* when one-stack btn clicked */
-	.view-change-2 .first-view {
-		transform: translateX(-100%);
-	}
-	
-	.view-change-2 .second-view {
-		transform: translateX(0);
-	}
-
-	.view-change-2 .third-view {
-		transform: translateX(100%);
-	}
-	
-	/* when detail view is open, expanded plate should become small */
-	.view-change-2 .expanded-view-with-detail {
-		width: 30%
-	}
-	
-	.view-change-2 .third-view.split-view {
-		width: 70%;
-    	transform: translateX(43%);
-	}
-}
 
 
 
@@ -533,7 +483,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .levels {
 	transition: transform 0.3s;
 	transform-style: preserve-3d;
-	transform: rotateX(70deg) rotateZ(-45deg) translateZ(-15vmin) scale(.7);
+	transform: rotateX(70deg) rotateZ(-45deg) translateZ(-6vmin) scale(.7);
 }
 
 .level {
@@ -557,10 +507,6 @@ h1, h2, h3, p, select, button, input, label, a {
 	white-space: nowrap;
 	color: #7d7d86;
 	transform: rotateZ(45deg) rotateX(-70deg) translateZ(5vmin);
-/*
-	transition: transform 1s, color 0.3s;
-	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-*/
 }
 
 .level:hover::after {
@@ -606,19 +552,109 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 
+/* Level map */
+.map__ground {
+	fill: #d7d7dc;
+}
+
+.map__outline {
+	transition: fill 0.3s;
+	fill: #bbb;
+}
+
+.level:hover .map__outline {
+	fill: #04b5fd;
+}
+
+.map__tree {
+	fill: #7bad7f;
+}
+
+.map__lake {
+	fill: #a2bbdd;
+}
+
+.map__space {
+	transition: fill-opacity 0.8s;
+	fill: #bdbdbd;
+	fill-opacity: 0.6;
+}
+
+.level--current .map__space {
+	fill-opacity: 1;
+}
+
+ .map__space--selected {
+ 	fill: #A4A4A4;
+ }
+
 /* HARD-CODED CLICK AREA ON SVG -- DELETE/CHANGE LATER*/
-#place-to-click {
+.available-unit {
 	fill: #b5e8fd;
 	transition: fill .3s;
 }
 
-#place-to-click:hover,
-.svg-container--content-open #place-to-click {
+.available-unit:hover,
+.svg-container--content-open .available-unit {
 	cursor: pointer;
 	fill: #6ed2fb;
 }
 
 
+/* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
+@media (min-width: 1400px) {
+	.container-bs3 {
+		width: 95%;
+	}
+	
+	.views.split-view {
+		width: 50%;
+	}
+	
+	.first-view {
+		min-width: 40vw;
+	}
+	
+	.third-view {
+		transform: translateX(200%);
+	}
+	
+	/* when stacks btn clicked */
+	.view-change-1 .first-view {
+		transform: translateX(0);
+	}
+
+	.view-change-1 .second-view {
+		transform: translateX(100%);
+	}
+	
+	/* when one-stack btn clicked */
+	.view-change-2 .first-view {
+		transform: translateX(-100%);
+	}
+	
+	.view-change-2 .second-view {
+		transform: translateX(0);
+	}
+
+	.view-change-2 .third-view {
+		transform: translateX(100%);
+	}
+	
+	/* when detail view is open, expanded plate should become small */
+	.view-change-2 .expanded-view-with-detail {
+		width: 30%
+	}
+	
+	.view-change-2 .third-view.split-view {
+		width: 70%;
+    	transform: translateX(43%);
+	}
+	
+	.split-view .levels {
+		transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(.7);
+	}
+}
 
 
 
@@ -735,130 +771,9 @@ h1, h2, h3, p, select, button, input, label, a {
 
 
 
-/* Level map */
-.map__ground {
-	fill: #d7d7dc;
-}
-
-.map__outline {
-	transition: fill 0.3s;
-	fill: #bbb;
-}
-
-.level:hover .map__outline {
-	fill: #04b5fd;
-}
-
-.map__tree {
-	fill: #7bad7f;
-}
-
-.map__lake {
-	fill: #a2bbdd;
-}
-
-.map__space {
-	transition: fill-opacity 0.8s;
-	fill: #bdbdbd;
-	fill-opacity: 0.6;
-}
-
-.level--current .map__space {
-	fill-opacity: 1;
-}
-
- .map__space--selected {
- 	fill: #A4A4A4;
- }
 
 
 
-/* Content */
-.content {
-	position: absolute;
-	top: 100%;
-	width: 100%;
-	height: 40%;
-}
-
-.content__item {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	padding: 2em 0;
-	text-align: center;
-	background: #d7d7dc;
-	transition: transform 0.8s;
-	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.content--open .content__item {
-	transition: none;
-}
-
-.content__item--current {
-	transform: translate3d(0,-100%,0);
-}
-
-.content__item-title {
-	font-size: 1.85em;
-	margin: 0;
-	padding: 0 0 0.75em 0;
-	pointer-events: none;
-	font-weight: normal;
-	opacity: 0;
-	transform: translate3d(0,-3em,0) translate3d(0,-100%,0);
-}
-
-.content__item--current .content__item-title {
-	opacity: 1;
-	transform: translate3d(0,0,0);
-}
-
-.content__item-details {
-	opacity: 0;
-	margin: 0 auto;
-	max-width: 50vmax;
-}
-
-.content__item--current .content__item-details {
-	opacity: 1;
-}
-
-.content__meta {
-	margin: 0;
-	font-size: 0.85em;
-	line-height: 1.5;
-}
-
-.content__meta-item {
-	display: inline-block;
-	padding: 0 0.25em;
-}
-
-.content__meta .icon {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.content__desc {
-	text-align: left;
-	margin: 7vmin 0 0 0;
-}
-
-.content__button {
-	position: absolute;
-	top: -114%;
-	right: 0;
-	transition: opacity 0.3s 0.7s;
-}
-
-.content__button--hidden {
-	pointer-events: none;
-	opacity: 0;
-	transition: none;
-}
 
 
 
