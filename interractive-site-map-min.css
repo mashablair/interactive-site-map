@@ -121,13 +121,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 #filter-bedrooms {
   margin: 0 2%;
-  width: 120px;
-  /*
-	border: 0;
-	outline: 1px solid #CCC;
-    background-color: white;
-    background: #ececec;
-*/ }
+  width: 120px; }
 
 /* icon tabs */
 #map-tabs {
@@ -143,6 +137,12 @@ h1, h2, h3, p, select, button, input, label, a {
           transform: translateY(15px);
   -webkit-transition: background .3s;
   transition: background .3s; }
+
+.second-expanded-view-btn svg {
+  width: 33px; }
+
+.second-expanded-view-btn.active-tab svg path {
+  fill: #717171; }
 
 #map-tabs .active-tab {
   background: white; }
@@ -325,9 +325,6 @@ h1, h2, h3, p, select, button, input, label, a {
   overflow: hidden;
   position: relative; }
 
-#interactive-site-map h2 {
-  margin-left: 25px; }
-
 .views {
   width: 100%;
   height: 100%;
@@ -419,7 +416,8 @@ h1, h2, h3, p, select, button, input, label, a {
 .second-view header {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  z-index: 1; }
 
 .second-view {
   -webkit-box-orient: vertical;
@@ -430,7 +428,6 @@ h1, h2, h3, p, select, button, input, label, a {
 .svg-container {
   width: 100%;
   height: 100%;
-  /*	pointer-events: none;*/
   -webkit-perspective: 3500px;
           perspective: 3500px;
   -webkit-perspective-origin: 0% 50%;
@@ -441,7 +438,45 @@ h1, h2, h3, p, select, button, input, label, a {
   transition: transform 0.8s, -webkit-transform 0.8s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
           transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  overflow: hidden; }
+  overflow: hidden;
+  position: absolute;
+  top: 60px; }
+
+.second-view__part1 .svg-container__part3 {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%); }
+
+.second-view__part1 .svg-container__part2 {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%); }
+
+.second-view__part1 .svg-container__part1 {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); }
+
+.second-view__part2 .svg-container__part3 {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%); }
+
+.second-view__part2 .svg-container__part2 {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); }
+
+.second-view__part2 .svg-container__part1 {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%); }
+
+.second-view__part3 .svg-container__part3 {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); }
+
+.second-view__part3 .svg-container__part2 {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%); }
+
+.second-view__part3 .svg-container__part1 {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%); }
 
 .levels {
   -webkit-transition: -webkit-transform 0.3s;
@@ -486,17 +521,41 @@ h1, h2, h3, p, select, button, input, label, a {
 .level--current::after {
   display: none; }
 
-.level--1::after {
+.svg-container__part1 .level--1::after {
   content: 'Floor 1'; }
 
-.level--2::after {
+.svg-container__part1 .level--2::after {
   content: 'Floor 2'; }
 
-.level--3::after {
+.svg-container__part1 .level--3::after {
   content: 'Floor 3'; }
 
-.level--4::after {
+.svg-container__part1 .level--4::after {
   content: 'Floor 4'; }
+
+.svg-container__part2 .level--1::after {
+  content: 'Floor 5'; }
+
+.svg-container__part2 .level--2::after {
+  content: 'Floor 6'; }
+
+.svg-container__part2 .level--3::after {
+  content: 'Floor 7'; }
+
+.svg-container__part2 .level--4::after {
+  content: 'Floor 8'; }
+
+.svg-container__part3 .level--1::after {
+  content: 'Floor 9'; }
+
+.svg-container__part3 .level--2::after {
+  content: 'Floor 10'; }
+
+.svg-container__part3 .level--3::after {
+  content: 'Floor 11'; }
+
+.svg-container__part3 .level--4::after {
+  content: 'Floor 12'; }
 
 .level:not(:first-child) {
   position: absolute;
@@ -593,7 +652,11 @@ h1, h2, h3, p, select, button, input, label, a {
             transform: translateX(43%); }
   .split-view .levels {
     -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7);
-            transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); } }
+            transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); }
+  .back-btn {
+    display: none; }
+  .second-view-header {
+    margin-left: 0; } }
 
 /* TYMPANUS STYLES */
 /* Icons */

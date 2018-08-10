@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -27,6 +27,7 @@
 		levelNav = $('.levelnav');
 		levelUpCtrl = $('.levelnav__button--up');
 		levelDownCtrl = $('.levelnav__button--down');
+		levelStackedCtrl = $('.levelnav__button--all-levels');
 		selectedLevel = null;
 		levelsTotal = null;
 		isExpanded = false;
@@ -131,6 +132,21 @@
 				secondView.addClass('expanded-view-with-detail');
 			},
 			
+			showFirstStack: function() {
+				secondView.removeClass('second-view__part2 second-view__part3');
+				secondView.addClass('second-view__part1');
+			},
+			
+			showSecondStack: function() {
+				secondView.removeClass('second-view__part1 second-view__part3');
+				secondView.addClass('second-view__part2');
+			},
+			
+			showThirdStack: function() {
+				secondView.removeClass('second-view__part1 second-view__part2');
+				secondView.addClass('second-view__part3');
+			},
+			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
 			},
@@ -161,8 +177,9 @@
 				secondViewStackedHeader = secondViewHeader.text();
 				secondViewHeader.text('Floor ' + selectedLevel).css('color', '#04b5fd');
 
-				// show navigation arrows
-				levelNav.removeClass('levelnav--hidden');
+				// navigation arrows
+				backBtn.addClass('hidden');
+				levelStackedCtrl.removeClass('hidden');
 
 				// check if .boxbutton--disabled needs to be applied
 				commands.setNavigationState();
@@ -198,8 +215,9 @@
 				levelsContainer.removeClass('levels--open levels--selected-' + selectedLevel);
 				$('.level--current').removeClass('level--current');
 
-				// show navigation arrows
-				levelNav.addClass('levelnav--hidden');
+				// navigation arrows
+				backBtn.removeClass('hidden');
+				levelStackedCtrl.addClass('hidden');
 
 				// activate 2nd tab
 				commands.navigateTabs();
@@ -306,6 +324,11 @@
 		
 		// navigating through different views of carousel
 		buildingBlocks.on('click', commands.splitViewMode);
+		
+		$('#link0').on('click', commands.showThirdStack);
+		$('#link1').on('click', commands.showSecondStack);
+		$('#link2').on('click', commands.showFirstStack);
+		
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		secondViewBtn.on('click', function() {
 			if (isExpanded) {
@@ -365,9 +388,30 @@
 			commands.showLevel();
 		});
 		
-		// navigating through the levels
-		levelUpCtrl.on('click', function() { commands.navigate('Down'); });
-		levelDownCtrl.on('click', function() { commands.navigate('Up'); });
+		// 'up' and 'down' arrows for navigating through stacks OR levels (depending on 'expanded')
+		levelUpCtrl.on('click', function() {
+			if (isExpanded) {
+				commands.navigate('Down');
+			} else {
+				// ***********create bunch of if statements here
+				commands.showSecondStack();
+			}
+		});
+		
+		levelDownCtrl.on('click', function() { 
+			if (isExpanded) {
+				commands.navigate('Up'); 
+			} else {
+				// ***********create bunch of if statements here
+				commands.showFirstStack();
+				
+			}
+		});
+		
+		levelStackedCtrl.on('click', function() {
+			commands.showStackedLevels();
+			commands.navigateToSecondView(); 
+		});
 		
 		// clicking on SVG hot spot
 		availableUnit.on('click', function(e) {
