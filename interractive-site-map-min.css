@@ -377,8 +377,8 @@ h1, h2, h3, p, select, button, input, label, a {
 
 /* this will create proper width and height to all other views */
 .second-view, .third-view {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%); }
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%); }
 
 /* when stacks btn clicked */
 .view-change-1 .first-view {
@@ -687,7 +687,7 @@ h1, h2, h3, p, select, button, input, label, a {
 @media (min-width: 1400px) {
   .container-bs3 {
     width: 95%; }
-  .views.split-view {
+  .second-view {
     width: 50%; }
   .first-view {
     min-width: 40vw; }
@@ -714,11 +714,11 @@ h1, h2, h3, p, select, button, input, label, a {
   /* when detail view is open, expanded plate should become small */
   .view-change-2 .expanded-view-with-detail {
     width: 30%; }
-  .view-change-2 .third-view.split-view {
+  .view-change-2 .third-view {
     width: 65%;
     -webkit-transform: translateX(51%);
             transform: translateX(51%); }
-  .split-view .levels {
+  .levels {
     -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7);
             transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); }
   .back-btn {

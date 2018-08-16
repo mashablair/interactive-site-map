@@ -407,7 +407,7 @@ h1, h2, h3, p, select, button, input, label, a {
 } /* this will create proper width and height to all other views */
 
 .second-view, .third-view {
-	transform: translateX(100%);
+	transform: translateX(200%);
 }
 
 /* when stacks btn clicked */
@@ -690,7 +690,7 @@ h1, h2, h3, p, select, button, input, label, a {
 		width: 95%;
 	}
 	
-	.views.split-view {
+	.second-view {
 		width: 50%;
 	}
 	
@@ -729,12 +729,12 @@ h1, h2, h3, p, select, button, input, label, a {
 		width: 30%
 	}
 	
-	.view-change-2 .third-view.split-view {
+	.view-change-2 .third-view {
 		width: 65%;
     	transform: translateX(51%);
 	}
 	
-	.split-view .levels {
+	.levels {
 		transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(.7);
 	}
 	

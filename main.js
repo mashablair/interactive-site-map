@@ -95,16 +95,6 @@
 				tabsBtns.removeClass('active-tab');
 			},
 			
-			splitViewMode: function() {
-				views.addClass('split-view');
-				commands.repositionPopovers();
-			},
-			
-			noSplitViewMode: function() {
-				views.removeClass('split-view');
-				commands.repositionPopovers();
-			},
-			
 			// 3 methods below change Interactive Site Map view by toggling 
 			// CSS classes that create a slider effect with a transition
 			navigateToFirstView: function() {
@@ -112,20 +102,12 @@
 				commands.showPopovers();
 				commands.navigateTabs();
 				firstViewBtn.addClass('active-tab');
-				if ( $(window).width() >= 1400 ) {
-					commands.noSplitViewMode();
-				}
 			},
 			
 			navigateToSecondView: function() {
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
-//				if ( $(window).width() >= 1400 ) {
-//					commands.splitViewMode();
-//				}
-				
-				commands.splitViewMode();
 			},
 			
 			navigateToSecondExpandedView: function() {
@@ -340,9 +322,6 @@
 		// filters
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);
-		
-		// navigating through different views of carousel
-		buildingBlocks.on('click', commands.splitViewMode);
 		
 		$('#link0').on('click', commands.showThirdStack);
 		$('#link1').on('click', commands.showSecondStack);
