@@ -399,7 +399,7 @@ h1, h2, h3, p, select, button, input, label, a {
           transform: translateX(0); }
 
 /* 1st View */
-.building-blocks:hover,
+.link-for-blocks:hover .building-blocks,
 .link-for-blocks:focus .building-blocks {
   opacity: .5; }
 
@@ -470,7 +470,9 @@ h1, h2, h3, p, select, button, input, label, a {
   transition: transform 0.8s, -webkit-transform 0.8s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
           transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  overflow: hidden;
+  overflow: hidden; }
+
+.second-view .svg-container {
   position: absolute;
   top: 60px; }
 
@@ -697,7 +699,8 @@ h1, h2, h3, p, select, button, input, label, a {
   /* when stacks btn clicked */
   .view-change-1 .first-view {
     -webkit-transform: translateX(0);
-            transform: translateX(0); }
+            transform: translateX(0);
+    width: 50%; }
   .view-change-1 .second-view {
     -webkit-transform: translateX(100%);
             transform: translateX(100%); }

@@ -432,7 +432,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 
 /* 1st View */
-.building-blocks:hover,
+.link-for-blocks:hover .building-blocks,
 .link-for-blocks:focus .building-blocks {
 	opacity: .5;
 }
@@ -509,7 +509,9 @@ h1, h2, h3, p, select, button, input, label, a {
 	transition: transform 0.8s;
 	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 	overflow: hidden;
-	
+}
+
+.second-view .svg-container {
 	position: absolute;
     top: 60px;
 }
@@ -705,6 +707,7 @@ h1, h2, h3, p, select, button, input, label, a {
 	/* when stacks btn clicked */
 	.view-change-1 .first-view {
 		transform: translateX(0);
+		width: 50%;
 	}
 
 	.view-change-1 .second-view {
