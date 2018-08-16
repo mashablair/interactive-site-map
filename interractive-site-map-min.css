@@ -727,7 +727,17 @@ h1, h2, h3, p, select, button, input, label, a {
   .back-btn {
     display: none; }
   .expand-detail-btn {
-    display: block; } }
+    display: block; }
+  /* to highlight building parts */
+  .first-stack-displayed .first-block,
+  .second-stack-displayed .second-block,
+  .third-stack-displayed .third-block {
+    opacity: .5; }
+  .first-stack-displayed #popover2 .popover-title,
+  .second-stack-displayed #popover1 .popover-title,
+  .third-stack-displayed #popover0 .popover-title {
+    background: #2BA6CB;
+    color: white; } }
 
 /* TYMPANUS STYLES */
 /* Icons */

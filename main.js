@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, splitMode;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, splitMode;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -15,6 +15,7 @@
 		secondExpandedViewBtn = $('.second-expanded-view-btn');
 		thirdViewBtn = $('.third-view-btn');
 		views = $('.views');
+		firstView = $('.first-view');
 		secondView = $('.second-view');
 		buildingBlocks = $('.first-view svg');
 		popovers = null;
@@ -114,10 +115,10 @@
 			},
 			
 			navigateToSecondView: function() {
-				commands.hidePopovers();
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
+				commands.hidePopovers();
 				setTimeout(function() {
 					commands.showPopovers();
 				}, 800);
@@ -139,33 +140,14 @@
 				secondView.addClass('expanded-view-with-detail');
 			},
 			
-//			highlightBuildingPart: function() {
-//				// which building portion to highlight
-//				if (splitMode) {
-//					if ( secondView.hasClass('second-view__part1')) {
-//						$('#link0').trigger('hover');
-//					}
-//					if ( secondView.hasClass('second-view__part2')) {
-//						$('#link1').trigger('hover');
-//					}
-//					if ( secondView.hasClass('second-view__part3')) {
-//						$('#link2').trigger('mouseover');
-//					}
-//				}
-//			},
-			
 			showFirstStack: function() {
 				secondView.removeClass('second-view__part2 second-view__part3');
 				secondView.addClass('second-view__part1');
 				levelDownCtrl.addClass('boxbutton--disabled');
 				levelUpCtrl.removeClass('boxbutton--disabled');
 				// add building highlight
-				if (splitMode) {
-					blockLinks.trigger('mouseout');
-					$('#link2').trigger('mouseenter');
-					$('.building-blocks').css('opacity', '.1');
-					$('#link2 .building-blocks').css('opacity', '.5');
-				}
+				firstView.addClass('first-stack-displayed');
+				firstView.removeClass('second-stack-displayed third-stack-displayed');
 			},
 			
 			showSecondStack: function() {
@@ -174,12 +156,8 @@
 				levelUpCtrl.removeClass('boxbutton--disabled');
 				levelDownCtrl.removeClass('boxbutton--disabled');
 				// add building highlight
-				if (splitMode) {
-					blockLinks.trigger('mouseout');
-					$('#link1').trigger('mouseenter');
-					$('.building-blocks').css('opacity', '.1');
-					$('#link1 .building-blocks').css('opacity', '.5');
-				}
+				firstView.addClass('second-stack-displayed');
+				firstView.removeClass('first-stack-displayed third-stack-displayed');
 			},
 			
 			showThirdStack: function() {
@@ -188,12 +166,8 @@
 				levelUpCtrl.addClass('boxbutton--disabled');
 				levelDownCtrl.removeClass('boxbutton--disabled');
 				// add building hightlight
-				if (splitMode) {
-					blockLinks.trigger('mouseout');
-					$('#link0').trigger('mouseenter');
-					$('.building-blocks').css('opacity', '.1');
-					$('#link0 .building-blocks').css('opacity', '.5');
-				}
+				firstView.addClass('third-stack-displayed');
+				firstView.removeClass('first-stack-displayed second-stack-displayed');
 			},
 			
 			showPopovers: function() {
@@ -400,15 +374,9 @@
 		// clicking on building blocks or related popovers
 		blockLinks.on('click', function() {
 			commands.navigateToSecondView();
-			var thisBlock = this;
-			console.log(thisBlock);
-			setTimeout(function() {
-				$(thisBlock).trigger('mouseenter');
-				console.log($(thisBlock));
-			}, 800); 
 		});
 		
-		$('.link-for-blocks, .first-view-popovers .popover-title, .first-view-popovers .popover-availability')
+		$('.link-for-blocks, .first-view-popovers')
 			.on('click', commands.navigateToSecondView);	
 		
 		// clicking 'Back' btn
