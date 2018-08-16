@@ -664,9 +664,10 @@ h1, h2, h3, p, select, button, input, label, a {
   height: 250px;
   list-style-type: circle; }
 
-.unit-photo-gallery .carousel-control i {
+.unit-photo-gallery .carousel-control i,
+.unit-photo-gallery .carousel-control carousel-control:focus i {
   height: 1.7em;
-  width: 1.1em;
+  width: 1.1em !important;
   background: black;
   line-height: 1.7em !important; }
 
@@ -674,7 +675,13 @@ h1, h2, h3, p, select, button, input, label, a {
   right: 33px !important; }
 
 .unit-photo-gallery .tab-pane {
-  min-height: 400px; }
+  min-height: 400px;
+  max-height: 500px; }
+
+.carousel-inner__img {
+  width: auto;
+  max-width: 100%;
+  max-height: 500px; }
 
 /* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
 @media (min-width: 1400px) {

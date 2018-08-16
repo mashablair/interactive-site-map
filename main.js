@@ -121,9 +121,11 @@
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
-				if ( $(window).width() >= 1400 ) {
-					commands.splitViewMode();
-				}
+//				if ( $(window).width() >= 1400 ) {
+//					commands.splitViewMode();
+//				}
+				
+				commands.splitViewMode();
 			},
 			
 			navigateToSecondExpandedView: function() {
