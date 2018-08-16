@@ -53,6 +53,24 @@ h1, h2, h3, p, select, button, input, label, a {
 	text-align: center;
 }
 
+/* utility */
+.flex-container {
+	display: flex;
+}
+
+.gray-text {
+	color: #b7b7b7;
+}
+
+.lg-bold-text {
+	font-size: 24px;
+	font-weight: bold;
+	color: #424242;
+}
+
+.blue {
+	color: #04b5fd;
+}
 
 /* BUTTONS */
 #interactive-map-container button:hover,
@@ -81,6 +99,22 @@ h1, h2, h3, p, select, button, input, label, a {
     font-size: 20px;
 }
 
+.expand-detail-btn {
+	margin-left: auto;
+	align-self: center;
+	font-size: 30px;
+    padding: 15px;
+    border: none;
+    color: #717171;
+	display: none;
+}
+
+.apply-btn {
+	width: 100%;
+    background: #717171;
+    padding: 10px;
+}
+
 
 /* Level nav and Box buttons */
 .levelnav {
@@ -102,14 +136,9 @@ h1, h2, h3, p, select, button, input, label, a {
 	display: block;
 	width: 2em;
 	height: 2em;
-	margin: 0;
 	padding: 0;
 	color: #fff;
 	border: 0;
-}
-
-.boxbutton:nth-child(2) {
-	border-top: 1px solid;
 }
 
 .boxbutton--disabled,
@@ -403,7 +432,6 @@ h1, h2, h3, p, select, button, input, label, a {
 
 
 /* 1st View */
-
 .building-blocks:hover,
 .link-for-blocks:focus .building-blocks {
 	opacity: .5;
@@ -466,6 +494,11 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .second-view {
 	flex-direction: column;
+}
+
+.levelnav__button--up,
+.levelnav__button--all-levels {
+	border-bottom: 1px solid white;
 }
 
 .svg-container {
@@ -614,6 +647,35 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 
+/* 3rd View */
+.unit-detail {
+	border-bottom: 1px solid #ddd;
+}
+
+.unit-amenities ul {
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+	height: 250px;
+	list-style-type: circle;
+}
+
+.unit-photo-gallery .carousel-control i {
+	    height: 1.7em;
+    width: 1.1em;
+    background: black;
+    line-height: 1.7em !important;
+}
+
+.unit-photo-gallery .carousel-control.right {
+	right: 33px !important;
+}
+
+.unit-photo-gallery .tab-pane {
+	min-height: 400px;
+}
+
+
 /* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
 @media (min-width: 1400px) {
 	.container-bs3 {
@@ -660,8 +722,8 @@ h1, h2, h3, p, select, button, input, label, a {
 	}
 	
 	.view-change-2 .third-view.split-view {
-		width: 70%;
-    	transform: translateX(43%);
+		width: 65%;
+    	transform: translateX(51%);
 	}
 	
 	.split-view .levels {
@@ -672,8 +734,8 @@ h1, h2, h3, p, select, button, input, label, a {
 		display: none;
 	}
 	
-	.second-view-header {
-		margin-left: 0;
+	.expand-detail-btn {
+		display: block;
 	}
 }
 

@@ -78,6 +78,16 @@
 			}, 800);  
 		}); 
 		
+		
+		// initialize tabs in 3rd View
+		$('#unitDetailTabs a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		});
+		
+		// initialize carousel in 3rd View
+		$('.carousel').carousel();
+		
 		var commands = {
 			
 			// header tabs navigation -- appearance only
@@ -135,16 +145,25 @@
 			showFirstStack: function() {
 				secondView.removeClass('second-view__part2 second-view__part3');
 				secondView.addClass('second-view__part1');
+				levelDownCtrl.addClass('boxbutton--disabled');
+				levelUpCtrl.removeClass('boxbutton--disabled');
+				// add building highlight
 			},
 			
 			showSecondStack: function() {
 				secondView.removeClass('second-view__part1 second-view__part3');
 				secondView.addClass('second-view__part2');
+				levelUpCtrl.removeClass('boxbutton--disabled');
+				levelDownCtrl.removeClass('boxbutton--disabled');
+				// add building highlight
 			},
 			
 			showThirdStack: function() {
 				secondView.removeClass('second-view__part1 second-view__part2');
 				secondView.addClass('second-view__part3');
+				levelUpCtrl.addClass('boxbutton--disabled');
+				levelDownCtrl.removeClass('boxbutton--disabled');
+				// add building hightlight
 			},
 			
 			showPopovers: function() {
@@ -190,8 +209,6 @@
 			
 			// Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
 			setNavigationState: function() {
-				console.log("selectedLevel is " + selectedLevel);
-				console.log("levelsTotal is " + levelsTotal);
 				if ( selectedLevel === 1 ) {
 					levelDownCtrl.addClass('boxbutton--disabled');
 				} else {
@@ -391,20 +408,30 @@
 		// 'up' and 'down' arrows for navigating through stacks OR levels (depending on 'expanded')
 		levelUpCtrl.on('click', function() {
 			if (isExpanded) {
+				// means we're navingating thru levels
 				commands.navigate('Down');
 			} else {
-				// ***********create bunch of if statements here
-				commands.showSecondStack();
+				// means we are navigating thru stacks (only 3 stacks)
+				if (secondView.hasClass('second-view__part1')) {
+					commands.showSecondStack();
+				} else if (secondView.hasClass('second-view__part2')) {
+					commands.showThirdStack();
+				}
 			}
 		});
 		
+		// this nav is shared by both stacks and levels
 		levelDownCtrl.on('click', function() { 
 			if (isExpanded) {
+				// means we are navigating thru levels
 				commands.navigate('Up'); 
 			} else {
-				// ***********create bunch of if statements here
-				commands.showFirstStack();
-				
+				// means we are navigating thru stacks (only 3 stacks)
+				if (secondView.hasClass('second-view__part3')) {
+					commands.showSecondStack();
+				} else if (secondView.hasClass('second-view__part2')) {
+					commands.showFirstStack();
+				}
 			}
 		});
 		

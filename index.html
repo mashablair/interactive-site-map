@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" />
 <!--    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />-->
 <!--    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />-->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/bootstrap3-grid.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/bootstrap-modal-fullscreen.min.css" />
@@ -1608,8 +1609,110 @@
 	
 		</div><!-- /second-view -->
 		
-		<div class="views third-view">
-			<img src="assets/third-view.png" alt="">
+		<div class="views third-view">			
+			<header class="row m-b-lg">
+				<div class="col-xs-12 col-sm-6 flex-container">
+					<button class="slider-btns btn-inverse boxbutton m-r-lg"><i class="iconm-arrow-left4"></i></button>
+					<div>
+						<h3 class="m-b-none">Apartment <span class="unit-number">#4406</span></h3>
+						<p class="unit-meta gray-text">Floor 44 &nbsp;|&nbsp; 2 Bed &nbsp;|&nbsp; 2 Bath &nbsp;|&nbsp; 879 Sq. Ft.</p>
+					</div>
+				</div>
+				
+				<div class="col-xs-6 col-sm-3 m-t-md">
+					<a href="" class="blue">Schedule Tour <img src="assets/walk-outline-24.svg" alt=""></a>
+				</div>
+				
+				<div class="col-xs-6 col-sm-3 m-t-md flex-container">
+					<div>
+						<p class="m-b-none gray-text">From <span class="unit-price lg-bold-text">$4,125 </span>/month</p>
+						<p class="m-b-none"><span class="deposit-amount">$500 </span> Deposit</p>
+					</div>
+					<button class="expand-detail-btn"><i class="iconm-enlarge7"></i></button>
+				</div>
+			</header>
+			
+			<div class="row">
+				<div class="unit-photo-gallery col-xs-12 col-md-8">
+					<!-- tabs -->
+					<ul class="nav nav-tabs" id="unitDetailTabs">
+						<li class="active"><a href="#apartment-photos">Apartment</a></li>
+						<li><a href="#floor-plan-photos">Floor Plan</a></li>
+						<li><a href="#community-photos">Community</a></li>
+						<li><a href="#amenities-photos">Amenities</a></li>
+					</ul>
+
+					<div class="tab-content">
+
+						<!-- 1st tab -->
+						<div class="tab-pane active" id="apartment-photos">
+							<!-- Carousel -->
+							<div id="unit-carousel" class="carousel slide">
+								<ol class="carousel-indicators">
+									<li data-target="#unit-carousel" data-slide-to="0" class="active"></li>
+									<li data-target="#unit-carousel" data-slide-to="1"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="active item">
+										<img src="https://cdn.rentcafe.com/dmslivecafe/3/19998/homegallery.jpg" alt="">  
+									</div>
+									<div class="item">
+										<img src="https://sitemanager.rentcafe.com/dmslivecafe/3/19998/bedroom.jpg" alt="">  
+									</div>
+								</div>
+								<!-- Carousel nav -->
+								<a class="carousel-control left" href="#unit-carousel" data-slide="prev"><i class="iconm-arrow-left4"></i></a>
+								<a class="carousel-control right" href="#unit-carousel" data-slide="next"><i class="iconm-arrow-right4"></i></a>
+							</div>
+						</div>
+
+						<!-- 2nd tab -->
+						<div class="tab-pane" id="floor-plan-photos">
+							<img src="assets/unit-photo.png" alt="image of the unit's kitchen and the view">
+						</div>
+
+						<div class="tab-pane" id="community-photos">Something</div>
+						<div class="tab-pane" id="amenities-photos">Amenities</div>
+					</div>
+				</div>
+				
+				<div class="unit-detail col-xs-12 col-md-4 p-b-lg">
+					<div>
+						<h4 class="m-b-none">Availability</h4>
+						<p>Available from January 15, 2018</p>
+					</div>
+					<div>
+						<h4 class="m-b-none">Specials</h4>
+						<p>First month free for 13+ month leases</p>
+					</div>
+					<div>
+						<button class="apply-btn btn-inverse">APPLY NOW</button>
+					</div>			
+				</div>
+				
+				<div class="unit-amenities col-xs-12 col-md-4">
+					<h4>In this Apartment</h4>
+					
+					<ul>
+						<li>Washer/Dryers</li>
+						<li>Walk-in Closet</li>
+						<li>Pool View</li>
+						<li>Vaulted Ceiling</li>
+						<li>Track Lighting</li>
+						<li>Tiled Entry</li>
+						<li>Stainless Steel</li>
+						<li>Appliances</li>
+						<li>Roman Tub</li>
+						<li>Stainless Refrigerator</li>
+						<li>Balcony Facing Pool</li>
+						<li>Vertical Blinds</li>
+						<li>Breakfast Bar</li>
+					</ul>
+				</div>
+				
+				
+			
+			</div>
 		</div>
 
 	</section>

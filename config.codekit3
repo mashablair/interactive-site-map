@@ -20,17 +20,6 @@
 		"opt": 0,
 		"q": 100
 		},
-	"\/assets\/details-shot.png": {
-		"ft": 32768,
-		"iS": 100847,
-		"oA": 0,
-		"oAP": "\/assets\/details-shot.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/assets\/Floors-39-40a.svg": {
 		"ft": 2097152,
 		"miP": 0,
@@ -61,17 +50,6 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"\/assets\/second-view.png": {
-		"ft": 32768,
-		"iS": 483048,
-		"oA": 0,
-		"oAP": "\/assets\/second-view.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/assets\/third-view-1.png": {
 		"ft": 32768,
 		"iS": 147879,
@@ -83,16 +61,26 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/assets\/third-view.png": {
+	"\/assets\/unit-photo.png": {
 		"ft": 32768,
-		"iS": 460433,
+		"iS": 1823621,
 		"oA": 0,
-		"oAP": "\/assets\/third-view.png",
+		"oAP": "\/assets\/unit-photo.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
 		"q": 100
+		},
+	"\/assets\/walk-outline-24.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/assets\/walk-outline-24.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
 		},
 	"\/index.html": {
 		"cB": 0,

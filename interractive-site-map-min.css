@@ -39,6 +39,23 @@ h1, h2, h3, p, select, button, input, label, a {
   font-size: 12px;
   text-align: center; }
 
+/* utility */
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.gray-text {
+  color: #b7b7b7; }
+
+.lg-bold-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #424242; }
+
+.blue {
+  color: #04b5fd; }
+
 /* BUTTONS */
 #interactive-map-container button:hover,
 #interactive-map-container button:active,
@@ -62,6 +79,21 @@ h1, h2, h3, p, select, button, input, label, a {
   border: none;
   font-size: 20px; }
 
+.expand-detail-btn {
+  margin-left: auto;
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 30px;
+  padding: 15px;
+  border: none;
+  color: #717171;
+  display: none; }
+
+.apply-btn {
+  width: 100%;
+  background: #717171;
+  padding: 10px; }
+
 /* Level nav and Box buttons */
 .levelnav {
   position: absolute;
@@ -81,13 +113,9 @@ h1, h2, h3, p, select, button, input, label, a {
   display: block;
   width: 2em;
   height: 2em;
-  margin: 0;
   padding: 0;
   color: #fff;
   border: 0; }
-
-.boxbutton:nth-child(2) {
-  border-top: 1px solid; }
 
 .boxbutton--disabled,
 .boxbutton--disabled:focus,
@@ -425,6 +453,10 @@ h1, h2, h3, p, select, button, input, label, a {
       -ms-flex-direction: column;
           flex-direction: column; }
 
+.levelnav__button--up,
+.levelnav__button--all-levels {
+  border-bottom: 1px solid white; }
+
 .svg-container {
   width: 100%;
   height: 100%;
@@ -615,6 +647,35 @@ h1, h2, h3, p, select, button, input, label, a {
   cursor: pointer;
   fill: #6ed2fb; }
 
+/* 3rd View */
+.unit-detail {
+  border-bottom: 1px solid #ddd; }
+
+.unit-amenities ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 250px;
+  list-style-type: circle; }
+
+.unit-photo-gallery .carousel-control i {
+  height: 1.7em;
+  width: 1.1em;
+  background: black;
+  line-height: 1.7em !important; }
+
+.unit-photo-gallery .carousel-control.right {
+  right: 33px !important; }
+
+.unit-photo-gallery .tab-pane {
+  min-height: 400px; }
+
 /* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
 @media (min-width: 1400px) {
   .container-bs3 {
@@ -647,16 +708,16 @@ h1, h2, h3, p, select, button, input, label, a {
   .view-change-2 .expanded-view-with-detail {
     width: 30%; }
   .view-change-2 .third-view.split-view {
-    width: 70%;
-    -webkit-transform: translateX(43%);
-            transform: translateX(43%); }
+    width: 65%;
+    -webkit-transform: translateX(51%);
+            transform: translateX(51%); }
   .split-view .levels {
     -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7);
             transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); }
   .back-btn {
     display: none; }
-  .second-view-header {
-    margin-left: 0; } }
+  .expand-detail-btn {
+    display: block; } }
 
 /* TYMPANUS STYLES */
 /* Icons */
