@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, splitMode;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -38,7 +38,6 @@
 		levels = $('.level');
 		secondViewStackedHeader = null;
 		availableUnit = $('.available-unit');
-		splitMode = false;
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -54,12 +53,6 @@
 	//      loc += "&";
 	//	}
 	//  location.href = loc + "ts=true";
-		
-		
-		// to determine the if splitMode or not
-		if ( $(window).width() >= 1400 ) {
-			splitMode = true;
-		}
 		
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
@@ -115,13 +108,16 @@
 			},
 			
 			navigateToSecondView: function() {
-				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
-				commands.navigateTabs();
-				secondViewBtn.addClass('active-tab');
-				commands.hidePopovers();
-				setTimeout(function() {
-					commands.showPopovers();
-				}, 800);
+				// if no .view-change-1 class
+				if ( !mapsContainer.hasClass('view-change-1')) {
+					mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+					commands.navigateTabs();
+					secondViewBtn.addClass('active-tab');
+					commands.hidePopovers();
+					setTimeout(function() {
+						commands.showPopovers();
+					}, 800);
+				}
 			},
 			
 			navigateToSecondExpandedView: function() {
@@ -148,6 +144,7 @@
 				// add building highlight
 				firstView.addClass('first-stack-displayed');
 				firstView.removeClass('second-stack-displayed third-stack-displayed');
+				secondViewHeader.text('Floors 1 - 4 (Lower Third)');
 			},
 			
 			showSecondStack: function() {
@@ -158,6 +155,7 @@
 				// add building highlight
 				firstView.addClass('second-stack-displayed');
 				firstView.removeClass('first-stack-displayed third-stack-displayed');
+				secondViewHeader.text('Floors 5 - 8 (Middle Third)');
 			},
 			
 			showThirdStack: function() {
@@ -168,6 +166,7 @@
 				// add building hightlight
 				firstView.addClass('third-stack-displayed');
 				firstView.removeClass('first-stack-displayed second-stack-displayed');
+				secondViewHeader.text('Floors 9 - 12 (Upper Third)');
 			},
 			
 			showPopovers: function() {
@@ -196,9 +195,10 @@
 				commands.navigateTabs();
 				secondExpandedViewBtn.addClass('active-tab');
 
-				// update header
+				// update header using floor number
 				secondViewStackedHeader = secondViewHeader.text();
-				secondViewHeader.text('Floor ' + selectedLevel).css('color', '#04b5fd');
+				var floorNum = $('.level--current').attr('data-floor');
+				secondViewHeader.text('Floor ' + floorNum).css('color', '#04b5fd');
 
 				// navigation arrows
 				backBtn.addClass('hidden');
@@ -245,7 +245,14 @@
 				secondViewBtn.addClass('active-tab');
 
 				// update header back to stacked
-				secondViewHeader.text(secondViewStackedHeader).css('color', '');
+				if (secondView.hasClass('second-view__part1')) {
+					secondViewHeader.text('Floors 1 - 4 (Lower Third)');
+				} else if (secondView.hasClass('second-view__part2')) {
+					secondViewHeader.text('Floors 5 - 8 (Middle Third)');
+				} else if (secondView.hasClass('second-view__part3')) {
+					secondViewHeader.text('Floors 9 - 12 (Upper Third)');
+				}
+				secondViewHeader.css('color', '');
 			},
 			
 			// navigate through levels
@@ -343,10 +350,6 @@
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);
 		
-		$('#link0').on('click', commands.showThirdStack);
-		$('#link1').on('click', commands.showSecondStack);
-		$('#link2').on('click', commands.showFirstStack);
-		
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		secondViewBtn.on('click', function() {
 			if (isExpanded) {
@@ -373,12 +376,26 @@
 		
 		// clicking on building blocks or related popovers
 		blockLinks.on('click', function() {
+			// if 1 floor is expanded
+			if (isExpanded) {
+				commands.showStackedLevels();
+			}
+			
+			if ( $(this).attr('id') === 'link0') {
+				commands.showThirdStack();
+			} else if ( $(this).attr('id') === 'link1') {
+				commands.showSecondStack();
+			} if ( $(this).attr('id') === 'link2') {
+				commands.showFirstStack();
+			}
 			commands.navigateToSecondView();
 		});
 		
-		$('.link-for-blocks, .first-view-popovers')
-			.on('click', commands.navigateToSecondView);	
-		
+		// ***********FIX THIS
+		$('.first-view-popovers').on('click', function() {
+			commands.navigateToSecondView();
+		});
+				
 		// clicking 'Back' btn
 		backBtn.on('click', function() {
 			if (isExpanded) {
@@ -391,14 +408,11 @@
 				secondView.removeClass('expanded-view-with-detail');
 			}
 		});
-		// for wide screens only close detail area, when user clicks 'back btn'
-//			$('.second-view').removeClass('expanded-view-with-detail');
 		
 		
 		// clicking on stacked floor plate, shows this plate in expanded view
 		levels.on('click', function() {
-			console.log($(this)); // --> .level.level--1
-			
+
 			// current .level should receive .level--current
 			$(this).addClass('level--current');
 			// get last digit
