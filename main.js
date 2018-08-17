@@ -393,6 +393,20 @@
 		
 		// ***********FIX THIS
 		$('.first-view-popovers').on('click', function() {
+			
+			if ( $(this).attr('id') === 'popover0') {
+				commands.showThirdStack();
+			} else if ( $(this).attr('id') === 'popover1') {
+				commands.showSecondStack();
+			} if ( $(this).attr('id') === 'popover2') {
+				commands.showFirstStack();
+			}
+			
+			// if 1 floor is expanded
+			if (isExpanded) {
+				commands.showStackedLevels();
+			}
+			
 			commands.navigateToSecondView();
 		});
 				
