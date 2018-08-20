@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -9,6 +9,8 @@
 		expandBtn = $('#more-filters-btn');
 		filtersContainer = $('.more-filters-container');
 		clearFiltersBtn = $('#clear-all-filters');
+		applyFiltersBtn = $('#apply-filters-btn');
+		filterSelectionSection = $('.filter-selections');
 		mapsContainer = $('#interactive-site-map');
 		firstViewBtn = $('.first-view-btn');
 		secondViewBtn = $('.second-view-btn');
@@ -18,7 +20,6 @@
 		firstView = $('.first-view');
 		secondView = $('.second-view');
 		buildingBlocks = $('.first-view svg');
-		popovers = null;
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = $('.first-view .link-for-blocks');
 		backBtn = $('.back-btn');
@@ -29,18 +30,15 @@
 		levelUpCtrl = $('.levelnav__button--up');
 		levelDownCtrl = $('.levelnav__button--down');
 		levelStackedCtrl = $('.levelnav__button--all-levels');
-		selectedLevel = null;
-		levelsTotal = null;
 		isExpanded = false;
 		isNavigating = false;
-		numberViewPopovers = null;
 		levelsContainer = $('.levels');
 		levels = $('.level');
-		secondViewStackedHeader = null;
 		availableUnit = $('.available-unit');
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
+		filterSelectionSection.hide();
 		
 		loadData();
 		
@@ -323,7 +321,7 @@
 					filtersContainer.animate({
 						opacity: 0
 					}, 200, function() {
-						moreFilters.removeClass('open').addClass('hidden-from-interaction');;
+						moreFilters.removeClass('open').addClass('hidden-from-interaction');
 						commands.showPopovers();
 					});
 					$(this).text('+ More Filters');
@@ -343,6 +341,47 @@
 			resetFilters: function() {
 				$("#map-header, #more-filters").find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
 				$("#any-ba").prop('checked', true);
+				filterSelectionSection.slideUp();
+			},
+			
+			applyFilters: function() {
+				filterSelectionSection.slideDown(300).html('<p class="filter-selections__header font-bold">Filtered By: </p>');
+				commands.buildActiveFiltersList();
+			}, 
+			
+			buildActiveFiltersList: function() {
+				filterSelectionUl =  '<ul class="filter-selections__ul flex-container flex1 m-b-none">';
+				
+				filterCounter = 0;
+				var filterBedrooms = $('#filter-bedrooms');
+				var filterMaxRent = $('#filter-max-rent');
+				
+				// bedrooms
+				if ( filterBedrooms.val() !== 'all' ) {
+					filterSelectionUl += '<li>' + filterBedrooms.val() + '</li>';
+					filterCounter ++;
+				}
+				
+				// max rent
+				if ( filterMaxRent.val() !== '' ) {
+					filterSelectionUl += '<li>Max Rent: $' + filterMaxRent.val() + '</li>';
+					filterCounter ++;
+				} else {
+					console.log(filterMaxRent.val() );
+				}
+				
+				filterSelectionUl += '</ul>';
+				
+				// if <ul> is empty, display message
+				if ( filterCounter === 0) {
+					filterSelectionUl = undefined;
+					filterSelectionSection.append('<p class="m-l-lg blue text-uppercase">You did not select any filters.</p>');
+					console.log('no lis');
+				} else {
+					filterSelectionSection.append(filterSelectionUl);
+					console.log('some lis');
+				}
+				
 			}
 			
 		}; // end of 'commands' var
@@ -354,6 +393,7 @@
 		// filters
 		expandBtn.on('click', commands.expandFilters);
 		clearFiltersBtn.on('click', commands.resetFilters);
+		applyFiltersBtn.on('click', commands.applyFilters);
 		
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		

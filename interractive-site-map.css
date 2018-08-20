@@ -383,6 +383,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .filter-selections {
 	border: 1px solid #717171;
+	display: flex;
 }
 
 .filter-selections__header {

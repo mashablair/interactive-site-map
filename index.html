@@ -8,10 +8,9 @@
 
 <head>
     <title>Interactive Site Map</title>
-    <meta name="description" content="Check out photos, floor plans, amenities, rental rates & availability at Cirrus, Seattle, WA and submit your lease application today!" />
+    <meta name="description" content="Check out photos, floor plans, amenities, rental rates & availability and submit your lease application today!" />
     <meta name="referrer" content="always" />
-    <meta name="keywords" content="Cirrus, apartments, rentals, apartment guide, apartment finder, apartment search, apartment locator, apartments for rent, apartment listings" />
-    <meta name="author" content="Cirrus" />
+    <meta name="keywords" content="apartments, rentals, apartment guide, apartment finder, apartment search, apartment locator, apartments for rent, apartment listings" />
     <meta name="robots" content="all" />
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
     <meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1'>
@@ -490,7 +489,7 @@
                             <div class="logo-outer-div">
                                 <div class="logo-holder">
                                     <div id="logo-container">
-                                        <a href='https://www.cirrusseattle.com'><img width='100%' height='100%' src='https://cdngeneral.rentcafe.com/dmslivecafe/3/511998/WA_Seattle_Cirrus_p0521647_logo_6_PropertyLogo.png?&quality=85' alt='Cirrus Logo, Seattle' title='Cirrus Logo' border='0' /></a>
+                                        <a href='https://www.cirrusseattle.com'><img style="height:120px" width='100%' height='120px' src='https://cdngeneral.rentcafe.com/dmslivecafe/3/19998/xcityview_logo_new.png,qcrop=,280,,0,,300,,226,29,acropxunits=300,acropyunits=226,aquality=85.pagespeed.ic.ZccibpzVjj.png' alt='Logo' title='Logo' border='0' /></a>
                                     </div>
                                 </div>
                             </div>
@@ -502,11 +501,11 @@
                                     <div class="dropdown login-dropdown"> <a class="login-btn" role="button" data-toggle="dropdown" data-target="#" href="#" aria-label="Login Links"><span></span> <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li id="rpdiv" class="hidden">
-                                                <a href="https://cirrusseattle.securecafe.com/residentservices/cirrus/userlogin.aspx?utm_nooverride=1&_yTrackUser=MzQ4OTQ2MzUyIzQxMTA2MjcwMA%253d%253d-jy5XCn%252fu9sg%253d&_yTrackVisit=NjQzNzk1NDg2IzIwMjM1MDAzNA%253d%253d-iPquyYcQADI%253d&_yTrackReqDT=24222220180607" target="_Blank" data-selenium-id="SID_rpdiv" aria-label="Resident Login">
+                                                <a href="#" target="_Blank" data-selenium-id="SID_rpdiv" aria-label="Resident Login">
                                                 </a>
                                             </li>
                                             <li id="apldiv" class="hidden">
-                                                <a href="https://cirrusseattle.securecafe.com/onlineleasing/cirrus/guestlogin.aspx?utm_nooverride=1&propleadsource_511998=portal&_yTrackUser=MzQ4OTQ2MzUyIzQxMTA2MjcwMA%253d%253d-jy5XCn%252fu9sg%253d&_yTrackVisit=NjQzNzk1NDg2IzIwMjM1MDAzNA%253d%253d-iPquyYcQADI%253d&_yTrackReqDT=24222220180607" target="_Blank" data-selenium-id="SID_apldiv" aria-label="Applicant Login"></a>
+                                                <a href="#" target="_Blank" data-selenium-id="SID_apldiv" aria-label="Applicant Login"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -531,9 +530,9 @@
 		
 		<select id="filter-bedrooms">
 			<option value="all">Any Bedrooms</option>
-			<option value="0">Studio</option>
-			<option value="1">1 Bedroom</option>
-			<option value="2">2 Bedrooms</option>
+			<option value="Studio">Studio</option>
+			<option value="1 Bedroom">1 Bedroom</option>
+			<option value="2 Bedrooms">2 Bedrooms</option>
 		</select>
 		
 		<button id="more-filters-btn" class="btn btn-inverse">+ More Filters</button>
@@ -556,7 +555,7 @@
 			<div>
 				<div>
 					<p>Max Rent</p>
-					<input type="text" placeholder="$ Amount">
+					<input type="text" id="filter-max-rent" placeholder="$ Amount">
 				</div>
 			</div>
 			
@@ -699,13 +698,14 @@
 		<!-- 3rd row -->
 		<div class="clear-filters-row">
 			<button id="clear-all-filters" class="filter-btns text-sm m-r-lg"><i class="iconm-cross2"></i> CLEAR ALL FILTERS</button>
-			<button class="filter-btns"><i class="iconm-checkmark4"></i> APPLY FILTERS</button>
+			<button id="apply-filters-btn" class="filter-btns"><i class="iconm-checkmark4"></i> APPLY FILTERS</button>
 		</div>
 		</div>
 	</section>
 	
 	<!-- filter selections -->
-	<section class="filter-selections flex-container p-sm p-b-none">
+<!--
+	<section class="filter-selections p-sm p-b-none" style="display: none !important">
 		<p class="filter-selections__header m-b-none font-bold">Filtered By: </p>
 		<ul class="filter-selections__ul flex-container flex1 m-b-none">
 			<li>1 Bedroom</li>
@@ -720,6 +720,11 @@
 			<li>Breakfast Bar</li>
 			<li>Hardwood Floors</li>
 		</ul>
+	</section>
+-->
+	
+	<section class="filter-selections p-sm p-b-none" style="display: none !important">
+		<p class="filter-selections__header font-bold">Filtered By: </p>
 	</section>
 	
 	<!--  INTERACTIVE MAP  -->
@@ -1660,9 +1665,9 @@
 							<div class="col-sm-12 no-padding">
 								<address id="address" class="horizontal">
 									<a href='http://maps.google.com?q=2030+8th+Avenue++Seattle+WA+98121' target='_blank'>
-										<span itemprop='name' data-selenium-id='address-propname'>Cirrus</span>
+										<span itemprop='name' data-selenium-id='address-propname'>Skyline</span>
 										<span itemprop='address' >
-											<span data-selenium-id='address-street'>2030 8th Avenue&nbsp;</span>
+											<span data-selenium-id='address-street'>1111 10th Avenue&nbsp;</span>
 											<span data-selenium-id='address-city'>Seattle</span>, 
 											<span data-selenium-id='address-state'>WA</span> 
 											<span data-selenium-id='address-zip'>98121</span>
@@ -1690,7 +1695,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <span class="copyright" id="copyright">&copy; 2018 Windsor Property Management Co..  All Rights Reserved.&nbsp;|&nbsp;Website Design by RENT<i>Caf&eacute;</i> (&copy; 2018 Yardi Systems, Inc. All Rights Reserved.)</span>
+                                    <span class="copyright" id="copyright">&copy; Website Design by RENT<i>Caf&eacute;</i> (&copy; 2018 Yardi Systems, Inc. All Rights Reserved.)</span>
                                 </div>
                             </div>
                             <div class="col-sm-3 col-lg-2 text-sm-center text-xs-only-left">
@@ -1699,8 +1704,8 @@
                             <div class="col-sm-5 col-lg-5 height100">
                                 <div id="footer-links">
                                     <ul class="unstyled nav nav-list">
-                                        <li id='footerResLogin'><a href="https://cirrusseattle.securecafe.com/residentservices/cirrus/userlogin.aspx?utm_nooverride=1&_yTrackUser=MzQ4OTQ2MzUyIzQxMTA2MjcwMA%253d%253d-jy5XCn%252fu9sg%253d&_yTrackVisit=NjQzNzk1NDg2IzIwMjM1MDAzNA%253d%253d-iPquyYcQADI%253d&_yTrackReqDT=30222220180607" class="AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_ResidentLogin' target="_self">Resident Login</a></li>
-                                        <li id='footerAplLogin'><a href="https://cirrusseattle.securecafe.com/onlineleasing/cirrus/guestlogin.aspx?utm_nooverride=1&propleadsource_511998=portal&_yTrackUser=MzQ4OTQ2MzUyIzQxMTA2MjcwMA%253d%253d-jy5XCn%252fu9sg%253d&_yTrackVisit=NjQzNzk1NDg2IzIwMjM1MDAzNA%253d%253d-iPquyYcQADI%253d&_yTrackReqDT=30222220180607" class=" AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_ApplicantLogin' target="_self">Applicant Login</a></li>
+                                        <li id='footerResLogin'><a href="#" class="AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_ResidentLogin' target="_self">Resident Login</a></li>
+                                        <li id='footerAplLogin'><a href="#" class=" AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_ApplicantLogin' target="_self">Applicant Login</a></li>
                                         <li><a href="termsandconditions.aspx" class="AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_termsandconditions' target="new">Terms and Conditions</a></li>
                                         <li><a href="privacypolicy.aspx" class="AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_privacypolicy' target="new">Privacy Policy</a></li>
                                         <li><a href="contactus.aspx" class="AddClickTrackParams footerlinks bottomlinks" data-selenium-id='SID_footer_contactus'>Contact Us</a></li>

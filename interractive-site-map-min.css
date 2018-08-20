@@ -356,7 +356,10 @@ h1, h2, h3, p, select, button, input, label, a {
   border: 1px solid white; }
 
 .filter-selections {
-  border: 1px solid #717171; }
+  border: 1px solid #717171;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
 
 .filter-selections__header {
   width: 65px; }
