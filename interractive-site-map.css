@@ -58,6 +58,10 @@ h1, h2, h3, p, select, button, input, label, a {
 	display: flex;
 }
 
+.flex1 {
+	flex: 1;
+}
+
 .gray-text {
 	color: #b7b7b7;
 }
@@ -70,6 +74,10 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .blue {
 	color: #04b5fd;
+}
+
+.hidden-from-interaction {
+	pointer-events: none;
 }
 
 /* BUTTONS */
@@ -366,12 +374,34 @@ h1, h2, h3, p, select, button, input, label, a {
 	padding: 10px;
 }
 
-#clear-all-filters {
+/* applied filters row */
+.filter-btns {
 	background: black;
 	color: white;
-	border: none;
+	border: 1px solid white;
 }
 
+.filter-selections {
+	border: 1px solid #717171;
+}
+
+.filter-selections__header {
+	width: 65px;
+}
+
+.filter-selections__ul {
+	list-style-type: none;
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.filter-selections__ul li {
+	background: #e2e2e2;
+    padding: 0 7px;
+    border-radius: 7px;
+    margin-right: 10px;
+	margin-bottom: 10px;
+}
 
 
 
@@ -516,11 +546,11 @@ h1, h2, h3, p, select, button, input, label, a {
     top: 60px;
 }
 
-.second-view__part1 .svg-container__part3 {transform: translateY(-100%)}
-.second-view__part1 .svg-container__part2 {transform: translateY(-100%)}
+.second-view__part1 .svg-container__part3 {transform: translateY(-120%)}
+.second-view__part1 .svg-container__part2 {transform: translateY(-120%)}
 .second-view__part1 .svg-container__part1 {transform: translateY(0)}
 
-.second-view__part2 .svg-container__part3 {transform: translateY(-100%)}
+.second-view__part2 .svg-container__part3 {transform: translateY(-120%)}
 .second-view__part2 .svg-container__part2 {transform: translateY(0)}
 .second-view__part2 .svg-container__part1 {transform: translateY(100%)}
 

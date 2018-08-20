@@ -209,6 +209,9 @@
 				
 				// means only 1 floor plate is visible (we are in 2nd Expanded View)
 				isExpanded = true;
+				
+				// hide other stacks?
+
 			},
 			
 			// Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
@@ -315,17 +318,19 @@
 			
 			// more filters button
 			expandFilters: function() {
+				// to close
 				if ( moreFilters.hasClass('open') ) {
 					filtersContainer.animate({
 						opacity: 0
 					}, 200, function() {
-						moreFilters.removeClass('open');
+						moreFilters.removeClass('open').addClass('hidden-from-interaction');;
 						commands.showPopovers();
 					});
 					$(this).text('+ More Filters');
 					moreFilters.find(":focusable").attr( "tabindex", "-1" );
 				} else {
-					moreFilters.addClass('open').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
+					// to open 
+					moreFilters.addClass('open').removeClass('hidden-from-interaction').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
 					$(this).text('- Less Filters');
 					filtersContainer.delay(200).animate({
 						opacity: 1
@@ -351,6 +356,7 @@
 		clearFiltersBtn.on('click', commands.resetFilters);
 		
 		firstViewBtn.on('click', commands.navigateToFirstView);
+		
 		secondViewBtn.on('click', function() {
 			if (isExpanded) {
 				commands.showStackedLevels();
@@ -374,7 +380,7 @@
 			}
 		});
 		
-		// clicking on building blocks or related popovers
+		// clicking on building blocks brings correct stack
 		blockLinks.on('click', function() {
 			// if 1 floor is expanded
 			if (isExpanded) {
@@ -391,7 +397,7 @@
 			commands.navigateToSecondView();
 		});
 		
-		// ***********FIX THIS
+		// clicking on first-view popovers brings correct stack
 		$('.first-view-popovers').on('click', function() {
 			
 			if ( $(this).attr('id') === 'popover0') {
@@ -439,7 +445,7 @@
 		// 'up' and 'down' arrows for navigating through stacks OR levels (depending on 'expanded')
 		levelUpCtrl.on('click', function() {
 			if (isExpanded) {
-				// means we're navingating thru levels
+				// means we're navigating thru levels
 				commands.navigate('Down');
 			} else {
 				// means we are navigating thru stacks (only 3 stacks)
