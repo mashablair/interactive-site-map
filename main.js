@@ -324,7 +324,7 @@
 						moreFilters.removeClass('open').addClass('hidden-from-interaction');
 						commands.showPopovers();
 					});
-					$(this).text('+ More Filters');
+					expandBtn.text('+ More Filters');
 					moreFilters.find(":focusable").attr( "tabindex", "-1" );
 				} else {
 					// to open 
@@ -339,22 +339,29 @@
 			
 			// reset all filters
 			resetFilters: function() {
-				$("#map-header, #more-filters").find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
+				$("#more-filters").find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
 				$("#any-ba").prop('checked', true);
 				filterSelectionSection.slideUp();
+				commands.expandFilters();
 			},
 			
 			applyFilters: function() {
-				filterSelectionSection.slideDown(300).html('<p class="filter-selections__header font-bold">Filtered By: </p>');
+				commands.expandFilters();
+				filterSelectionSection.slideDown(300).html('');
 				commands.buildActiveFiltersList();
 			}, 
 			
 			buildActiveFiltersList: function() {
-				filterSelectionUl =  '<ul class="filter-selections__ul flex-container flex1 m-b-none">';
+				filterSelectionUl =  '<ul class="filter-selections__ul flex-container">';
 				
 				filterCounter = 0;
 				var filterBedrooms = $('#filter-bedrooms');
 				var filterMaxRent = $('#filter-max-rent');
+				var filterBathrooms = $('#filter-bathrooms');
+				var filterMoveInDate = $('#filter-available-date');
+				var filterRushOnly = $('#rush-only');
+				var filterSpecialsOnly = $('#specials-only');
+				var filterAmenities = $('#amenities-list');
 				
 				// bedrooms
 				if ( filterBedrooms.val() !== 'all' ) {
@@ -366,20 +373,57 @@
 				if ( filterMaxRent.val() !== '' ) {
 					filterSelectionUl += '<li>Max Rent: $' + filterMaxRent.val() + '</li>';
 					filterCounter ++;
-				} else {
-					console.log(filterMaxRent.val() );
 				}
+				
+				// bathrooms
+				if ( filterBathrooms.val() !== 'all' ) {
+					filterSelectionUl += '<li>' + filterBathrooms.val() + '</li>';
+					filterCounter ++;
+				}
+				
+				// move-in date
+				if ( filterMoveInDate.val() !== 'all' ) {
+					filterSelectionUl += '<li> Move In Date: ' + filterMoveInDate.find('option:selected').text() + '</li>';
+					filterCounter ++;
+				}
+				
+				// rush only
+//				if ( filterRushOnly.prop('checked', false) ) {
+//					filterSelectionUl += '<li>' + filterRushOnly.parent().text() + '</li>';
+//					filterCounter ++;
+//				}
+//				
+//				// specials only
+//				if ( filterSpecialsOnly.prop('checked', false) ) {
+//					filterSelectionUl += '<li>' + filterSpecialsOnly.parent().text() + '</li>';
+//					filterCounter ++;
+//				}
+				
+				// desired amenities
+//				$('.amenities-list input:checked').each(function() { 
+//					console.log(this); //-- what is 'this'? (I don't need ID, I just need this checkbox elem)
+//					filterSelectionUl += '<li>' + $(this).parent().text() + '</li>';
+//					filterCounter ++;
+//				});
+				
+				// ALL cheched checkboxes (includes rush, specials and desired amenities)
+				$('#more-filters input[type=checkbox]').each(function() {
+					if ($(this).is(":checked")) {
+						console.log(this); //-- what is 'this'? (I don't need ID, I just need this checkbox elem)
+						filterSelectionUl += '<li>' + $(this).parent().text() + '</li>';
+						filterCounter ++;
+					}
+				});
+				
 				
 				filterSelectionUl += '</ul>';
 				
 				// if <ul> is empty, display message
 				if ( filterCounter === 0) {
 					filterSelectionUl = undefined;
-					filterSelectionSection.append('<p class="m-l-lg blue text-uppercase">You did not select any filters.</p>');
-					console.log('no lis');
+					filterSelectionSection.append('<p class="m-l-md blue text-uppercase">You did not select any filters.</p>');
 				} else {
 					filterSelectionSection.append(filterSelectionUl);
-					console.log('some lis');
 				}
 				
 			}

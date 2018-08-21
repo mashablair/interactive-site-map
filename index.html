@@ -553,24 +553,17 @@
 		<!-- 1st row -->
 		<div class="filters-first-row">
 			<div>
-				<div>
-					<p>Max Rent</p>
-					<input type="text" id="filter-max-rent" placeholder="$ Amount">
-				</div>
+				<p>Max Rent</p>
+				<input type="text" id="filter-max-rent" placeholder="$ Amount">
 			</div>
 			
 			<div>
-				<div id="filter-baths">
-					<p>Bathrooms</p>
-					<div class="buttonRadios">
-						<input class="buttonRadio" id="any-ba" name="baths" type="radio" data-filter="baths" value="0" checked />
-						<label for="any" class="buttonRadio-label">Any</label>
-						<input class="buttonRadio" id="1ba" name="baths" type="radio" data-filter="baths" value="1" />
-						<label for="1ba" class="buttonRadio-label">1+</label>
-						<input class="buttonRadio" id="2ba" name="baths" type="radio" data-filter="baths" value="2" />
-						<label for="2ba" class="buttonRadio-label">2+</label>
-					</div>
-				</div>
+				<p>Bathrooms</p>
+				<select id="filter-bathrooms">
+					<option value="all">Any Bathrooms</option>
+					<option value="1 Bathroom">1 Bathroom</option>
+					<option value="2 Bathrooms">2 Bathrooms</option>
+				</select>
 			</div>
 			
 			<div>
@@ -582,18 +575,22 @@
 			</div>
 			
 			<div class="p-r-none">
-				<div class="p-r-none">
-					<p>Move In Date</p>
-					<div style="padding: 0">
-						<select id="filter_availableDate" class="show-tick" data-filter="availableDate" data-selenium-id="MoveInDateSelector">
-							<option value="all">Any Timeframe</option>
-							<option value="0">Immediately</option>
-							<option value="30">Within a Month</option>
-							<option value="60">Within two Months</option>
-							<option value="90">Within three Months</option>
-						</select>
-					</div>
-				</div>
+				<p>Move In Date</p>
+				<select id="filter-available-date">
+					<option value="all">Any Timeframe</option>
+					<option value="0">Immediately</option>
+					<option value="30">Within a Month</option>
+					<option value="60">Within two Months</option>
+					<option value="90">Within three Months</option>
+				</select>
+			</div>
+			
+			<div>
+				<p>Unit Number</p>
+				<form class="form-search m-b-none">
+				  <input type="text" class="input-medium m-r-sm">
+				  <button class="btn btn-info border">Go</button>
+				</form>
 			</div>
 		
 		</div>
@@ -681,14 +678,14 @@
 				<div>
 					<p>In a Rush?</p>
 					<label class="checkbox">
-						<input type="checkbox" value="">Show Available Now Only
+						<input type="checkbox" value="" id="rush-only">Available Now Only
 					</label>
 				</div>
 				
 				<div>
 					<p>Specials</p>
 					<label class="checkbox">
-						<input type="checkbox" value="">Show Unit Specials Only
+						<input type="checkbox" value="" id="specials-only">Unit Specials Only
 					</label>
 				</div>
 			</div>
@@ -697,8 +694,8 @@
 		
 		<!-- 3rd row -->
 		<div class="clear-filters-row">
-			<button id="clear-all-filters" class="filter-btns text-sm m-r-lg"><i class="iconm-cross2"></i> CLEAR ALL FILTERS</button>
-			<button id="apply-filters-btn" class="filter-btns"><i class="iconm-checkmark4"></i> APPLY FILTERS</button>
+			<button id="clear-all-filters" class="filter-btns text-sm m-r-lg"><i class="iconm-cross2"></i> CLEAR ALL</button>
+			<button id="apply-filters-btn" class="filter-btns"><i class="iconm-checkmark4"></i> APPLY</button>
 		</div>
 		</div>
 	</section>
@@ -723,8 +720,7 @@
 	</section>
 -->
 	
-	<section class="filter-selections p-sm p-b-none" style="display: none !important">
-		<p class="filter-selections__header font-bold">Filtered By: </p>
+	<section class="filter-selections p-b-none">
 	</section>
 	
 	<!--  INTERACTIVE MAP  -->

@@ -58,10 +58,6 @@ h1, h2, h3, p, select, button, input, label, a {
 	display: flex;
 }
 
-.flex1 {
-	flex: 1;
-}
-
 .gray-text {
 	color: #b7b7b7;
 }
@@ -78,6 +74,10 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .hidden-from-interaction {
 	pointer-events: none;
+}
+
+.border {
+	border: 1px solid;
 }
 
 /* BUTTONS */
@@ -295,6 +295,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .filters-second-row label {
 	font-size: 11px;
     margin-bottom: 0;
+	line-height: 22px;
 }
 
 #desired-amenities {
@@ -382,23 +383,21 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 .filter-selections {
-	border: 1px solid #717171;
-	display: flex;
-}
-
-.filter-selections__header {
-	width: 65px;
+	border-bottom: 1px solid #ececec;
+	padding: 12px;
 }
 
 .filter-selections__ul {
 	list-style-type: none;
 	padding: 0;
 	flex-wrap: wrap;
+	margin: 0;
 }
 
 .filter-selections__ul li {
-	background: #e2e2e2;
-    padding: 0 7px;
+	border: 1px solid #e2e2e2;
+	background: white;
+    padding: 0 10px;
     border-radius: 7px;
     margin-right: 10px;
 	margin-bottom: 10px;
