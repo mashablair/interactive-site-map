@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, popovers, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -175,13 +175,6 @@
 				firstViewPopovers.popover('hide');
 			},
 			
-//			repositionPopovers: function() {
-//				this.hidePopovers();
-//				setTimeout(function() {
-//					commands.showPopovers();
-//				}, 500);  
-//			},
-			
 			showLevel: function() {
 				// calculate levelsTotal
 				levelsTotal = $('[data-levelnum]').length;
@@ -339,7 +332,7 @@
 			
 			// reset all filters
 			resetFilters: function() {
-				$("#more-filters").find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
+				moreFilters.find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
 				$("#any-ba").prop('checked', true);
 				filterSelectionSection.slideUp();
 				commands.expandFilters();
@@ -359,9 +352,6 @@
 				var filterMaxRent = $('#filter-max-rent');
 				var filterBathrooms = $('#filter-bathrooms');
 				var filterMoveInDate = $('#filter-available-date');
-				var filterRushOnly = $('#rush-only');
-				var filterSpecialsOnly = $('#specials-only');
-				var filterAmenities = $('#amenities-list');
 				
 				// bedrooms
 				if ( filterBedrooms.val() !== 'all' ) {
@@ -387,27 +377,8 @@
 					filterCounter ++;
 				}
 				
-				// rush only
-//				if ( filterRushOnly.prop('checked', false) ) {
-//					filterSelectionUl += '<li>' + filterRushOnly.parent().text() + '</li>';
-//					filterCounter ++;
-//				}
-//				
-//				// specials only
-//				if ( filterSpecialsOnly.prop('checked', false) ) {
-//					filterSelectionUl += '<li>' + filterSpecialsOnly.parent().text() + '</li>';
-//					filterCounter ++;
-//				}
-				
-				// desired amenities
-//				$('.amenities-list input:checked').each(function() { 
-//					console.log(this); //-- what is 'this'? (I don't need ID, I just need this checkbox elem)
-//					filterSelectionUl += '<li>' + $(this).parent().text() + '</li>';
-//					filterCounter ++;
-//				});
-				
 				// ALL cheched checkboxes (includes rush, specials and desired amenities)
-				$('#more-filters input[type=checkbox]').each(function() {
+				moreFilters.find('input[type=checkbox]').each(function() {
 					if ($(this).is(":checked")) {
 						console.log(this); //-- what is 'this'? (I don't need ID, I just need this checkbox elem)
 						filterSelectionUl += '<li>' + $(this).parent().text() + '</li>';
@@ -556,6 +527,7 @@
 			}
 		});
 		
+		// clicking 'stack' nav btn
 		levelStackedCtrl.on('click', function() {
 			commands.showStackedLevels();
 			commands.navigateToSecondView(); 
