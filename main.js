@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 	// Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterMaxRent, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
 		moreFilters = $('#more-filters');
@@ -11,6 +11,9 @@
 		clearFiltersBtn = $('#clear-all-filters');
 		applyFiltersBtn = $('#apply-filters-btn');
 		filterSelectionSection = $('.filter-selections');
+		filterMaxRent = $('#filter-max-rent');
+		filterBathrooms = $('#filter-bathrooms');
+		filterMoveInDate = $('#filter-available-date');
 		mapsContainer = $('#interactive-site-map');
 		firstViewBtn = $('.first-view-btn');
 		secondViewBtn = $('.second-view-btn');
@@ -319,6 +322,10 @@
 					});
 					expandBtn.text('+ More Filters');
 					moreFilters.find(":focusable").attr( "tabindex", "-1" );
+					
+					if (filterCounter > 0) {
+						filterSelectionSection.slideDown();
+					}		
 				} else {
 					// to open 
 					moreFilters.addClass('open').removeClass('hidden-from-interaction').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
@@ -327,6 +334,7 @@
 						opacity: 1
 					}, 200);
 					commands.hidePopovers();
+					filterSelectionSection.slideUp();	
 				}
 			},
 			
@@ -334,8 +342,8 @@
 			resetFilters: function() {
 				moreFilters.find(":input", ":checkbox").val("").prop('checked', false).prop('selected', false);
 				$("#any-ba").prop('checked', true);
-				filterSelectionSection.slideUp();
-				commands.expandFilters();
+				filterSelectionSection.slideUp().html('');
+				filterCounter = 0;
 			},
 			
 			applyFilters: function() {
@@ -348,40 +356,30 @@
 				filterSelectionUl =  '<ul class="filter-selections__ul flex-container">';
 				
 				filterCounter = 0;
-				var filterBedrooms = $('#filter-bedrooms');
-				var filterMaxRent = $('#filter-max-rent');
-				var filterBathrooms = $('#filter-bathrooms');
-				var filterMoveInDate = $('#filter-available-date');
-				
-				// bedrooms
-				if ( filterBedrooms.val() !== 'all' ) {
-					filterSelectionUl += '<li>' + filterBedrooms.val() + '</li>';
-					filterCounter ++;
-				}
 				
 				// max rent
 				if ( filterMaxRent.val() !== '' ) {
-					filterSelectionUl += '<li>Max Rent: $' + filterMaxRent.val() + '</li>';
+					filterSelectionUl += '<li>Max Rent: $' + filterMaxRent.val() + ' <button class="delete-filter-btn delete-filter-btn__max-rent transparent-btn"><i class="iconm-cancel-circle2 close-tag-icon"></i></button></li>';
 					filterCounter ++;
 				}
 				
 				// bathrooms
 				if ( filterBathrooms.val() !== 'all' ) {
-					filterSelectionUl += '<li>' + filterBathrooms.val() + '</li>';
+					filterSelectionUl += '<li>' + filterBathrooms.val() + ' <button class="delete-filter-btn delete-filter-btn__bathrooms transparent-btn"><i class="iconm-cancel-circle2 close-tag-icon"></i></button></li>';
 					filterCounter ++;
 				}
 				
 				// move-in date
 				if ( filterMoveInDate.val() !== 'all' ) {
-					filterSelectionUl += '<li> Move In Date: ' + filterMoveInDate.find('option:selected').text() + '</li>';
+					filterSelectionUl += '<li> Move In Date: ' + filterMoveInDate.find('option:selected').text() + ' <button class="delete-filter-btn delete-filter-btn__move-date transparent-btn"><i class="iconm-cancel-circle2 close-tag-icon"></i></button></li>';
 					filterCounter ++;
 				}
 				
 				// ALL cheched checkboxes (includes rush, specials and desired amenities)
 				moreFilters.find('input[type=checkbox]').each(function() {
 					if ($(this).is(":checked")) {
-						console.log(this); //-- what is 'this'? (I don't need ID, I just need this checkbox elem)
-						filterSelectionUl += '<li>' + $(this).parent().text() + '</li>';
+						console.log($(this).val());
+						filterSelectionUl += '<li>' + $(this).val() + ' <button class="delete-filter-btn delete-filter-btn__checkbox transparent-btn"><i class="iconm-cancel-circle2 close-tag-icon"></i></button></li>';
 						filterCounter ++;
 					}
 				});
@@ -392,7 +390,7 @@
 				// if <ul> is empty, display message
 				if ( filterCounter === 0) {
 					filterSelectionUl = undefined;
-					filterSelectionSection.append('<p class="m-l-md blue text-uppercase">You did not select any filters.</p>');
+					filterSelectionSection.append('<button id="close-filter-msg" class="transparent-btn m-b-sm"><i class="iconm-cancel-circle2 close-tag-icon"></i></button><p class="m-b-none blue text-uppercase" style="line-height:29px">You did not select any filters.</p>').css('display', 'flex');
 				} else {
 					filterSelectionSection.append(filterSelectionUl);
 				}
@@ -407,8 +405,45 @@
 		
 		// filters
 		expandBtn.on('click', commands.expandFilters);
-		clearFiltersBtn.on('click', commands.resetFilters);
+		
+		// click 'Clear All' filters btn 
+		clearFiltersBtn.on('click', function() {
+			commands.resetFilters();
+			commands.expandFilters();
+		});
+		
 		applyFiltersBtn.on('click', commands.applyFilters);
+		
+				// to close filter message w/o active filter selection 
+		filterSelectionSection.on('click', '#close-filter-msg', function() {
+			filterSelectionSection.slideUp().html('');	
+		});
+		
+		// to delete filter tag and corresponding filter
+		filterSelectionSection.on('click', '.delete-filter-btn', function() {
+			$(this).parent().remove();
+			filterCounter--;
+			if (filterCounter === 0) {
+				filterSelectionSection.slideUp().html('');
+				commands.resetFilters();
+			}
+			
+			// it should also find a corresponding input and uncheck it
+			// if it's for checkbox
+			if ($(this).hasClass('delete-filter-btn__checkbox')) {
+
+				// find checkbox with this label and uncheck it
+				var str =  $(this).parent().text();
+				moreFilters.find(":checkbox[value='" + $.trim(str) + "']").prop("checked", false);
+
+			} else if ($(this).hasClass('delete-filter-btn__max-rent')) {
+				filterMaxRent.val('');
+			} else if ($(this).hasClass('delete-filter-btn__bathrooms')) {
+				filterBathrooms.find('option:selected').prop('selected', false);
+			} else if ($(this).hasClass('delete-filter-btn__move-date')) {
+				filterMoveInDate.find('option:selected').prop('selected', false);
+			}
+		});
 		
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		
@@ -540,8 +575,7 @@
 			commands.navigateToThirdView();
 		});
 		
-
-				   
+					   
 		// DELETE AFTER DONE W/ DEMO:		
 //		var topNum = 0;
 //		$('.floor-plate').each(function() {

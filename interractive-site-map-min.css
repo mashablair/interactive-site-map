@@ -62,6 +62,14 @@ h1, h2, h3, p, select, button, input, label, a {
 .border {
   border: 1px solid; }
 
+.transparent-btn {
+  background: transparent;
+  border: none; }
+
+.close-tag-icon {
+  font-size: 11px;
+  color: #b7b7b7; }
+
 /* BUTTONS */
 #interactive-map-container button:hover,
 #interactive-map-container button:active,
@@ -203,7 +211,7 @@ h1, h2, h3, p, select, button, input, label, a {
           flex-direction: column; }
 
 #more-filters.open {
-  height: 418px; }
+  height: 395px; }
 
 #more-filters .more-filters-container {
   opacity: 0; }
@@ -218,9 +226,9 @@ h1, h2, h3, p, select, button, input, label, a {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border-bottom: 1px solid #adadad;
   padding: 20px 0;
   margin-right: 30px;
@@ -230,13 +238,7 @@ h1, h2, h3, p, select, button, input, label, a {
   padding-left: 5px; }
 
 .filters-first-row div {
-  padding: 0 15px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1; }
-
-.filters-first-row div:not(:first-of-type) {
-  border-left: 1px solid #adadad; }
+  padding: 0 15px; }
 
 .filters-first-row p {
   margin-bottom: 4px; }
@@ -302,7 +304,7 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-height: 199px;
+  max-height: 150px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
 
@@ -368,7 +370,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .filter-selections__ul li {
   border: 1px solid #e2e2e2;
   background: white;
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   border-radius: 7px;
   margin-right: 10px;
   margin-bottom: 10px; }
@@ -713,7 +715,7 @@ h1, h2, h3, p, select, button, input, label, a {
   max-height: 500px; }
 
 /* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
-@media (min-width: 1400px) {
+@media (min-width: 1300px) {
   .container-bs3 {
     width: 95%; }
   .second-view {
