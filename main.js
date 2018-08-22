@@ -10,19 +10,29 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterMaxRent, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, filterSelectionSection, filterSelectionUl, filterMaxRent, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, allUnits;
 	
 	function init() {
+
+		// units and filters
 		moreFilters = $('#more-filters');
-		tabsBtns = $('.nav-icon');
 		expandBtn = $('#more-filters-btn');
 		filtersContainer = $('.more-filters-container');
 		clearFiltersBtn = $('#clear-all-filters');
 		applyFiltersBtn = $('#apply-filters-btn');
+		availableUnit = $('.available-unit');
+		allUnits = $('.all-available-units');
+		thirdStackUnitsAll = $('.svg-container__part3 .available-unit').length;
+		secondStackUnitsAll = $('.svg-container__part2 .available-unit').length;
+		firstStackUnitsAll = $('.svg-container__part1 .available-unit').length;
+		filterBedrooms = $('#filter-bedrooms');
 		filterSelectionSection = $('.filter-selections');
 		filterMaxRent = $('#filter-max-rent');
 		filterBathrooms = $('#filter-bathrooms');
 		filterMoveInDate = $('#filter-available-date');
+		
+		// structure
+		tabsBtns = $('.nav-icon');
 		mapsContainer = $('#interactive-site-map');
 		firstViewBtn = $('.first-view-btn');
 		secondViewBtn = $('.second-view-btn');
@@ -36,8 +46,9 @@
 		firstViewPopovers = $('.first-view .link-for-blocks');
 		backBtn = $('.back-btn');
 		secondViewHeader = $('.second-view-header');
+		
+		// levels and navigation up/down ctrls
 		firstLevel = $('.level--1');
-		// levels navigation up/down ctrls
 		levelNav = $('.levelnav');
 		levelUpCtrl = $('.levelnav__button--up');
 		levelDownCtrl = $('.levelnav__button--down');
@@ -46,7 +57,11 @@
 		isNavigating = false;
 		levelsContainer = $('.levels');
 		levels = $('.level');
-		availableUnit = $('.available-unit');
+	
+		
+		// delete later -- just FYI
+		function calculateAllUnits() { console.log('available units: ' + availableUnit.length);}
+		calculateAllUnits();
 		
 		
 		
@@ -189,19 +204,20 @@
 			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
-				commands.updateAvailabilityNumbers();
+				commands.setInitialAvailabilityNumbers();
 			},
 			
-			// dynamically update Upper popover availability
-			updateAvailabilityNumbers: function() {
-				var thirdStackUnits = $('.svg-container__part3 .available-unit').length;
-				$('#popover0 .popover-availability span').text(thirdStackUnits);
-
-				var secondStackUnits = $('.svg-container__part2 .available-unit').length;
-				$('#popover1 .popover-availability span').text(secondStackUnits);
-
-				var firstStackUnits = $('.svg-container__part1 .available-unit').length;
-				$('#popover2 .popover-availability span').text(firstStackUnits);
+			// dynamically insert availability into popovers
+			setInitialAvailabilityNumbers: function() {
+				$('#popover0 .popover-availability span').text(thirdStackUnitsAll);
+				$('#popover1 .popover-availability span').text(secondStackUnitsAll);
+				$('#popover2 .popover-availability span').text(firstStackUnitsAll);
+				
+				// put back all .available-unit to all .all-available-units
+				allUnits.each(function() {
+					$(this).attr('class', 'map__space all-available-units available-unit');
+				});
+				console.log('initial count of all available units before any filtering is: ' + availableUnit.length);
 			},
 			
 			hidePopovers: function() {
@@ -425,11 +441,56 @@
 					filterSelectionSection.append(filterSelectionUl);
 				}
 				
+			}, 
+			
+			calculateBedrooms: function(bedroomNum) {
+				// put back all .available-unit and data-filter to all .all-available-units
+				allUnits.each(function() {
+					$(this).attr('class', 'map__space all-available-units available-unit');
+					$(this).removeAttr('data-filter');
+				});
+				console.log('recalculate all available units before applying filter: ' + availableUnit.length);
+				console.log('number of data-filter elems: ' + $('[data-filter]').length);
+				
+				// then filter all 3 stacks and add data-filter to filter results
+				var thirdStackUnits = $('.svg-container__part3 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				thirdStackUnits.each(function() {
+					$(this).attr("data-filter", "true");
+				});
+				$('#popover0 .popover-availability span').text(thirdStackUnits.length);
+				
+				var secondStackUnits = $('.svg-container__part2 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				secondStackUnits.each(function() {
+					$(this).attr("data-filter", "true");
+				});
+				$('#popover1 .popover-availability span').text(secondStackUnits.length);
+				
+				var firstStackUnits = $('.svg-container__part1 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				firstStackUnits.each(function() {
+					$(this).attr("data-filter", "true");
+				});
+				$('#popover2 .popover-availability span').text(firstStackUnits.length);
+				
+				console.log( 'number of units with active filter: ' + $('[data-filter]').length );
+				
+				// if unit doesn't have this data-filter, remove .available-unit from all .second-view 
+				$('.second-view .all-available-units').not('[data-filter]').each(function() {
+					$(this).attr('class', 'map__space all-available-units');
+				});
 			}
 			
 		}; // end of 'commands' var
 	
-		
+		filterBedrooms.on('change', function() {
+			// get selected val
+			var bedroomNum = this.value;
+			if (bedroomNum !== 'all') {
+				commands.calculateBedrooms(bedroomNum);	
+			} else {
+				commands.setInitialAvailabilityNumbers();
+			}
+			
+		});
 		
 		// ### 4. All events handlers
 		tabsBtns.on('click', commands.navigateTabs);
@@ -613,7 +674,7 @@
 		
 		// add classes and id's to popovers for :hover highlighting
 		commands.setPopovers("first-view");
-		commands.updateAvailabilityNumbers();
+		commands.setInitialAvailabilityNumbers();
 		
 		// Loads data from JSON to create 1st view.  Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
 		function loadData() {
