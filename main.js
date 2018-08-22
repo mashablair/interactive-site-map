@@ -45,25 +45,14 @@
 		
 		loadData();
 		
-		// to experiment with modifying the URL string
-		var loc = location.href;
-		console.log(loc);
-	//	if (loc.indexOf("?") === -1) {
-	//  	loc += "?";
-	//	} else {
-	//      loc += "&";
-	//	}
-	//  location.href = loc + "ts=true";
-		
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
-		
 		
 		// add classes and id's to popovers for :hover highlighting
 		setPopovers("first-view");
 		
 		
-		// DELETE LATER
+		// DELETE LATER -- for testing only 
 		$('.first-view h2').on('click', function() {
 			commands.showPopovers();
 		});
@@ -77,8 +66,7 @@
 				commands.showPopovers();
 			}, 800);  
 		}); 
-		
-		
+				
 		// initialize tabs in 3rd View
 		$('#unitDetailTabs a').click(function (e) {
 		  e.preventDefault();
@@ -172,6 +160,18 @@
 			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
+			},
+			
+			// dynamically update Upper popover availability
+			updateAvailabilityNumbers: function() {
+				var thirdStackUnits = $('.svg-container__part3 .available-unit').length;
+				$('#popover0 .popover-availability span').text(thirdStackUnits);
+
+				var secondStackUnits = $('.svg-container__part2 .available-unit').length;
+				$('#popover1 .popover-availability span').text(secondStackUnits);
+
+				var firstStackUnits = $('.svg-container__part1 .available-unit').length;
+				$('#popover2 .popover-availability span').text(firstStackUnits);
 			},
 			
 			hidePopovers: function() {
@@ -399,6 +399,7 @@
 			
 		}; // end of 'commands' var
 		
+		commands.updateAvailabilityNumbers();
 		
 		// ALL EVENT HANDLERS
 		tabsBtns.on('click', commands.navigateTabs);
