@@ -1,6 +1,15 @@
+// TOC
+// 1. Declare/define vars
+// 2. Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
+// 3. Object with all reusable commands
+// 4. All events handlers
+// 5. Some more init functions and commands
+
+
 (function ($) {
 	"use strict";
-	// Declare our local/private vars:
+	
+	// ### 1. Declare our local/private vars:
 	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterSelectionSection, filterSelectionUl, filterMaxRent, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit;
 	
 	function init() {
@@ -39,24 +48,23 @@
 		levels = $('.level');
 		availableUnit = $('.available-unit');
 		
+		
+		
+		// ### 2. Some initial tasks e.g. load, initialize popovers & tabs, etc. 
+		loadData();
+		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
 		filterSelectionSection.hide();
-		
-		loadData();
-		
+
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
-		
-		// add classes and id's to popovers for :hover highlighting
-		setPopovers("first-view");
-		
-		
+
 		// DELETE LATER -- for testing only 
 		$('.first-view h2').on('click', function() {
 			commands.showPopovers();
 		});
-		
+
 		// to reposition popovers on screen resize
 		// needed b/c popovers are set on SVG parts, and not on regular elems
 		$(window).resize(function() {
@@ -66,16 +74,19 @@
 				commands.showPopovers();
 			}, 800);  
 		}); 
-				
+
 		// initialize tabs in 3rd View
 		$('#unitDetailTabs a').click(function (e) {
 		  e.preventDefault();
 		  $(this).tab('show');
 		});
-		
+
 		// initialize carousel in 3rd View
 		$('.carousel').carousel();
+
 		
+		
+		// ### 3. Object with all reusable commands
 		var commands = {
 			
 			// header tabs navigation -- appearance only
@@ -158,8 +169,27 @@
 				secondViewHeader.text('Floors 9 - 12 (Upper Third)');
 			},
 			
+			// set up popovers
+			setPopovers: function(numberView) {
+
+				// FIRST VIEW POPOVERS (unless we change 'blockLinks')
+				// since all popovers are attached .svg-container, we need to connect them with their <a>
+				// so when user hovers over particular <a>, related popover gets highlighted 
+				numberViewPopovers = $('.' + numberView).find('.popover').addClass('first-view-popovers');
+
+				// ***to make this function universal, 'blockLinks' should also be param/argument (currently, this will only work for .first-view)
+				blockLinks.each(function(i) {
+					$(this).attr('id', 'link' + i);
+				});
+
+				numberViewPopovers.each(function(i) {
+					$(this).attr('id', 'popover' +i);
+				});
+			},
+			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
+				commands.updateAvailabilityNumbers();
 			},
 			
 			// dynamically update Upper popover availability
@@ -398,10 +428,10 @@
 			}
 			
 		}; // end of 'commands' var
+	
 		
-		commands.updateAvailabilityNumbers();
 		
-		// ALL EVENT HANDLERS
+		// ### 4. All events handlers
 		tabsBtns.on('click', commands.navigateTabs);
 		
 		// filters
@@ -576,59 +606,43 @@
 			commands.navigateToThirdView();
 		});
 		
-					   
-		// DELETE AFTER DONE W/ DEMO:		
-//		var topNum = 0;
-//		$('.floor-plate').each(function() {
-//			topNum -= 30;
-//			var top = topNum + "px";
-//			$(this).css('top', top);
-//		});
-	
+		
+		
+		
+		// ### 5. Some more init functions and commands
+		
+		// add classes and id's to popovers for :hover highlighting
+		commands.setPopovers("first-view");
+		commands.updateAvailabilityNumbers();
+		
+		// Loads data from JSON to create 1st view.  Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
+		function loadData() {
+
+		//        // loops through each plans.js object:
+		//        $.each(plans, function (key, cardData) {
+		//
+		//            // first creates html card for each plans.js objects
+		//            var CARD = _makeCard();
+		//            // personalizes each card:
+		//            CARD.title.text(typeToString(cardData.type) + ' | ' + cardData.size);
+		//            CARD.name.text(cardData.name);
+		//            CARD.image.attr({src: cardData.image});
+		//            CARD.pre.text(cardData.price.pre);
+		//            CARD.price.text('$' + cardData.price.usd);
+		//            CARD.post.text(cardData.price.post);
+		//            CARD.note.text(cardData.note);
+		//            // add the 'specials' banner:
+		//            if (cardData.specials) CARD.item.addClass('special');
+		//            cards.append(CARD.card);
+		//
+		//        });
+		}
 
 	} // end of 'init' function
 	
 	
 	
-	// Loads data from JSON to create 1st view:
-    function loadData() {
-//        // loops through each plans.js object:
-//        $.each(plans, function (key, cardData) {
-//
-//            // first creates html card for each plans.js objects
-//            var CARD = _makeCard();
-//            // personalizes each card:
-//            CARD.title.text(typeToString(cardData.type) + ' | ' + cardData.size);
-//            CARD.name.text(cardData.name);
-//            CARD.image.attr({src: cardData.image});
-//            CARD.pre.text(cardData.price.pre);
-//            CARD.price.text('$' + cardData.price.usd);
-//            CARD.post.text(cardData.price.post);
-//            CARD.note.text(cardData.note);
-//            // add the 'specials' banner:
-//            if (cardData.specials) CARD.item.addClass('special');
-//            cards.append(CARD.card);
-//
-//        });
-    }
-	
-	// set up popovers
-	function setPopovers(numberView) {
-		
-		// FIRST VIEW POPOVERS (unless we change 'blockLinks')
-		// since all popovers are attached .svg-container, we need to connect them with their <a>
-		// so when user hovers over particular <a>, related popover gets highlighted 
-		numberViewPopovers = $('.' + numberView).find('.popover').addClass('first-view-popovers');
-		
-		// ***to make this function universal, 'blockLinks' should also be param/argument (currently, this will only work for .first-view)
-		blockLinks.each(function(i) {
-			$(this).attr('id', 'link' + i);
-		});
-		
-		numberViewPopovers.each(function(i) {
-			$(this).attr('id', 'popover' +i);
-		});
-	}
+
 	
 	$(document).ready(init);
 })(jQuery);
