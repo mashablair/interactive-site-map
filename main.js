@@ -2,15 +2,17 @@
 // 1. Declare/define vars
 // 2. Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
 // 3. Object with all reusable commands
-// 4. All events handlers
-// 5. Some more init functions and commands
+// 4. More init set up actions
+// 5. All events handlers
+// 6. Some more init functions and commands
 
 
 (function ($) {
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, filterSelectionSection, filterSelectionUl, filterMaxRent, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, allUnits;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, allUnits;
+	
 	
 	function init() {
 
@@ -28,6 +30,7 @@
 		filterBedrooms = $('#filter-bedrooms');
 		filterSelectionSection = $('.filter-selections');
 		filterMaxRent = $('#filter-max-rent');
+		
 		filterBathrooms = $('#filter-bathrooms');
 		filterMoveInDate = $('#filter-available-date');
 		
@@ -204,11 +207,37 @@
 			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
-				commands.setInitialAvailabilityNumbers();
+				commands.setInitialPopoversNumbers();
+			},
+			
+			getInitialRentPricesRange: function() {
+				// get array of all data-rentprice values for each stack
+				var thirdPriceArray = [];
+				var secondPriceArray = [];
+				var firstPriceArray = [];
+				
+				$('.svg-container__part3 [data-rentprice]').each(function() {
+					thirdPriceArray.push($(this).attr('data-rentprice'));
+				});
+				$('.svg-container__part2 [data-rentprice]').each(function() {
+					secondPriceArray.push($(this).attr('data-rentprice'));
+				});
+				$('.svg-container__part1 [data-rentprice]').each(function() {
+					firstPriceArray.push($(this).attr('data-rentprice'));
+				});
+				
+				firstMinRentAll = Math.min.apply(Math, firstPriceArray);
+				secondMinRentAll = Math.min.apply(Math, secondPriceArray);
+				thirdMinRentAll = Math.min.apply(Math, thirdPriceArray);
+				
+				firstMaxRentAll = Math.max.apply(Math, firstPriceArray);
+				secondMaxRentAll = Math.max.apply(Math, secondPriceArray);
+				thirdMaxRentAll = Math.max.apply(Math, thirdPriceArray);
+				
 			},
 			
 			// dynamically insert availability into popovers
-			setInitialAvailabilityNumbers: function() {
+			setInitialPopoversNumbers: function() {
 				$('#popover0 .popover-availability span').text(thirdStackUnitsAll);
 				$('#popover1 .popover-availability span').text(secondStackUnitsAll);
 				$('#popover2 .popover-availability span').text(firstStackUnitsAll);
@@ -217,7 +246,13 @@
 				allUnits.each(function() {
 					$(this).attr('class', 'map__space all-available-units available-unit');
 				});
-				console.log('initial count of all available units before any filtering is: ' + availableUnit.length);
+				
+				$('#popover0 .min-rent').text(thirdMinRentAll);
+				$('#popover0 .max-rent').text(thirdMaxRentAll);
+				$('#popover1 .min-rent').text(secondMinRentAll);
+				$('#popover1 .max-rent').text(secondMaxRentAll);
+				$('#popover2 .min-rent').text(firstMinRentAll);
+				$('#popover2 .max-rent').text(firstMaxRentAll);
 			},
 			
 			hidePopovers: function() {
@@ -443,7 +478,7 @@
 				
 			}, 
 			
-			calculateBedrooms: function(bedroomNum) {
+			calculateFilteredBedrooms: function(bedroomNum) {
 				// put back all .available-unit and data-filter to all .all-available-units
 				allUnits.each(function() {
 					$(this).attr('class', 'map__space all-available-units available-unit');
@@ -453,46 +488,48 @@
 				console.log('number of data-filter elems: ' + $('[data-filter]').length);
 				
 				// then filter all 3 stacks and add data-filter to filter results
-				var thirdStackUnits = $('.svg-container__part3 .available-unit[data-bedroom="' + bedroomNum + '"]');
-				thirdStackUnits.each(function() {
+				thirdStackUnitsFiltered = $('.svg-container__part3 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				secondStackUnitsFiltered = $('.svg-container__part2 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				firstStackUnitsFiltered = $('.svg-container__part1 .available-unit[data-bedroom="' + bedroomNum + '"]');
+				
+				thirdStackUnitsFiltered.each(function() {
 					$(this).attr("data-filter", "true");
 				});
-				$('#popover0 .popover-availability span').text(thirdStackUnits.length);
-				
-				var secondStackUnits = $('.svg-container__part2 .available-unit[data-bedroom="' + bedroomNum + '"]');
-				secondStackUnits.each(function() {
+				secondStackUnitsFiltered.each(function() {
 					$(this).attr("data-filter", "true");
 				});
-				$('#popover1 .popover-availability span').text(secondStackUnits.length);
-				
-				var firstStackUnits = $('.svg-container__part1 .available-unit[data-bedroom="' + bedroomNum + '"]');
-				firstStackUnits.each(function() {
+				firstStackUnitsFiltered.each(function() {
 					$(this).attr("data-filter", "true");
 				});
-				$('#popover2 .popover-availability span').text(firstStackUnits.length);
-				
+
 				console.log( 'number of units with active filter: ' + $('[data-filter]').length );
 				
 				// if unit doesn't have this data-filter, remove .available-unit from all .second-view 
 				$('.second-view .all-available-units').not('[data-filter]').each(function() {
 					$(this).attr('class', 'map__space all-available-units');
 				});
+			}, 
+			
+			updatePopoversFilteredNumbers: function() {
+				$('#popover0 .popover-availability span').text(thirdStackUnitsFiltered.length);
+				$('#popover1 .popover-availability span').text(secondStackUnitsFiltered.length);
+				$('#popover2 .popover-availability span').text(firstStackUnitsFiltered.length);
 			}
 			
 		}; // end of 'commands' var
 	
-		filterBedrooms.on('change', function() {
-			// get selected val
-			var bedroomNum = this.value;
-			if (bedroomNum !== 'all') {
-				commands.calculateBedrooms(bedroomNum);	
-			} else {
-				commands.setInitialAvailabilityNumbers();
-			}
-			
-		});
 		
-		// ### 4. All events handlers
+		
+		// ### 4. More init set up actions
+		// add classes and id's to popovers for :hover highlighting
+		commands.setPopovers("first-view");
+		commands.getInitialRentPricesRange();
+		commands.setInitialPopoversNumbers();
+		
+		
+		
+		
+		// ### 5. All events handlers
 		tabsBtns.on('click', commands.navigateTabs);
 		
 		// filters
@@ -535,6 +572,18 @@
 			} else if ($(this).hasClass('delete-filter-btn__move-date')) {
 				filterMoveInDate.find('option:selected').prop('selected', false);
 			}
+		});
+		
+		filterBedrooms.on('change', function() {
+			// get selected val
+			var bedroomNum = this.value;
+			if (bedroomNum !== 'all') {
+				commands.calculateFilteredBedrooms(bedroomNum);
+				commands.updatePopoversFilteredNumbers();
+			} else {
+				commands.setInitialPopoversNumbers();
+			}
+			
 		});
 		
 		firstViewBtn.on('click', commands.navigateToFirstView);
@@ -581,7 +630,7 @@
 		
 		// clicking on first-view popovers brings correct stack
 		$('.first-view-popovers').on('click', function() {
-			
+			console.log('popover clicked');
 			if ( $(this).attr('id') === 'popover0') {
 				commands.showThirdStack();
 			} else if ( $(this).attr('id') === 'popover1') {
@@ -670,12 +719,8 @@
 		
 		
 		
-		// ### 5. Some more init functions and commands
-		
-		// add classes and id's to popovers for :hover highlighting
-		commands.setPopovers("first-view");
-		commands.setInitialAvailabilityNumbers();
-		
+		// ### 6. Some more init functions and commands
+
 		// Loads data from JSON to create 1st view.  Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
 		function loadData() {
 
