@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, allUnits;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, availableUnit, allUnits, isFiltered;
 	
 	
 	function init() {
@@ -33,6 +33,7 @@
 		
 		filterBathrooms = $('#filter-bathrooms');
 		filterMoveInDate = $('#filter-available-date');
+		isFiltered = false;
 		
 		// structure
 		tabsBtns = $('.nav-icon');
@@ -207,7 +208,11 @@
 			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
-				commands.setInitialPopoversNumbers();
+				if (isFiltered) {
+					commands.updatePopoversFilteredNumbers();
+				} else {
+					commands.setInitialPopoversNumbers();
+				}
 			},
 			
 			getInitialRentPricesRange: function() {
@@ -236,16 +241,22 @@
 				
 			},
 			
+			// put back all .available-unit and data-filter to all .all-available-units
+			resetAllAvailability: function() {
+				allUnits.each(function() {
+					$(this).attr('class', 'map__space all-available-units available-unit');
+					$(this).removeAttr('data-filter');
+				});
+			},
+			
 			// dynamically insert availability into popovers
 			setInitialPopoversNumbers: function() {
+				
+				commands.resetAllAvailability();
+				
 				$('#popover0 .popover-availability span').text(thirdStackUnitsAll);
 				$('#popover1 .popover-availability span').text(secondStackUnitsAll);
 				$('#popover2 .popover-availability span').text(firstStackUnitsAll);
-				
-				// put back all .available-unit to all .all-available-units
-				allUnits.each(function() {
-					$(this).attr('class', 'map__space all-available-units available-unit');
-				});
 				
 				$('#popover0 .min-rent').text(thirdMinRentAll);
 				$('#popover0 .max-rent').text(thirdMaxRentAll);
@@ -399,7 +410,6 @@
 						opacity: 0
 					}, 200, function() {
 						moreFilters.removeClass('open').addClass('hidden-from-interaction');
-						commands.showPopovers();
 					});
 					expandBtn.text('+ More Filters');
 					moreFilters.find(":focusable").attr( "tabindex", "-1" );
@@ -414,7 +424,6 @@
 					filtersContainer.delay(200).animate({
 						opacity: 1
 					}, 200);
-					commands.hidePopovers();
 					filterSelectionSection.slideUp();	
 				}
 			},
@@ -479,11 +488,8 @@
 			}, 
 			
 			calculateFilteredBedrooms: function(bedroomNum) {
-				// put back all .available-unit and data-filter to all .all-available-units
-				allUnits.each(function() {
-					$(this).attr('class', 'map__space all-available-units available-unit');
-					$(this).removeAttr('data-filter');
-				});
+				isFiltered = true;
+				commands.resetAllAvailability();
 				console.log('recalculate all available units before applying filter: ' + availableUnit.length);
 				console.log('number of data-filter elems: ' + $('[data-filter]').length);
 				
@@ -504,16 +510,95 @@
 
 				console.log( 'number of units with active filter: ' + $('[data-filter]').length );
 				
+				// calculate thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered
+				
 				// if unit doesn't have this data-filter, remove .available-unit from all .second-view 
 				$('.second-view .all-available-units').not('[data-filter]').each(function() {
 					$(this).attr('class', 'map__space all-available-units');
 				});
 			}, 
 			
+			calculateFilteredMaxRent: function(maxRentNum) {
+				isFiltered = true;
+				commands.resetAllAvailability();
+				
+				thirdStackUnitsFiltered = $('.svg-container__part3 .available-unit[data-rentprice]').filter(function() {
+					// return elems with data-rentprice value <= maxRentNum
+					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
+				}).attr("data-filter", "true");
+				
+				secondStackUnitsFiltered = $('.svg-container__part2 .available-unit[data-rentprice]').filter(function() {
+					// return elems with data-rentprice value <= maxRentNum
+					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
+				}).attr("data-filter", "true");
+				
+				firstStackUnitsFiltered = $('.svg-container__part1 .available-unit[data-rentprice]').filter(function() {
+					// return elems with data-rentprice value <= maxRentNum
+					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
+				}).attr("data-filter", "true");
+								
+				// if unit doesn't have this data-filter, remove .available-unit from all .second-view 
+				$('.second-view .all-available-units').not('[data-filter]').each(function() {
+					$(this).attr('class', 'map__space all-available-units');
+				});
+
+				console.log( 'number of units with active filter: ' + $('[data-filter]').length );
+			},
+			
 			updatePopoversFilteredNumbers: function() {
 				$('#popover0 .popover-availability span').text(thirdStackUnitsFiltered.length);
 				$('#popover1 .popover-availability span').text(secondStackUnitsFiltered.length);
 				$('#popover2 .popover-availability span').text(firstStackUnitsFiltered.length);
+				
+				// get array of all data-rentprice values for each stack
+				var thirdPriceArray = [];
+				var secondPriceArray = [];
+				var firstPriceArray = [];
+				
+				$('.svg-container__part3 [data-filter]').each(function() {
+					thirdPriceArray.push($(this).attr('data-rentprice'));
+					console.log(thirdPriceArray);
+				});
+				$('.svg-container__part2 [data-filter]').each(function() {
+					secondPriceArray.push($(this).attr('data-rentprice'));
+					console.log(secondPriceArray);
+				});
+				$('.svg-container__part1 [data-filter]').each(function() {
+					console.log($(this));
+					firstPriceArray.push($(this).attr('data-rentprice'));
+					// console.log(firstPriceArray);
+				});
+				
+				thirdMinRentFiltered = Math.min.apply(Math, thirdPriceArray);
+				secondMinRentFiltered = Math.min.apply(Math, secondPriceArray);
+				firstMinRentFiltered = Math.min.apply(Math, firstPriceArray);
+			
+				thirdMaxRentFiltered = Math.max.apply(Math, thirdPriceArray);
+				secondMaxRentFiltered = Math.max.apply(Math, secondPriceArray);
+				firstMaxRentFiltered = Math.max.apply(Math, firstPriceArray);
+				
+				// if nothing available, don't calculate min/max -- just set it to 0
+				if (thirdStackUnitsFiltered.length === 0) {
+					$('#popover0 .min-rent, #popover0 .max-rent').text('0');
+				} else {
+					$('#popover0 .min-rent').text(thirdMinRentFiltered);
+					$('#popover0 .max-rent').text(thirdMaxRentFiltered);
+				}
+				
+				if (secondStackUnitsFiltered.length === 0) {
+					$('#popover1 .min-rent, #popover1 .max-rent').text('0');
+				} else {
+					$('#popover1 .min-rent').text(secondMinRentFiltered);
+					$('#popover1 .max-rent').text(secondMaxRentFiltered);
+				}
+				
+				if (firstStackUnitsFiltered.length === 0) {
+					$('#popover2 .min-rent, #popover2 .max-rent').text('0');
+				} else {
+					$('#popover2 .min-rent').text(firstMinRentFiltered);
+					$('#popover2 .max-rent').text(firstMaxRentFiltered);
+					// console.log(firstMaxRentFiltered);
+				}			
 			}
 			
 		}; // end of 'commands' var
@@ -521,8 +606,7 @@
 		
 		
 		// ### 4. More init set up actions
-		// add classes and id's to popovers for :hover highlighting
-		commands.setPopovers("first-view");
+		commands.setPopovers("first-view"); // add classes and id's to popovers
 		commands.getInitialRentPricesRange();
 		commands.setInitialPopoversNumbers();
 		
@@ -537,8 +621,10 @@
 		
 		// click 'Clear All' filters btn 
 		clearFiltersBtn.on('click', function() {
+			isFiltered = false;
 			commands.resetFilters();
 			commands.expandFilters();
+			commands.setInitialPopoversNumbers();
 		});
 		
 		applyFiltersBtn.on('click', commands.applyFilters);
@@ -578,10 +664,28 @@
 			// get selected val
 			var bedroomNum = this.value;
 			if (bedroomNum !== 'all') {
+				isFiltered = true;
 				commands.calculateFilteredBedrooms(bedroomNum);
 				commands.updatePopoversFilteredNumbers();
 			} else {
+				isFiltered = false;
 				commands.setInitialPopoversNumbers();
+			}
+			
+		});
+		
+		filterMaxRent.on('change', function() {
+			var maxRentNum = this.value;
+			console.log(maxRentNum);
+			
+			if (maxRentNum !== '') {
+				isFiltered = true; // ***unless combined with other filters (esp. bedrooms) 
+				commands.calculateFilteredMaxRent(maxRentNum);
+				commands.updatePopoversFilteredNumbers();
+
+			} else {
+				isFiltered = false; // ***unless combined with other filters (esp. bedrooms) 
+				commands.setInitialPopoversNumbers(); // ***unless combined with other filters (esp. bedrooms)
 			}
 			
 		});
