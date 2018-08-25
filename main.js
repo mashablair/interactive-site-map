@@ -629,7 +629,7 @@
 		
 		applyFiltersBtn.on('click', commands.applyFilters);
 		
-				// to close filter message w/o active filter selection 
+		// to close filter message w/o active filter selection 
 		filterSelectionSection.on('click', '#close-filter-msg', function() {
 			filterSelectionSection.slideUp().html('');	
 		});
@@ -653,6 +653,9 @@
 
 			} else if ($(this).hasClass('delete-filter-btn__max-rent')) {
 				filterMaxRent.val('');
+				isFiltered = false; // ***unless combined with other filters (esp. bedrooms) 
+				commands.setInitialPopoversNumbers(); // ***unless combined with other filters (esp. bedrooms)
+
 			} else if ($(this).hasClass('delete-filter-btn__bathrooms')) {
 				filterBathrooms.find('option:selected').prop('selected', false);
 			} else if ($(this).hasClass('delete-filter-btn__move-date')) {
