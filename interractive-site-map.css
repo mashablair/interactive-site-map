@@ -673,13 +673,13 @@ h1, h2, h3, p, select, button, input, label, a {
  }
 
 /* HARD-CODED CLICK AREA ON SVG -- DELETE/CHANGE LATER*/
-.available-unit {
+[data-filter] {
 	fill: #b5e8fd;
 	transition: fill .3s;
 }
 
-.available-unit:hover,
-.svg-container--content-open .available-unit {
+[data-filter]:hover,
+.svg-container--content-open [data-filter] {
 	cursor: pointer;
 	fill: #6ed2fb;
 }
