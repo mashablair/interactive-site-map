@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, filteredAvailableUnitsTotal;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits;
 	
 	
 	function init() {
@@ -208,7 +208,8 @@
 			
 			showPopovers: function() {
 				firstViewPopovers.popover('show');
-				if (isFiltered) {
+				// if active filter
+				if (allAvailableUnits.length !== $('[data-filter]').length) {
 					commands.updatePopoversFilteredNumbers();
 				} else {
 					commands.setInitialPopoversNumbers();
@@ -488,61 +489,107 @@
 			
 			calculateFilteredBedrooms: function(bedroomNum) {
 				commands.resetAllAvailability();
-				console.log('recalculate .all-available-units before applying filter: ' + allAvailableUnits.length);
-				console.log('number of [data-filter] elems: ' + filteredUnit.length);
-				
-				// then filter all 3 stacks and add remove data-filter from all non-matchin elems
-				// loop through all available units
-				allAvailableUnits.each(function() {
-					// if data-bedroom value !== bedroomNum, 
-					if ($(this).attr('data-bedroom') !== bedroomNum) {
-						// remove data-filter
-						$(this).removeAttr('data-filter');
-					}
-				});
-				
-				thirdStackUnitsFiltered = $('.svg-container__part3 [data-bedroom="' + bedroomNum + '"]');
-				secondStackUnitsFiltered = $('.svg-container__part2 [data-bedroom="' + bedroomNum + '"]');
-				firstStackUnitsFiltered = $('.svg-container__part1 [data-bedroom="' + bedroomNum + '"]');
+				// check if maxRent filter is NOT active
+				var maxRentNum = parseInt(filterMaxRent.val());
+				if (isNaN(maxRentNum)) {
+					
+					// if both filters are empty
+					if (bedroomNum === 'all') {
+						commands.setInitialPopoversNumbers();
+					// if bedroom filter is active
+					} else {
+						allAvailableUnits.each(function() {
+							if ($(this).attr('data-bedroom') !== bedroomNum) {
+								$(this).removeAttr('data-filter');
+							}
+						});
 
-				filteredAvailableUnitsTotal = $('[data-filter]').length;
-				console.log( 'number of units with active filter: ' + filteredAvailableUnitsTotal );
-				
+						thirdStackUnitsFiltered = $('.svg-container__part3 [data-bedroom="' + bedroomNum + '"]');
+						secondStackUnitsFiltered = $('.svg-container__part2 [data-bedroom="' + bedroomNum + '"]');
+						firstStackUnitsFiltered = $('.svg-container__part1 [data-bedroom="' + bedroomNum + '"]');
+						
+						commands.updatePopoversFilteredNumbers();
+					}
+					
+				// if maxRent is active
+				} else {
+					// we need a way to reset bedroom filter without resetting maxRent filter:	
+					// commands.calculateFilteredMaxRent(maxRentNum); // I can't call this function b/c it creates infite loop
+					// but I can manually refilter by maxRent:
+					$('[data-filter]').each(function() {
+						if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
+							$(this).removeAttr('data-filter');
+						}
+					});
+					commands.filterByMaxRent(maxRentNum);
+					
+					// if bedroom filter is active
+					if (filterBedrooms.val() !== 'all') {
+						console.log('if maxRent filter is active AND Bedroom filter is active');
+						$('[data-filter]').each(function() {
+							if ($(this).attr('data-bedroom') !== bedroomNum) {
+								$(this).removeAttr('data-filter');
+							}
+						});
+
+						thirdStackUnitsFiltered = $('.svg-container__part3 [data-filter][data-bedroom="' + bedroomNum + '"]');
+						secondStackUnitsFiltered = $('.svg-container__part2 [data-filter][data-bedroom="' + bedroomNum + '"]');
+						firstStackUnitsFiltered = $('.svg-container__part1 [data-filter][data-bedroom="' + bedroomNum + '"]');
+					} 		
+					commands.updatePopoversFilteredNumbers();
+				}
 			}, 
 			
 			calculateFilteredMaxRent: function(maxRentNum) {
-				commands.resetAllAvailability();
-				console.log('recalculate .all-available-units before applying filter: ' + allAvailableUnits.length);
-				console.log('number of [data-filter] elems: ' + filteredUnit.length);
 				
-				// then filter all 3 stacks and add remove data-filter from all non-matchin elems
-				// loop through all available units
-				allAvailableUnits.each(function() {
-					// if data-rentprice value <= bedroomNum, 
-					if ( parseInt($(this).attr("data-rentprice")) > parseInt(maxRentNum)) {
-						// remove data-filter
-						$(this).removeAttr('data-filter');
+				// check if bedroom filter is NOT active
+				if (filterBedrooms.val() === 'all') {
+					
+					commands.resetAllAvailability();
+					
+					// if maxRent is NaN (not active)
+					if (isNaN(maxRentNum)) {
+						commands.setInitialPopoversNumbers(); 
+					// if maxRent filter is active:
+					} else { 
+						allAvailableUnits.each(function() {
+							if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
+								$(this).removeAttr('data-filter');
+							}
+						});
+						commands.filterByMaxRent(maxRentNum);
+						commands.updatePopoversFilteredNumbers();
 					}
-				});
-				
-				thirdStackUnitsFiltered = $('.svg-container__part3 [data-rentprice]').filter(function() {
-					// return elems with data-rentprice value <= maxRentNum
-					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
-				});
-				
-				secondStackUnitsFiltered = $('.svg-container__part2 [data-rentprice]').filter(function() {
-					// return elems with data-rentprice value <= maxRentNum
-					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
-				});
-				
-				firstStackUnitsFiltered = $('.svg-container__part1 [data-rentprice]').filter(function() {
-					// return elems with data-rentprice value <= maxRentNum
-					return parseInt($(this).attr("data-rentprice")) <= parseInt(maxRentNum);
-				});
-								
+				// if bedroom filter IS active:	
+				} else {			
+					commands.calculateFilteredBedrooms(filterBedrooms.val()); // this will also reset all availability 
+					
+					// if maxRent filter is active
+					if (!isNaN(maxRentNum)) {
+						console.log('if bedroom filter IS active AND maxRent filter is active');
+						$('[data-filter]').each(function() {
+							if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
+								$(this).removeAttr('data-filter');
+							}
+						});
+						commands.filterByMaxRent(maxRentNum);
+					} 
+					commands.updatePopoversFilteredNumbers();
+				}
+			},
+			
+			filterByMaxRent: function(maxRentNum) {
+						thirdStackUnitsFiltered = $('.svg-container__part3 [data-filter]').filter(function() {
+							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+						});
 
-				filteredAvailableUnitsTotal = $('[data-filter]').length;
-				console.log( 'number of units with active filter: ' + filteredAvailableUnitsTotal );
+						secondStackUnitsFiltered = $('.svg-container__part2 [data-filter]').filter(function() {
+							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+						});
+
+						firstStackUnitsFiltered = $('.svg-container__part1 [data-filter]').filter(function() {
+							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+						});
 			},
 			
 			updatePopoversFilteredNumbers: function() {
@@ -558,15 +605,12 @@
 				$('.svg-container__part3 [data-filter]').each(function() {
 					thirdPriceArray.push($(this).attr('data-rentprice'));
 				});
-				console.log(thirdPriceArray);
 				$('.svg-container__part2 [data-filter]').each(function() {
 					secondPriceArray.push($(this).attr('data-rentprice'));
 				});
-				console.log(secondPriceArray);
 				$('.svg-container__part1 [data-filter]').each(function() {
 					firstPriceArray.push($(this).attr('data-rentprice'));
 				});
-				console.log(firstPriceArray);
 				
 				thirdMinRentFiltered = Math.min.apply(Math, thirdPriceArray);
 				secondMinRentFiltered = Math.min.apply(Math, secondPriceArray);
@@ -596,7 +640,6 @@
 				} else {
 					$('#popover2 .min-rent').text(firstMinRentFiltered);
 					$('#popover2 .max-rent').text(firstMaxRentFiltered);
-					// console.log(firstMaxRentFiltered);
 				}			
 			}
 			
@@ -663,27 +706,14 @@
 		filterBedrooms.on('change', function() {
 			// get selected val
 			var bedroomNum = this.value;
-			if (bedroomNum !== 'all') {
-				commands.calculateFilteredBedrooms(bedroomNum);
-				commands.updatePopoversFilteredNumbers();
-			} else {
-				commands.setInitialPopoversNumbers();
-			}
+			commands.calculateFilteredBedrooms(bedroomNum);
 			
 		});
 		
 		filterMaxRent.on('change', function() {
-			var maxRentNum = this.value;
-			console.log(maxRentNum);
-			
-			if (maxRentNum !== '') {
-				commands.calculateFilteredMaxRent(maxRentNum);
-				commands.updatePopoversFilteredNumbers();
-
-			} else {
-				commands.setInitialPopoversNumbers(); // ***unless combined with other filters (esp. bedrooms)
-			}
-			
+			// get entered input value, turn into integer, pass into a function
+			var maxRentNum = parseInt(this.value);
+			commands.calculateFilteredMaxRent(maxRentNum);
 		});
 		
 		firstViewBtn.on('click', commands.navigateToFirstView);
