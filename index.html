@@ -39,312 +39,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/nudge.min.css" />
 	<link rel="stylesheet" href="interractive-site-map.css">
 	
-    <style type="text/css">
-        /***case 4086416 LZ 3739 (add chat function)***/
-        
-        #chat-section {
-            border: 1px solid #2a1905;
-            border-radius: 5px 0 0 5px;
-            position: fixed;
-            right: 0;
-            top: 20%;
-            z-index: 1000
-        }
-        
-        #slide {
-            background-color: rgba(29, 29, 29, .8);
-            float: right;
-            height: auto;
-            margin-right: -295px;
-            min-height: 86px;
-            transition: margin-right 1s ease 0s;
-            width: 380px
-        }
-        
-        #slide h3,
-        #slide a {
-            color: #fff;
-        }
-        
-        #slide:hover {
-            margin-right: -140px
-        }
-        
-        #slide #connect {
-            float: left;
-            margin-top: 12px;
-            width: 90px
-        }
-        
-        #slide:hover .connect-slide::before {
-            color: #fff
-        }
-        
-        #slide .connect-slide::after {
-            content: "\f086";
-            font-family: FontAwesome;
-            font-size: 57px;
-            position: absolute;
-            z-index: 0;
-            margin-left: 16px;
-            margin-top: 5px
-        }
-        
-        #slide:hover h3 {
-            color: #fff;
-        }
-        
-        #slide:hover #text {
-            display: block;
-            transition: all 1s ease 0s;
-            color: #fff
-        }
-        
-        #slide:hover #text a {
-            color: #fff
-        }
-        
-        #text a:hover {
-            text-decoration: none;
-        }
-        
-        #slide #text::before {
-            font-size: 22.8px;
-            padding: 17px;
-            float: left;
-            background: 0 0
-        }
-        
-        #slide #text {
-            width: 200px;
-            float: left;
-            margin-top: 10px;
-            margin-left: 100px;
-            font-size: 20px;
-            text-align: left;
-        }
-        
-        @media(max-width:767px) {
-            #chat-section {
-                top: 50%;
-            }
-        }
-        
-        @media(max-height:360px) {
-            #chat-section {
-                top: 0;
-            }
-        }
-        /***case 4086416 LZ 3739 (add extra social media icons)***/
-        
-        .extra-media .iconm {
-            color: #cdcdcf;
-            width: 30px;
-            height: 30px;
-            padding: 3px 0;
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle;
-        }
-        
-        .extra-media:hover .iconm {
-            color: #fff;
-        }
-        
-        .iconm-youtube:before,
-        .iconm-instagram:before,
-        .iconm-yelp:before,
-        .iconm-blogger:before {}
-        
-        #ctmcontentcontainer .extra-media .iconm {
-            padding: 0;
-            width: 22px;
-            height: 22px;
-            color: #fff;
-            background: #bfbfbf;
-        }
-        
-        #ctmcontentcontainer .yelp-media:hover span {
-            background: #D32323 !important;
-        }
-        
-        #ctmcontentcontainer .instagram-media:hover span {
-            background: #125688 !important;
-        }
-        
-        @media(max-width:768px) {
-            .other-social-wrap ul li {
-                float: left;
-            }
-        }
-        
-        @media(max-width:320px) {
-            #mySidenav {
-                width: 40% !important;
-            }
-            .social-media {
-                width: 60% !important;
-            }
-        }
-        /***case 4086416 LZ 3739 (add contact page maintenance info)***/
-        
-        #mobilenotext {
-            padding-left: 50px;
-        }
-        /***case 4086416 LZ 3739 (adjust contact page call 24/7)***/
-        
-        .primary-color-text {
-            padding-left: 8px;
-        }
-        /***case 4080390 LZ (overwrite amanity-layout-1 margin 0)***/
-        
-        #amenities-layout-1 .petPolicy ul {
-            margin: 10px 0 20px !important;
-        }
-        /***case 4075165 LZ 3739***/
-        
-        #RentCafeContent.amenities #amenities-toggle .accordion-title {
-            display: none;
-        }
-        /***case 4116238 LZ 3739 (add office hours)***/
-        
-        #hours-container > li {
-            display: inline-block;
-            padding: 0 15px;
-        }
-        
-        #hours-container > li > span {
-            display: block;
-            line-height: 20px;
-        }
-        
-        #office-hours-home h3 {
-            font-size: 16.8px;
-            text-transform: uppercase;
-            margin-bottom: 0;
-        }
-        
-        #office-hours-home h3:before {
-            content: "\f017";
-            font-family: fontawesome;
-            padding-right: 5px;
-        }
-        /***case 4241818 LZ 3739 (Sub menu position adjustment)***/
-        
-        .mainnav ul li ul {
-            position: relative !important;
-            margin: 0 !important;
-        }
-        /***case 4241849 LZ 3739***/
-        
-        #ole_office_hours dt.ole_hours_today,
-        #ole_office_hours dd.ole_hours_today {
-            font-weight: normal;
-        }
-        /***case 4341222 LZ 3739***/
-        
-        #RentCafeContent.contactus #ole_phone_ct #ole_phone_number > a:hover,
-        #RentCafeContent.contactus #mobilenotext > a:hover {
-            text-decoration: none;
-        }
-        /***case 4373633 LZ 3739***/
-        
-        a:hover,
-        a:focus {
-            text-decoration: none;
-        }
-        /***case 4392295 LZ 3739***/
-        
-        @media(min-width:1025px) {
-            .logo-holder #logo-container img {
-                max-width: 235px;
-                max-height: 235px;
-            }
-            .logo-holder #logo-container {
-                padding: 10px;
-                float: left;
-            }
-            .logo-holder {
-                width: auto;
-                float: left;
-            }
-        }
-    </style>
-    <style type="text/css">
-        /* Case #4829816 - JR - 18198 */
-        /*#innerformdiv .hidden-phone > a {
-    background-color: #f15a22;
-    color: #fff;
-    padding: 10px;
-} */
-        
-        @media (max-width:1279px) {
-            .virtual-tour iframe {
-                height: 400px;
-            }
-        }
-        /***case 4094714 LZ 3739***/
-        
-        @media(min-width:1280px) {
-            #innerpage #banner,
-            #rentcafe_residentportal #banner,
-            #rentcafe_onlineleasing #banner {
-                margin-top: -100px;
-            }
-        }
-        
-        @media(min-width:1367px) {
-            #innerpage #banner,
-            #rentcafe_residentportal #banner,
-            #rentcafe_onlineleasing #banner {
-                margin-top: -168px;
-            }
-        }
-        /***case 4095901 LZ 3739***/
-        
-        #address a {
-            color: #002a3a;
-        }
-        
-        #slide h3 {
-            color: #F5BC51;
-        }
-        /* Case#4119729 - MP - 11216 */
-        
-        .custom-content {
-            padding-bottom: 20px;
-            color: #686868;
-            font-style: italic;
-        }
-        
-        #hours-container {
-            text-align: center!important;
-        }
-    </style>
+
 </head>
 
 <body id="innerpage" class="melange">
-
-	
-    <a id="skippy" class="sr-only sr-only-focusable" href="#ResServicesContent" tabindex="0">
-        <div class="container">
-            <span class="skiplink-text">Skip Navigation</span>
-        </div>
-    </a>
-    <style>
-        #skippy {
-            display: block;
-            padding: 1em;
-            color: #fff;
-            background-color: #333;
-            outline: 0;
-        }
-        
-        #skippy .skiplink-text {
-            padding: .5em;
-            outline: 1px dotted;
-        }
-    </style>
     <div id="offcanvas_outer">
         <div id="offcanvas_inner">
             <div id="wrapper">
@@ -806,14 +504,14 @@
 							<ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
 							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="4200" />
-							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="5200" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="4200" />
+							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="1" data-rentprice="5200" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
 							
-							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="5900" />
+							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units" data-bedroom="2" data-rentprice="5900" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
@@ -875,7 +573,7 @@
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
 							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="5900" />
+							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units" data-bedroom="2" data-rentprice="5900" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
@@ -973,7 +671,7 @@
 							<ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
 							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="6200" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="6200" />
 							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
@@ -981,7 +679,7 @@
 							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
-							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="6995" />
+							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space all-available-units" data-bedroom="2" data-rentprice="6995" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
 							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
@@ -989,9 +687,9 @@
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
-							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="6995" />
+							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space all-available-units" data-bedroom="2" data-rentprice="6995" />
 							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
-							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="7225" />
+							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space all-available-units" data-bedroom="2" data-rentprice="7225" />
 							<polygon data-space="1.01" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space" />
 							<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
 							<rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
@@ -1041,15 +739,15 @@
 							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
-							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1800" />
+							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="0" data-rentprice="1800" />
 							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
-							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="2200" />
+							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space all-available-units" data-bedroom="0" data-rentprice="2200" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
 							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="3300" />
+							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units" data-bedroom="1" data-rentprice="3300" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
@@ -1139,13 +837,13 @@
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="3900" />
-							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="3900" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="2" data-rentprice="3900" />
+							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="2" data-rentprice="3900" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
-							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2900" />
-							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="4025" />
+							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="1" data-rentprice="2900" />
+							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units" data-bedroom="2" data-rentprice="4025" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space " />
@@ -1194,20 +892,20 @@
 							<ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
 							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="2500" />
-							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="3025" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="2500" />
+							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="1" data-rentprice="3025" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
-							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="4025" />
+							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="2" data-rentprice="4025" />
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
 							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="4025" />
-							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="3025" />
+							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units" data-bedroom="2" data-rentprice="4025" />
+							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space all-available-units" data-bedroom="1" data-rentprice="3025" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
 							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
@@ -1250,27 +948,27 @@
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1600" />
-							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2100" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="1600" />
+							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="1" data-rentprice="2100" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
-							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2500" />
+							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="2" data-rentprice="2500" />
 
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
-							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1600" />
+							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space all-available-units" data-bedroom="0" data-rentprice="1600" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2500" />
+							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units" data-bedroom="2" data-rentprice="2500" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
-							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2500" />
+							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space all-available-units" data-bedroom="2" data-rentprice="2500" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
 							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" rel="popover" data-container="body" data-placement="top" data-trigger="hover" title="" data-content="Available from 10/24/2018 !" data-original-title="1608" />
 							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
 							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
-							<polygon data-space="1.01" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2500" />
+							<polygon data-space="1.01" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space all-available-units" data-bedroom="2" data-rentprice="2500" />
 							<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
 							<rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
 							<rect x="139.5" y="501.73" width="35.61" height="35.23" class="map__space" />
@@ -1306,22 +1004,22 @@
 							<ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
 							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1700" />
+							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="1700" />
 							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
-							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2200" />
+							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space all-available-units" data-bedroom="1" data-rentprice="2200" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
 							<rect data-space="1.08" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
-							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2600" />
+							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space all-available-units" data-bedroom="2" data-rentprice="2600" />
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2600" />
+							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space all-available-units" data-bedroom="2" data-rentprice="2600" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
-							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2100" />
+							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space all-available-units" data-bedroom="1" data-rentprice="2100" />
 							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
 							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
 							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
@@ -1357,8 +1055,8 @@
 							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
-							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1700" />
-							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units available-unit" data-bedroom="2" data-rentprice="2600" />
+							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="0" data-rentprice="1700" />
+							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space all-available-units" data-bedroom="2" data-rentprice="2600" />
 							<path data-space="1.05" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
 							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
 							<rect data-space="1.09" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
@@ -1368,11 +1066,11 @@
 							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
 							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
-							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2200" />
+							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space all-available-units" data-bedroom="1" data-rentprice="2200" />
 							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
 							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
 							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
-							<polygon data-space="1.01" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1700" />
+							<polygon data-space="1.01" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space all-available-units" data-bedroom="0" data-rentprice="1700" />
 							<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
 							<rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
 							<rect x="139.5" y="501.73" width="35.61" height="35.23" class="map__space" />
@@ -1409,7 +1107,7 @@
 							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
 							<polygon data-space="1.04" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
 							<rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space" />
-							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units available-unit" data-bedroom="0" data-rentprice="1700" />
+							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="1700" />
 							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
 							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
 							<rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
@@ -1422,7 +1120,7 @@
 							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
 							<rect data-space="1.03" x="991.9" y="12" width="195.4" height="339.1" class="map__space" />
 							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
-							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space all-available-units available-unit" data-bedroom="1" data-rentprice="2200" />
+							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space all-available-units" data-bedroom="1" data-rentprice="2200" />
 							<rect data-space="1.02" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
 							<rect data-space="1.06" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
 							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
