@@ -91,6 +91,8 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 
+
+
 /* BUTTONS */
 #interactive-map-container button:hover,
 #interactive-map-container button:active,
@@ -98,10 +100,9 @@ h1, h2, h3, p, select, button, input, label, a {
 	outline: thin dotted #333 !important;
 }
 
-#interactive-map-container .floor-labels:hover,
-#interactive-map-container .floor-labels:active,
-#interactive-map-container .floor-labels:focus {
-	text-decoration: underline;
+#interactive-map-container .btn-link:hover,
+#interactive-map-container .btn-link:active,
+#interactive-map-container .btn-link:focus {
 	outline: none !important;
 }
 
@@ -593,9 +594,6 @@ h1, h2, h3, p, select, button, input, label, a {
 }
 
 .floor-labels {
-	border-color: transparent;
-	background-color: transparent;
-	
 	font-size: 1.9vmin;
 	line-height: 0;
 	position: absolute;
@@ -606,13 +604,6 @@ h1, h2, h3, p, select, button, input, label, a {
 	color: #7d7d86;
 	transform: rotateZ(45deg) rotateX(-56deg) translateZ(5vmin);
 	letter-spacing: 2px;
-}
-
-.floor-labels:hover,
-.floor-labels:active,
-.floor-labels:focus {
-	text-decoration: underline;
-	outline: none !important;
 }
 
 .floor-labels span {
@@ -694,7 +685,7 @@ h1, h2, h3, p, select, button, input, label, a {
  }
 
 [data-filter] {
-	fill: #b5e8fd;
+	fill: #6ed2fb;
 	transition: fill .3s;
 }
 
@@ -791,6 +782,10 @@ h1, h2, h3, p, select, button, input, label, a {
 	/* when detail view is open, expanded plate should become small */
 	.view-change-2 .expanded-view-with-detail {
 		width: 30%
+	}
+	
+	.view-change-2 .expanded-view-with-detail .floor-labels {
+		display: none;
 	}
 	
 	.view-change-2 .third-view {
