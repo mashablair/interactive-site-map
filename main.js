@@ -507,8 +507,6 @@
 						thirdStackUnitsFiltered = $('.svg-container__part3 [data-bedroom="' + bedroomNum + '"]');
 						secondStackUnitsFiltered = $('.svg-container__part2 [data-bedroom="' + bedroomNum + '"]');
 						firstStackUnitsFiltered = $('.svg-container__part1 [data-bedroom="' + bedroomNum + '"]');
-						
-						commands.updatePopoversFilteredNumbers();
 					}
 					
 				// if maxRent is active
@@ -536,8 +534,9 @@
 						secondStackUnitsFiltered = $('.svg-container__part2 [data-filter][data-bedroom="' + bedroomNum + '"]');
 						firstStackUnitsFiltered = $('.svg-container__part1 [data-filter][data-bedroom="' + bedroomNum + '"]');
 					} 		
-					commands.updatePopoversFilteredNumbers();
 				}
+				commands.updatePopoversFilteredNumbers();
+				commands.setFloorLabelAvailabilityNumber();
 			}, 
 			
 			calculateFilteredMaxRent: function(maxRentNum) {
@@ -558,7 +557,6 @@
 							}
 						});
 						commands.filterByMaxRent(maxRentNum);
-						commands.updatePopoversFilteredNumbers();
 					}
 				// if bedroom filter IS active:	
 				} else {			
@@ -574,22 +572,23 @@
 						});
 						commands.filterByMaxRent(maxRentNum);
 					} 
-					commands.updatePopoversFilteredNumbers();
 				}
+				commands.updatePopoversFilteredNumbers();
+				commands.setFloorLabelAvailabilityNumber();
 			},
 			
 			filterByMaxRent: function(maxRentNum) {
-						thirdStackUnitsFiltered = $('.svg-container__part3 [data-filter]').filter(function() {
-							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
-						});
+				thirdStackUnitsFiltered = $('.svg-container__part3 [data-filter]').filter(function() {
+					return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+				});
 
-						secondStackUnitsFiltered = $('.svg-container__part2 [data-filter]').filter(function() {
-							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
-						});
+				secondStackUnitsFiltered = $('.svg-container__part2 [data-filter]').filter(function() {
+					return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+				});
 
-						firstStackUnitsFiltered = $('.svg-container__part1 [data-filter]').filter(function() {
-							return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
-						});
+				firstStackUnitsFiltered = $('.svg-container__part1 [data-filter]').filter(function() {
+					return parseInt($(this).attr("data-rentprice")) <= maxRentNum;
+				});
 			},
 			
 			updatePopoversFilteredNumbers: function() {
@@ -641,6 +640,20 @@
 					$('#popover2 .min-rent').text(firstMinRentFiltered);
 					$('#popover2 .max-rent').text(firstMaxRentFiltered);
 				}			
+			},
+			
+			setFloorLabelAvailabilityNumber: function() {
+				// check each .level for available units and update the label
+				$('.level').each(function() {
+					var availableUnitsTotal = $(this).find('[data-filter]').length;
+					var floorLabel = $(this).find('.floor-labels');
+					floorLabel.find('span').text(availableUnitsTotal);
+					if (availableUnitsTotal === 0) {
+						floorLabel.removeClass('available-units');
+					} else {
+						floorLabel.addClass('available-units');
+					}
+				});
 			}
 			
 		}; // end of 'commands' var
@@ -651,6 +664,7 @@
 		commands.setPopovers("first-view"); // add classes and id's to popovers
 		commands.getInitialRentPricesRange();
 		commands.setInitialPopoversNumbers();
+		commands.setFloorLabelAvailabilityNumber();
 		
 		
 		
@@ -881,5 +895,6 @@
 
 	
 	$(document).ready(init);
+
 })(jQuery);
 
