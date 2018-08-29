@@ -1059,17 +1059,8 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transition-delay: 0.4s;
           transition-delay: 0.4s; }
 
-.pin[data-category='1'] .icon--pin {
-  fill: #7cbf7f; }
-
-.pin[data-category='2'] .icon--pin {
-  fill: #6584c7; }
-
-.pin[data-category='3'] .icon--pin {
-  fill: #dc4b7c; }
-
-.pin[data-category='4'] .icon--pin {
-  fill: #8d65e0; }
+.pin .icon--pin {
+  fill: #717171; }
 
 .pin--active .icon--pin {
   stroke: #515158;

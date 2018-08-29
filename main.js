@@ -270,9 +270,19 @@
 				firstViewPopovers.popover('hide');
 			},
 			
-			showLevel: function() {
-				// calculate levelsTotal
-				levelsTotal = $('[data-levelnum]').length;
+			showLevel: function(thisLevel) {
+				
+				// current .level should receive .level--current
+				$(thisLevel).addClass('level--current');
+				
+				// get last digit
+				selectedLevel = parseInt($(thisLevel).attr('data-levelnum'), 10);
+				
+				// add pins to floorplate
+				$(thisLevel).find('.level__pins').addClass('level__pins--active');
+				
+				// calculate levelsTotal for THIS stack (b/c in future, stacks might contain different # of floors)
+				levelsTotal = $('.level--current').closest('.svg-container').find('[data-levelnum]').length;
 
 				// .levels should receive classes: levels--selected-4 levels--open
 				levelsContainer.addClass('levels--open levels--selected-' + selectedLevel);
@@ -807,14 +817,8 @@
 		
 		// clicking on stacked floor plate, shows this plate in expanded view
 		levels.on('click', function() {
-
-			// current .level should receive .level--current
-			$(this).addClass('level--current');
-			// get last digit
-			selectedLevel = parseInt($(this).attr('data-levelnum'), 10);
-			console.log("selectedLevel is " + selectedLevel);
-			
-			commands.showLevel();
+			var thisLevel = this;
+			commands.showLevel(thisLevel);
 		});
 		
 		// 'up' and 'down' arrows for navigating through stacks OR levels (depending on 'expanded')
