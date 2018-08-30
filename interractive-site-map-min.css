@@ -549,31 +549,6 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transform: translateY(100%);
           transform: translateY(100%); }
 
-.levels {
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-6vmin) scale(0.7);
-          transform: rotateX(70deg) rotateZ(-45deg) translateZ(-6vmin) scale(0.7); }
-
-.level {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  pointer-events: auto;
-  -webkit-transition: opacity 1s, -webkit-transform 1s;
-  transition: opacity 1s, -webkit-transform 1s;
-  transition: opacity 1s, transform 1s;
-  transition: opacity 1s, transform 1s, -webkit-transform 1s;
-  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-          transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d; }
-
 .floor-labels {
   font-size: 1.9vmin;
   line-height: 0;
@@ -703,58 +678,6 @@ h1, h2, h3, p, select, button, input, label, a {
   max-width: 100%;
   max-height: 500px; }
 
-/* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
-@media (min-width: 1300px) {
-  .container-bs3 {
-    width: 95%; }
-  .second-view {
-    width: 50%; }
-  .first-view {
-    min-width: 40vw; }
-  .third-view {
-    -webkit-transform: translateX(200%);
-            transform: translateX(200%); }
-  /* when stacks btn clicked */
-  .view-change-1 .first-view {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    width: 50%; }
-  .view-change-1 .second-view {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%); }
-  /* when one-stack btn clicked */
-  .view-change-2 .first-view {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%); }
-  .view-change-2 .second-view {
-    -webkit-transform: translateX(0);
-            transform: translateX(0); }
-  .view-change-2 .third-view {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%); }
-  /* when detail view is open, expanded plate should become small */
-  .view-change-2 .expanded-view-with-detail {
-    width: 30%; }
-  .view-change-2 .expanded-view-with-detail .floor-labels {
-    display: none; }
-  .view-change-2 .third-view {
-    width: 65%;
-    -webkit-transform: translateX(51%);
-            transform: translateX(51%); }
-  .levels {
-    -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7);
-            transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); }
-  .back-btn {
-    display: none; }
-  .expand-detail-btn {
-    display: block; }
-  /* to highlight building parts */
-  .first-stack-displayed .first-block,
-  .second-stack-displayed .second-block,
-  .third-stack-displayed .third-block {
-    opacity: .5; } }
-
-/* TYMPANUS STYLES */
 /* Icons */
 .icon {
   display: block;
@@ -814,16 +737,6 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transition-delay: 0.45s;
           transition-delay: 0.45s; }
 
-/* Current level */
-.level.level--current {
-  /* go to center */
-  -webkit-transform: translateZ(15vmin) rotate3d(0, 0, 1, 20deg);
-          transform: translateZ(15vmin) rotate3d(0, 0, 1, 20deg); }
-
-.level.level--current {
-  -webkit-transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg);
-          transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg); }
-
 /* Navigation classes */
 .levels--open .level,
 .levels--open .level::after {
@@ -849,6 +762,103 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transform: translateZ(-60vmin);
           transform: translateZ(-60vmin); }
 
+.levels {
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-16vmin) scale(0.7);
+          transform: rotateX(70deg) rotateZ(-45deg) translateZ(-16vmin) scale(0.7); }
+
+.levels--open {
+  -webkit-transform: rotateX(79deg) rotateZ(-32deg) translateZ(-10vmin) translateX(39px) scale(0.9);
+          transform: rotateX(79deg) rotateZ(-32deg) translateZ(-10vmin) translateX(39px) scale(0.9); }
+
+.level {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-transition: opacity 1s, -webkit-transform 1s;
+  transition: opacity 1s, -webkit-transform 1s;
+  transition: opacity 1s, transform 1s;
+  transition: opacity 1s, transform 1s, -webkit-transform 1s;
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+          transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+/* Current level */
+.level.level--current {
+  /* go to center */
+  -webkit-transform: translateZ(15vmin) rotate3d(0, 0, 1, 20deg);
+          transform: translateZ(15vmin) rotate3d(0, 0, 1, 20deg); }
+
+.level.level--current {
+  -webkit-transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg);
+          transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg); }
+
+/* SIDE-BY-SIDE VIEW ON WIDER SCREENS */
+@media (min-width: 1200px) {
+  .container-bs3 {
+    width: 95%; }
+  .second-view {
+    width: 50%; }
+  .first-view {
+    min-width: 40vw; }
+  .third-view {
+    -webkit-transform: translateX(200%);
+            transform: translateX(200%); }
+  /* when stacks btn clicked */
+  .view-change-1 .first-view {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    width: 50%; }
+  .view-change-1 .second-view {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%); }
+  /* when one-stack btn clicked */
+  .view-change-2 .first-view {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  .view-change-2 .second-view {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  .view-change-2 .third-view {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%); }
+  /* when detail view is open, expanded plate should become small */
+  .view-change-2 .expanded-view-with-detail {
+    width: 30%; }
+  .view-change-2 .expanded-view-with-detail .floor-labels {
+    display: none; }
+  .view-change-2 .third-view {
+    width: 65%;
+    -webkit-transform: translateX(51%);
+            transform: translateX(51%); }
+  .levels {
+    -webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7);
+            transform: rotateX(70deg) rotateZ(-45deg) translateZ(-24vmin) scale(0.7); }
+  .levels--open {
+    -webkit-transform: rotateX(77deg) rotateZ(-35deg) translateZ(-21vmin) translateX(39px) scale(0.9);
+            transform: rotateX(77deg) rotateZ(-35deg) translateZ(-21vmin) translateX(39px) scale(0.9); }
+  .level.level--current {
+    -webkit-transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg);
+            transform: translateZ(15vmin) rotate3d(-4, -3, 2, 14deg); }
+  .back-btn {
+    display: none; }
+  .expand-detail-btn {
+    display: block; }
+  /* to highlight building parts */
+  .first-stack-displayed .first-block,
+  .second-stack-displayed .second-block,
+  .third-stack-displayed .third-block {
+    opacity: .5; } }
+
+/* TYMPANUS STYLES */
 /* Spaces list (sidebar) */
 .spaces-list {
   position: absolute;
@@ -992,7 +1002,7 @@ h1, h2, h3, p, select, button, input, label, a {
           transform-style: preserve-3d; }
 
 .level__pins--active {
-  pointer-events: auto; }
+  /*	pointer-events: auto;*/ }
 
 .pin {
   position: absolute;
@@ -1000,8 +1010,8 @@ h1, h2, h3, p, select, button, input, label, a {
   height: 8.25vmin;
   margin: -8.25vmin 0 0 -2.25vmin;
   /* let the bottom tip be the reference point for individual coordinates */
-  -webkit-transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
-          transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+  -webkit-transform: rotateZ(32deg) rotateX(-70deg);
+          transform: rotateZ(32deg) rotateX(-70deg);
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
   -webkit-transform-style: preserve-3d;
@@ -1059,6 +1069,10 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transition-delay: 0.4s;
           transition-delay: 0.4s; }
 
+.pin .icon {
+  background-image: none;
+  /* to override Bootstrap's style*/ }
+
 .pin .icon--pin {
   fill: #717171; }
 
@@ -1070,7 +1084,7 @@ h1, h2, h3, p, select, button, input, label, a {
   width: 100%;
   height: 100%; }
 
-.icon--logo {
+.pin--text {
   position: absolute;
   top: 11%;
   left: 25%;
@@ -1079,10 +1093,18 @@ h1, h2, h3, p, select, button, input, label, a {
   fill: white;
   fill-opacity: 0.6;
   -webkit-transition: fill-opacity 0.3s;
-  transition: fill-opacity 0.3s; }
+  transition: fill-opacity 0.3s;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  line-height: 14px; }
 
-.pin--active .icon--logo,
-.pin:hover .icon--logo {
+.pin--studio {
+  left: 18%;
+  top: 20%; }
+
+.pin--active .pin--text,
+.pin:hover .pin--text {
   fill-opacity: 1; }
 
 /* Pins for floor 1 */
@@ -1114,14 +1136,6 @@ h1, h2, h3, p, select, button, input, label, a {
   top: 36vmin;
   left: 61vmin; }
 
-.pin--1-8 {
-  top: 9vmin;
-  left: 59vmin; }
-
-.pin--1-9 {
-  top: 8vmin;
-  left: 51vmin; }
-
 /* Pins for floor 2 */
 .pin--2-1 {
   top: 7vmin;
@@ -1143,18 +1157,6 @@ h1, h2, h3, p, select, button, input, label, a {
   top: 14vmin;
   left: 50vmin; }
 
-.pin--2-6 {
-  top: 60vmin;
-  left: 15vmin; }
-
-.pin--2-7 {
-  top: 34vmin;
-  left: 37vmin; }
-
-.pin--2-8 {
-  top: 52vmin;
-  left: 74vmin; }
-
 /* Pins for floor 3 */
 .pin--3-1 {
   top: 17vmin;
@@ -1172,18 +1174,6 @@ h1, h2, h3, p, select, button, input, label, a {
   top: 61vmin;
   left: 57vmin; }
 
-.pin--3-5 {
-  top: 58vmin;
-  left: 25vmin; }
-
-.pin--3-6 {
-  top: 30vmin;
-  left: 57vmin; }
-
-.pin--3-7 {
-  top: 32vmin;
-  left: 37vmin; }
-
 /* Pins for floor 4 */
 .pin--4-1 {
   top: 55vmin;
@@ -1193,25 +1183,93 @@ h1, h2, h3, p, select, button, input, label, a {
   top: 18vmin;
   left: 20vmin; }
 
-.pin--4-3 {
+/* Pins for floor 5 */
+.pin--5-1 {
+  top: 55vmin;
+  left: 21vmin; }
+
+.pin--5-2 {
+  top: 18vmin;
+  left: 20vmin; }
+
+.pin--5-3 {
   top: 21vmin;
   left: 88vmin; }
 
-.pin--4-4 {
+/* No pins on floor 6 */
+/* Pins for floor 7 */
+.pin--7-1 {
+  top: 55vmin;
+  left: 21vmin; }
+
+.pin--7-2 {
+  top: 18vmin;
+  left: 20vmin; }
+
+.pin--7-3 {
+  top: 21vmin;
+  left: 88vmin; }
+
+.pin--7-4 {
   top: 52vmin;
   left: 74vmin; }
 
-.pin--4-5 {
-  top: 33vmin;
-  left: 38vmin; }
+/* Pins for floor 8 */
+.pin--8-1 {
+  top: 55vmin;
+  left: 21vmin; }
 
-.pin--4-6 {
-  top: 39vmin;
-  left: 56vmin; }
+.pin--8-2 {
+  top: 18vmin;
+  left: 20vmin; }
 
-.pin--4-7 {
-  top: 58vmin;
-  left: 10vmin; }
+.pin--8-3 {
+  top: 21vmin;
+  left: 88vmin; }
+
+.pin--8-4 {
+  top: 52vmin;
+  left: 74vmin; }
+
+.pin--8-5 {
+  top: 52vmin;
+  left: 74vmin; }
+
+/* Pins for floor 9 */
+.pin--9-1 {
+  top: 55vmin;
+  left: 21vmin; }
+
+.pin--9-2 {
+  top: 18vmin;
+  left: 20vmin; }
+
+.pin--9-3 {
+  top: 21vmin;
+  left: 88vmin; }
+
+/* Pins for floor 10 */
+.pin--10-1 {
+  top: 55vmin;
+  left: 21vmin; }
+
+/* No pins on floor 11 */
+/* Pins for floor 12 */
+.pin--12-1 {
+  top: 55vmin;
+  left: 21vmin; }
+
+.pin--12-2 {
+  top: 18vmin;
+  left: 20vmin; }
+
+.pin--12-3 {
+  top: 21vmin;
+  left: 88vmin; }
+
+.pin--12-4 {
+  top: 52vmin;
+  left: 74vmin; }
 
 /* Mobile compatability */
 .open-search,

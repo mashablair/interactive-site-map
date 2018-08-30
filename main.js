@@ -333,7 +333,10 @@
 				isExpanded = false;
 
 				levelsContainer.removeClass('levels--open levels--selected-' + selectedLevel);
-				$('.level--current').removeClass('level--current');
+				var currentLevel = $('.level--current');
+				// hide pins from floorplate
+				currentLevel.find('.level__pins').removeClass('level__pins--active');
+				currentLevel.removeClass('level--current');
 
 				// navigation arrows
 				backBtn.removeClass('hidden');
@@ -361,10 +364,7 @@
 				}
 				isNavigating = true;
 
-				console.log("selectedLevel is " + selectedLevel);
 				var prevSelectedLevel = selectedLevel;
-				console.log("prevSelectedLevel " + prevSelectedLevel); // --> should be 4
-				console.log(levels); // --> array like object of levels
 
 				// current level
 				var currentLevel = $('.level--' + selectedLevel);
@@ -376,7 +376,6 @@
 				}
 				else if( direction === 'Down' && prevSelectedLevel < levelsTotal ) {
 					++selectedLevel;
-					console.log("selectedLevel++ is " + selectedLevel); 
 				}
 				else {
 					isNavigating = false;	
@@ -389,11 +388,11 @@
 				currentLevel.addClass('level--moveOut' + direction);
 				// next level element
 				var nextLevelNum = selectedLevel; // --> ??? should be '3'
-				console.log('nextLevelNum is ' + nextLevelNum);
 				var nextLevel = $('.level--' + nextLevelNum); 
-				console.log(nextLevel);  // --> should be .level.level--3
 				// ..becomes the current one
 				nextLevel.addClass('level--current');
+				// add pins to floorplate
+				nextLevel.find('.level__pins').addClass('level__pins--active');
 
 				// moves levels out of view, updates the container's classes
 				currentLevel.removeClass('level--moveOut' + direction);
