@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref;
 	
 	
 	function init() {
@@ -48,7 +48,8 @@
 		buildingBlocks = $('.first-view svg');
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = $('.first-view .link-for-blocks');
-		backBtn = $('.back-btn');
+		backToFirstViewBtn = $('.back-btn');
+		backToSecondExpandedViewBtn = $('.back-to-single-plate__btn');
 		secondViewHeader = $('.second-view-header');
 		
 		// levels and navigation up/down ctrls
@@ -61,6 +62,8 @@
 		isNavigating = false;
 		levelsContainer = $('.levels');
 		levels = $('.level');
+		
+		pins = $('.pin');
 	
 		
 		// delete later -- just FYI
@@ -143,12 +146,12 @@
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
 				secondExpandedViewBtn.addClass('active-tab');
-				firstLevel.trigger('click');
 				$('[data-toggle="popover"]').popover('show'); 
 			},
 			
 			// when clicked on .nav-icon.third-view-btn OR clicked on interactive plate portion
 			navigateToThirdView: function() {
+				secondView.addClass('expanded-view-with-detail');
 				mapsContainer.addClass('view-change-1 view-change-2');
 				commands.navigateTabs();
 				thirdViewBtn.addClass('active-tab');
@@ -297,7 +300,7 @@
 				secondViewHeader.text('Floor ' + floorNum).css('color', '#04b5fd');
 
 				// navigation arrows
-				backBtn.addClass('hidden');
+				backToFirstViewBtn.addClass('hidden');
 				levelStackedCtrl.removeClass('hidden');
 
 				// check if .boxbutton--disabled needs to be applied
@@ -339,7 +342,7 @@
 				currentLevel.removeClass('level--current');
 
 				// navigation arrows
-				backBtn.removeClass('hidden');
+				backToFirstViewBtn.removeClass('hidden');
 				levelStackedCtrl.addClass('hidden');
 
 				// activate 2nd tab
@@ -679,7 +682,6 @@
 		
 		
 		// ### 5. All events handlers
-		tabsBtns.on('click', commands.navigateTabs);
 		
 		// filters
 		expandBtn.on('click', commands.expandFilters);
@@ -739,17 +741,24 @@
 			commands.calculateFilteredMaxRent(maxRentNum);
 		});
 		
+		
+		// Tabs navigation
 		firstViewBtn.on('click', commands.navigateToFirstView);
 		
 		secondViewBtn.on('click', function() {
-			if (isExpanded) {
-				commands.showStackedLevels();
-			} else {
-				commands.navigateToSecondView();
-			}
+			if ($(this).hasClass('boxbutton--disabled')) { return false; }
+			commands.navigateToSecondView();
 		});
-		secondExpandedViewBtn.on('click', commands.navigateToSecondExpandedView);
-		thirdViewBtn.on('click', commands.navigateToThirdView);
+		
+		secondExpandedViewBtn.on('click', function() {
+			if ($(this).hasClass('boxbutton--disabled')) { return false; }
+			commands.navigateToSecondExpandedView();
+		});
+		
+		thirdViewBtn.on('click', function() {
+			if ($(this).hasClass('boxbutton--disabled')) { return false; }
+			commands.navigateToThirdView();
+		});
 		
 		// hovering over building blocks
 		blockLinks.on({
@@ -800,15 +809,23 @@
 			commands.navigateToSecondView();
 		});
 				
-		// clicking 'Back' btn
-		backBtn.on('click', function() {
+		// clicking 'Back' btn from Stacked to building view
+		backToFirstViewBtn.on('click', function() {
 			if (isExpanded) {
 				commands.showStackedLevels();
-			} else if ( $(window).width() >= 1400 ) {
-				commands.navigateToSecondView();
-				secondView.removeClass('expanded-view-with-detail');
 			} else {
 				commands.navigateToFirstView();
+				secondView.removeClass('expanded-view-with-detail');
+			}
+		});
+		
+		// clicking 'Back' btn from Detail Unit view to single floor plate view
+		backToSecondExpandedViewBtn.on('click', function() {
+			if ( $(window).width() >= 1200 ) { // this is unnecessary b/c there is no 'back' btn in split view
+				commands.navigateToSecondExpandedView();
+				secondView.removeClass('expanded-view-with-detail');
+			} else {
+				commands.navigateToSecondExpandedView();
 				secondView.removeClass('expanded-view-with-detail');
 			}
 		});
@@ -858,10 +875,29 @@
 		
 		// clicking on SVG hot spot
 		filteredUnit.on('click', function(e) {
-			e.stopPropagation(); // to prevent showLevel() invokation 
-			$('.second-view').addClass('expanded-view-with-detail');
+			e.stopPropagation(); // to prevent showLevel() invokation
+			// get data-space attribute 
+			spaceref = $(this).attr('data-space');
+			console.log(spaceref);
+			// find pin with same data-space attribute and add .pin--active
+			$('.pin[data-space="' + spaceref + '"]').addClass('pin--active');
 			commands.navigateToThirdView();
 		});
+		
+		// clickin on a pin
+		$('.level').on('click', '.level__pins--active .pin', function(e) {
+			e.preventDefault();
+			pins.removeClass('pin--active');
+			e.stopPropagation(); // to prevent showLevel() invokation
+			// get data-space attribute 
+			spaceref = $(this).attr('data-space');
+			console.log(spaceref);
+			// find pin with same data-space attribute and add .pin--active
+			$('.pin[data-space="' + spaceref + '"]').addClass('pin--active');
+			commands.navigateToThirdView();
+		});
+		// prevent default
+		// make pins clickable
 		
 		
 		
