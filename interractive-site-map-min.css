@@ -204,6 +204,9 @@ h1, h2, h3, p, select, button, input, label, a {
 .second-expanded-view-btn.boxbutton--disabled svg path {
   fill: #b7b7b7; }
 
+.second-view .back-to-single-plate__btn {
+  display: none; }
+
 /* MORE FILTERS  */
 #more-filters {
   background: #717171;
@@ -860,7 +863,13 @@ h1, h2, h3, p, select, button, input, label, a {
   .first-stack-displayed .first-block,
   .second-stack-displayed .second-block,
   .third-stack-displayed .third-block {
-    opacity: .5; } }
+    opacity: .5; }
+  .second-view .back-to-single-plate__btn {
+    display: none; }
+  .expanded-view-with-detail.second-view .back-to-single-plate__btn {
+    display: block; }
+  .third-view .back-to-single-plate__btn {
+    display: none; } }
 
 /* TYMPANUS STYLES */
 /* Spaces list (sidebar) */

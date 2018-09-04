@@ -123,30 +123,41 @@
 				mapsContainer.removeClass('view-change-1 view-change-2');
 				commands.showPopovers();
 				commands.navigateTabs();
-				firstViewBtn.addClass('active-tab');
+				tabsBtns.addClass('boxbutton--disabled');
+				secondView.removeClass('expanded-view-with-detail');
+				firstViewBtn.addClass('active-tab').removeClass('boxbutton--disabled');
 				setTimeout(function() {
 					commands.showPopovers();
 				}, 800); 
 			},
 			
 			navigateToSecondView: function() {
-				// if no .view-change-1 class
-				if ( !mapsContainer.hasClass('view-change-1')) {
-					mapsContainer.addClass('view-change-1').removeClass('view-change-2');
-					commands.navigateTabs();
-					secondViewBtn.addClass('active-tab');
-					commands.hidePopovers();
-					setTimeout(function() {
-						commands.showPopovers();
-					}, 800);
+				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
+				commands.navigateTabs();
+				secondViewBtn.addClass('active-tab');
+				secondViewBtn.removeClass('boxbutton--disabled');
+				secondExpandedViewBtn.addClass('boxbutton--disabled'); // not working???
+				thirdViewBtn.addClass('boxbutton--disabled');
+				secondView.removeClass('expanded-view-with-detail');
+				commands.hidePopovers();
+				setTimeout(function() {
+					commands.showPopovers();
+				}, 800);
+				
+				if (isExpanded) {
+					commands.showStackedLevels();
 				}
 			},
 			
 			navigateToSecondExpandedView: function() {
 				mapsContainer.addClass('view-change-1').removeClass('view-change-2');
 				commands.navigateTabs();
-				secondExpandedViewBtn.addClass('active-tab');
-				$('[data-toggle="popover"]').popover('show'); 
+				secondExpandedViewBtn.addClass('active-tab').removeClass('boxbutton--disabled'); // not working????
+				thirdViewBtn.addClass('boxbutton--disabled');
+				secondView.removeClass('expanded-view-with-detail');
+				setTimeout(function() {
+					commands.showPopovers();
+				}, 800); 
 			},
 			
 			// when clicked on .nav-icon.third-view-btn OR clicked on interactive plate portion
@@ -155,7 +166,7 @@
 				mapsContainer.addClass('view-change-1 view-change-2');
 				commands.navigateTabs();
 				thirdViewBtn.addClass('active-tab');
-				secondView.addClass('expanded-view-with-detail');
+				tabsBtns.removeClass('boxbutton--disabled'); // all tab nav btns are active
 			},
 			
 			showFirstStack: function() {
@@ -293,6 +304,7 @@
 				// activate 3rd tab
 				commands.navigateTabs();
 				secondExpandedViewBtn.addClass('active-tab');
+				secondExpandedViewBtn.removeClass('boxbutton--disabled');
 
 				// update header using floor number
 				secondViewStackedHeader = secondViewHeader.text();
@@ -348,6 +360,7 @@
 				// activate 2nd tab
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
+				secondExpandedViewBtn.addClass('boxbutton--disabled');
 
 				// update header back to stacked
 				if (secondView.hasClass('second-view__part1')) {
@@ -395,6 +408,7 @@
 				// ..becomes the current one
 				nextLevel.addClass('level--current');
 				// add pins to floorplate
+				$('.level__pins').removeClass('level__pins--active');
 				nextLevel.find('.level__pins').addClass('level__pins--active');
 
 				// moves levels out of view, updates the container's classes
@@ -753,6 +767,7 @@
 		secondExpandedViewBtn.on('click', function() {
 			if ($(this).hasClass('boxbutton--disabled')) { return false; }
 			commands.navigateToSecondExpandedView();
+			secondExpandedViewBtn.removeClass('boxbutton--disabled');
 		});
 		
 		thirdViewBtn.on('click', function() {
@@ -815,19 +830,13 @@
 				commands.showStackedLevels();
 			} else {
 				commands.navigateToFirstView();
-				secondView.removeClass('expanded-view-with-detail');
 			}
 		});
 		
 		// clicking 'Back' btn from Detail Unit view to single floor plate view
 		backToSecondExpandedViewBtn.on('click', function() {
-			if ( $(window).width() >= 1200 ) { // this is unnecessary b/c there is no 'back' btn in split view
-				commands.navigateToSecondExpandedView();
-				secondView.removeClass('expanded-view-with-detail');
-			} else {
-				commands.navigateToSecondExpandedView();
-				secondView.removeClass('expanded-view-with-detail');
-			}
+			commands.navigateToSecondExpandedView();
+			secondView.removeClass('expanded-view-with-detail');
 		});
 		
 		
@@ -870,18 +879,21 @@
 		// clicking 'stack' nav btn
 		levelStackedCtrl.on('click', function() {
 			commands.showStackedLevels();
-			commands.navigateToSecondView(); 
 		});
 		
 		// clicking on SVG hot spot
 		filteredUnit.on('click', function(e) {
-			e.stopPropagation(); // to prevent showLevel() invokation
-			// get data-space attribute 
-			spaceref = $(this).attr('data-space');
-			console.log(spaceref);
-			// find pin with same data-space attribute and add .pin--active
-			$('.pin[data-space="' + spaceref + '"]').addClass('pin--active');
-			commands.navigateToThirdView();
+			// allow clicking only when not stacked (when single plate is shown)
+			if (isExpanded) {
+				e.stopPropagation(); // to prevent showLevel() invokation
+				// get data-space attribute 
+				spaceref = $(this).attr('data-space');
+				console.log(spaceref);
+				// find pin with same data-space attribute and add .pin--active
+				$('.pin[data-space="' + spaceref + '"]').addClass('pin--active');
+				commands.navigateToThirdView();
+			}
+			
 		});
 		
 		// clickin on a pin

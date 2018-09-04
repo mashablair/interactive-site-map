@@ -242,6 +242,10 @@ h1, h2, h3, p, select, button, input, label, a {
 	fill: #b7b7b7;
 }
 
+.second-view .back-to-single-plate__btn {
+	display: none;
+}
+
 
 
 
@@ -932,6 +936,18 @@ h1, h2, h3, p, select, button, input, label, a {
 	.third-stack-displayed .third-block {
 		opacity: .5;
 	}
+	
+	.second-view .back-to-single-plate__btn {
+		display: none;
+	}
+	.expanded-view-with-detail.second-view .back-to-single-plate__btn {
+		display: block;
+	}
+	
+	.third-view .back-to-single-plate__btn {
+		display: none;
+	}
+
 
 }
 
