@@ -11,11 +11,11 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount;
 	
 	
 	function init() {
-
+		
 		// units and filters
 		moreFilters = $('#more-filters');
 		expandBtn = $('#more-filters-btn');
@@ -64,6 +64,13 @@
 		levels = $('.level');
 		
 		pins = $('.pin');
+		unitNumber = $('.unit-number');
+		unitFloor = $('.unit-floor');
+		unitBedCount = $('.unit-bed-count');
+		unitBathCount = $('.unit-bath-count');
+		unitSqFt = $('.unit-sq-ft');
+		unitPrice = $('.unit-price');
+		unitDepositAmount = $('.deposit-amount');
 	
 		
 		// delete later -- just FYI
@@ -155,6 +162,8 @@
 				secondExpandedViewBtn.addClass('active-tab').removeClass('boxbutton--disabled'); // not working????
 				thirdViewBtn.addClass('boxbutton--disabled');
 				secondView.removeClass('expanded-view-with-detail');
+				pins.removeClass('pin--active');
+				$('.all-available-units').removeAttr('data-active');
 				setTimeout(function() {
 					commands.showPopovers();
 				}, 800); 
@@ -172,8 +181,7 @@
 			showFirstStack: function() {
 				secondView.removeClass('second-view__part2 second-view__part3');
 				secondView.addClass('second-view__part1');
-				levelDownCtrl.addClass('boxbutton--disabled');
-				levelUpCtrl.removeClass('boxbutton--disabled');
+				commands.setNavigationStateStacks();
 				// add building highlight
 				firstView.addClass('first-stack-displayed');
 				firstView.removeClass('second-stack-displayed third-stack-displayed');
@@ -183,8 +191,7 @@
 			showSecondStack: function() {
 				secondView.removeClass('second-view__part1 second-view__part3');
 				secondView.addClass('second-view__part2');
-				levelUpCtrl.removeClass('boxbutton--disabled');
-				levelDownCtrl.removeClass('boxbutton--disabled');
+				commands.setNavigationStateStacks();
 				// add building highlight
 				firstView.addClass('second-stack-displayed');
 				firstView.removeClass('first-stack-displayed third-stack-displayed');
@@ -194,8 +201,7 @@
 			showThirdStack: function() {
 				secondView.removeClass('second-view__part1 second-view__part2');
 				secondView.addClass('second-view__part3');
-				levelUpCtrl.addClass('boxbutton--disabled');
-				levelDownCtrl.removeClass('boxbutton--disabled');
+				commands.setNavigationStateStacks();
 				// add building hightlight
 				firstView.addClass('third-stack-displayed');
 				firstView.removeClass('first-stack-displayed second-stack-displayed');
@@ -260,6 +266,7 @@
 			resetAllAvailability: function() {
 				allAvailableUnits.each(function() {
 					$(this).attr('data-filter', true);
+					pins.removeClass('hidden');
 				});
 			},
 			
@@ -325,7 +332,7 @@
 
 			},
 			
-			// Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
+			// Control navigation ctrls state for single plates. Add disable class to the respective ctrl when the current level is either the first or the last.
 			setNavigationState: function() {
 				if ( selectedLevel === 1 ) {
 					levelDownCtrl.addClass('boxbutton--disabled');
@@ -340,6 +347,20 @@
 				}
 			},
 			
+			// Control navigation ctrls state for stacks. Add/remove disable class
+			setNavigationStateStacks: function() {
+				if ( secondView.hasClass('second-view__part1') ) {
+					levelDownCtrl.addClass('boxbutton--disabled');
+					levelUpCtrl.removeClass('boxbutton--disabled');
+				} else if ( secondView.hasClass('second-view__part2') ) {
+					levelUpCtrl.removeClass('boxbutton--disabled');
+					levelDownCtrl.removeClass('boxbutton--disabled');
+				} else if ( secondView.hasClass('second-view__part3') ) {
+					levelUpCtrl.addClass('boxbutton--disabled');
+					levelDownCtrl.removeClass('boxbutton--disabled');
+				}
+			},
+			
 			// show the stacked view 
 			showStackedLevels: function() {
 				if( !isExpanded ) {
@@ -350,7 +371,7 @@
 				levelsContainer.removeClass('levels--open levels--selected-' + selectedLevel);
 				var currentLevel = $('.level--current');
 				// hide pins from floorplate
-				currentLevel.find('.level__pins').removeClass('level__pins--active');
+				$('.level__pins').removeClass('level__pins--active');
 				currentLevel.removeClass('level--current');
 
 				// navigation arrows
@@ -361,6 +382,7 @@
 				commands.navigateTabs();
 				secondViewBtn.addClass('active-tab');
 				secondExpandedViewBtn.addClass('boxbutton--disabled');
+				commands.setNavigationStateStacks();
 
 				// update header back to stacked
 				if (secondView.hasClass('second-view__part1')) {
@@ -408,7 +430,6 @@
 				// ..becomes the current one
 				nextLevel.addClass('level--current');
 				// add pins to floorplate
-				$('.level__pins').removeClass('level__pins--active');
 				nextLevel.find('.level__pins').addClass('level__pins--active');
 
 				// moves levels out of view, updates the container's classes
@@ -425,6 +446,7 @@
 				secondViewHeader.text('Floor ' + selectedLevel);
 
 				isNavigating = false;
+				currentLevel.removeClass('level__pins--active');
 
 			},
 			
@@ -432,6 +454,10 @@
 			expandFilters: function() {
 				// to close
 				if ( moreFilters.hasClass('open') ) {
+					// if in Detail Unit view, take user to single plate view
+					if ( secondView.hasClass('expanded-view-with-detail')) {
+						backToSecondExpandedViewBtn.trigger('click');
+					}
 					filtersContainer.animate({
 						opacity: 0
 					}, 200, function() {
@@ -439,12 +465,16 @@
 					});
 					expandBtn.text('+ More Filters');
 					moreFilters.find(":focusable").attr( "tabindex", "-1" );
-					
+
 					if (filterCounter > 0) {
 						filterSelectionSection.slideDown();
-					}		
+					}	
+				// to open
 				} else {
-					// to open 
+					// if in Detail Unit view, take user to single plate view
+					if ( secondView.hasClass('expanded-view-with-detail')) {
+						backToSecondExpandedViewBtn.trigger('click');
+					}
 					moreFilters.addClass('open').removeClass('hidden-from-interaction').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
 					$(this).text('- Less Filters');
 					filtersContainer.delay(200).animate({
@@ -519,14 +549,21 @@
 				var maxRentNum = parseInt(filterMaxRent.val());
 				if (isNaN(maxRentNum)) {
 					
+					console.log('maxRent is Not ACTIVE');
+					
 					// if both filters are empty
 					if (bedroomNum === 'all') {
 						commands.setInitialPopoversNumbers();
+						commands.setFloorLabelAvailabilityNumber();
+						return false; // stop all further calculations
 					// if bedroom filter is active
 					} else {
 						allAvailableUnits.each(function() {
 							if ($(this).attr('data-bedroom') !== bedroomNum) {
 								$(this).removeAttr('data-filter');
+								// find and hide corresponding icon
+								spaceref = $(this).attr('data-space');
+								$('.pin[data-space="' + spaceref + '"]').addClass('hidden');	  
 							}
 						});
 
@@ -537,12 +574,16 @@
 					
 				// if maxRent is active
 				} else {
+					console.log('maxRent is ACTIVE');
 					// we need a way to reset bedroom filter without resetting maxRent filter:	
 					// commands.calculateFilteredMaxRent(maxRentNum); // I can't call this function b/c it creates infite loop
 					// but I can manually refilter by maxRent:
 					$('[data-filter]').each(function() {
 						if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
 							$(this).removeAttr('data-filter');
+							// find and hide corresponding icon
+							spaceref = $(this).attr('data-space');
+							$('.pin[data-space="' + spaceref + '"]').addClass('hidden');
 						}
 					});
 					commands.filterByMaxRent(maxRentNum);
@@ -553,6 +594,9 @@
 						$('[data-filter]').each(function() {
 							if ($(this).attr('data-bedroom') !== bedroomNum) {
 								$(this).removeAttr('data-filter');
+								// find and hide corresponding icon
+								spaceref = $(this).attr('data-space');
+								$('.pin[data-space="' + spaceref + '"]').addClass('hidden');
 							}
 						});
 
@@ -580,6 +624,9 @@
 						allAvailableUnits.each(function() {
 							if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
 								$(this).removeAttr('data-filter');
+								// find and hide corresponding icon
+								spaceref = $(this).attr('data-space');
+								$('.pin[data-space="' + spaceref + '"]').addClass('hidden');
 							}
 						});
 						commands.filterByMaxRent(maxRentNum);
@@ -594,6 +641,9 @@
 						$('[data-filter]').each(function() {
 							if ( parseInt($(this).attr("data-rentprice")) > maxRentNum) {
 								$(this).removeAttr('data-filter');
+								// find and hide corresponding icon
+								spaceref = $(this).attr('data-space');
+								$('.pin[data-space="' + spaceref + '"]').addClass('hidden');
 							}
 						});
 						commands.filterByMaxRent(maxRentNum);
@@ -646,6 +696,7 @@
 				firstMaxRentFiltered = Math.max.apply(Math, firstPriceArray);
 				
 				// if nothing available, don't calculate min/max -- just set it to 0
+				// but check each stack
 				if (thirdStackUnitsFiltered.length === 0) {
 					$('#popover0 .min-rent, #popover0 .max-rent').text('0');
 				} else {
@@ -691,6 +742,22 @@
 		commands.getInitialRentPricesRange();
 		commands.setInitialPopoversNumbers();
 		commands.setFloorLabelAvailabilityNumber();
+		// dynamically add bathrooms, square footage and deposit amount
+		allAvailableUnits.each(function() {
+			if ($(this).attr('data-bedroom') === '0') {
+				$(this).attr('data-bathroom', 1);
+				$(this).attr('data-sqft', 536);
+				$(this).attr('data-deposit', 500);
+			} else if($(this).attr('data-bedroom') === '1') {
+				$(this).attr('data-bathroom', 1);
+				$(this).attr('data-sqft', 779);
+				$(this).attr('data-deposit', 1000);
+			} else if ($(this).attr('data-bedroom') === '2') {
+				$(this).attr('data-bathroom', 2);
+				$(this).attr('data-sqft', 952);
+				$(this).attr('data-deposit', 1500);
+			}
+		});
 		
 		
 		
@@ -726,20 +793,23 @@
 			// it should also find a corresponding input and uncheck it
 			// if it's for checkbox
 			if ($(this).hasClass('delete-filter-btn__checkbox')) {
-				
 				// find checkbox with this label and uncheck it
 				var str =  $(this).parent().text();
 				moreFilters.find(":checkbox[value='" + $.trim(str) + "']").prop("checked", false);
-
 			} else if ($(this).hasClass('delete-filter-btn__max-rent')) {
 				filterMaxRent.val('');
-				commands.setInitialPopoversNumbers(); // ***unless combined with other filters (esp. bedrooms)
-
 			} else if ($(this).hasClass('delete-filter-btn__bathrooms')) {
 				filterBathrooms.find('option:selected').prop('selected', false);
 			} else if ($(this).hasClass('delete-filter-btn__move-date')) {
 				filterMoveInDate.find('option:selected').prop('selected', false);
 			}
+			
+			commands.calculateFilteredBedrooms(filterBedrooms.val()); // it works BUT popovers info is not updating
+			
+			
+			
+			
+			
 		});
 		
 		filterBedrooms.on('change', function() {
@@ -881,7 +951,7 @@
 			commands.showStackedLevels();
 		});
 		
-		// clicking on SVG hot spot
+		// clicking on SVG hot spot -- NOT USED ANYMORE b/c user clicks on pins now
 		filteredUnit.on('click', function(e) {
 			// allow clicking only when not stacked (when single plate is shown)
 			if (isExpanded) {
@@ -896,20 +966,41 @@
 			
 		});
 		
+		
+		
 		// clickin on a pin
 		$('.level').on('click', '.level__pins--active .pin', function(e) {
-			e.preventDefault();
+			e.preventDefault(); // prevents page jumpingj
 			pins.removeClass('pin--active');
 			e.stopPropagation(); // to prevent showLevel() invokation
 			// get data-space attribute 
 			spaceref = $(this).attr('data-space');
-			console.log(spaceref);
 			// find pin with same data-space attribute and add .pin--active
-			$('.pin[data-space="' + spaceref + '"]').addClass('pin--active');
+			$(this).addClass('pin--active');
+			$('.all-available-units').removeAttr('data-active');
+			$('.all-available-units[data-space="' + spaceref + '"]').attr('data-active', 'true');
 			commands.navigateToThirdView();
+			
+			// update Detail Page
+			unitNumber.text(spaceref);
+			unitFloor.text($('.all-available-units[data-space="' + spaceref + '"]').closest('[data-floor]').attr('data-floor'));
+			unitBedCount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-bedroom'));
+			unitBathCount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-bathroom'));
+			unitSqFt.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-sqft'));
+			unitPrice.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-rentprice'));
+			unitDepositAmount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-deposit'));
+			
 		});
-		// prevent default
-		// make pins clickable
+		
+//		$('.pin').hover(
+//			function() {
+//				spaceref = $(this).attr('data-space');
+//				$('.all-available-units[data-space="' + spaceref + '"]').css('fill', '#515158');
+//			}, function() {
+//				$('.all-available-units[data-space="' + spaceref + '"]').css('fill', '#04b5fd');
+//			}
+//
+//		);
 		
 		
 		

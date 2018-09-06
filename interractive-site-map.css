@@ -687,6 +687,11 @@ h1, h2, h3, p, select, button, input, label, a {
 	transition: fill .3s;
 }
 
+.levels--open [data-active] {
+	fill: #515158;
+	transition: fill .3s;
+}
+
 [data-filter]:hover,
 .svg-container--content-open [data-filter] {
 	cursor: pointer;
@@ -947,6 +952,10 @@ h1, h2, h3, p, select, button, input, label, a {
 	.third-view .back-to-single-plate__btn {
 		display: none;
 	}
+	
+	.second-view.expanded-view-with-detail .second-view-header {
+		margin-left: 0;
+	}
 
 
 }
@@ -1206,6 +1215,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .pin--active .icon--pin {
 	stroke: #515158;
 	stroke-width: 15px;
+	fill: white;
 }
 
 .icon--pin {
@@ -1227,6 +1237,10 @@ h1, h2, h3, p, select, button, input, label, a {
 	text-align: center;
 	padding-top: 10px;
 	line-height: 14px;
+}
+
+.pin--active .pin--text {
+	color: #515158;
 }
 
 .pin--studio {

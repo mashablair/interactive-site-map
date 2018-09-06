@@ -644,6 +644,11 @@ h1, h2, h3, p, select, button, input, label, a {
   -webkit-transition: fill .3s;
   transition: fill .3s; }
 
+.levels--open [data-active] {
+  fill: #515158;
+  -webkit-transition: fill .3s;
+  transition: fill .3s; }
+
 [data-filter]:hover,
 .svg-container--content-open [data-filter] {
   cursor: pointer;
@@ -869,7 +874,9 @@ h1, h2, h3, p, select, button, input, label, a {
   .expanded-view-with-detail.second-view .back-to-single-plate__btn {
     display: block; }
   .third-view .back-to-single-plate__btn {
-    display: none; } }
+    display: none; }
+  .second-view.expanded-view-with-detail .second-view-header {
+    margin-left: 0; } }
 
 /* TYMPANUS STYLES */
 /* Spaces list (sidebar) */
@@ -1095,7 +1102,8 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .pin--active .icon--pin {
   stroke: #515158;
-  stroke-width: 15px; }
+  stroke-width: 15px;
+  fill: white; }
 
 .icon--pin {
   width: 100%;
@@ -1115,6 +1123,9 @@ h1, h2, h3, p, select, button, input, label, a {
   text-align: center;
   padding-top: 10px;
   line-height: 14px; }
+
+.pin--active .pin--text {
+  color: #515158; }
 
 .pin--studio {
   left: 18%;
