@@ -485,6 +485,9 @@
 			},
 			
 			applyFilters: function() {
+				if ( secondView.hasClass('expanded-view-with-detail')) {
+					backToSecondExpandedViewBtn.trigger('click');
+				}
 				commands.expandFilters();
 				filterSelectionSection.slideDown(300).html('');
 				commands.buildActiveFiltersList();
