@@ -454,10 +454,6 @@
 			expandFilters: function() {
 				// to close
 				if ( moreFilters.hasClass('open') ) {
-					// if in Detail Unit view, take user to single plate view
-					if ( secondView.hasClass('expanded-view-with-detail')) {
-						backToSecondExpandedViewBtn.trigger('click');
-					}
 					filtersContainer.animate({
 						opacity: 0
 					}, 200, function() {
@@ -471,10 +467,6 @@
 					}	
 				// to open
 				} else {
-					// if in Detail Unit view, take user to single plate view
-					if ( secondView.hasClass('expanded-view-with-detail')) {
-						backToSecondExpandedViewBtn.trigger('click');
-					}
 					moreFilters.addClass('open').removeClass('hidden-from-interaction').find(":focusable").attr( "tabindex", "0" ).eq(0).focus();
 					$(this).text('- Less Filters');
 					filtersContainer.delay(200).animate({
@@ -802,11 +794,7 @@
 			}
 			
 			commands.calculateFilteredBedrooms(filterBedrooms.val()); // it works BUT popovers info is not updating
-			
-			
-			
-			
-			
+
 		});
 		
 		filterBedrooms.on('change', function() {
