@@ -548,9 +548,7 @@
 				// check if maxRent filter is NOT active
 				var maxRentNum = parseInt(filterMaxRent.val());
 				if (isNaN(maxRentNum)) {
-					
-					console.log('maxRent is Not ACTIVE');
-					
+										
 					// if both filters are empty
 					if (bedroomNum === 'all') {
 						commands.setInitialPopoversNumbers();
@@ -574,7 +572,6 @@
 					
 				// if maxRent is active
 				} else {
-					console.log('maxRent is ACTIVE');
 					// we need a way to reset bedroom filter without resetting maxRent filter:	
 					// commands.calculateFilteredMaxRent(maxRentNum); // I can't call this function b/c it creates infite loop
 					// but I can manually refilter by maxRent:
@@ -966,8 +963,6 @@
 			
 		});
 		
-		
-		
 		// clickin on a pin
 		$('.level').on('click', '.level__pins--active .pin', function(e) {
 			e.preventDefault(); // prevents page jumpingj
@@ -987,21 +982,10 @@
 			unitBedCount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-bedroom'));
 			unitBathCount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-bathroom'));
 			unitSqFt.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-sqft'));
-			unitPrice.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-rentprice'));
+			unitPrice.text('$' + $('.all-available-units[data-space="' + spaceref + '"]').attr('data-rentprice'));
 			unitDepositAmount.text($('.all-available-units[data-space="' + spaceref + '"]').attr('data-deposit'));
 			
 		});
-		
-//		$('.pin').hover(
-//			function() {
-//				spaceref = $(this).attr('data-space');
-//				$('.all-available-units[data-space="' + spaceref + '"]').css('fill', '#515158');
-//			}, function() {
-//				$('.all-available-units[data-space="' + spaceref + '"]').css('fill', '#04b5fd');
-//			}
-//
-//		);
-		
 		
 		
 		
