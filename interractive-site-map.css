@@ -1331,6 +1331,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 /* Pins for floor 10 */
 .pin--10-1 { top: 25%; right: 7%; }
+.pin--10-2 { top: 52%; right: 86%; }
 
 /* No pins on floor 11 */
 
