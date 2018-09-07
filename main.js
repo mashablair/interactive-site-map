@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount, expandDetailViewBtn;
 	
 	
 	function init() {
@@ -61,6 +61,7 @@
 		isExpanded = false;
 		isNavigating = false;
 		levels = $('.level');
+		expandDetailViewBtn = $('.expand-detail-btn');
 		
 		pins = $('.pin');
 		unitNumber = $('.unit-number');
@@ -979,6 +980,17 @@
 			
 		});
 		
+		expandDetailViewBtn.on('click', function() {
+			// add .expanded-3rd-view to .view-change-2
+			if (!mapsContainer.hasClass('expanded-3rd-view')) {
+				mapsContainer.addClass('expanded-3rd-view');
+				$(this).html('<i class="iconm-shrink7"></i>');
+			} else {
+				mapsContainer.removeClass('expanded-3rd-view');
+				$(this).html('<i class="iconm-enlarge7"></i>');
+			}
+			
+		});
 		
 		
 		// ### 6. Some more init functions and commands

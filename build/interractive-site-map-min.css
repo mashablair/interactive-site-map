@@ -845,6 +845,13 @@ h1, h2, h3, p, select, button, input, label, a {
   /* when detail view is open, expanded plate should become small */
   .view-change-2 .expanded-view-with-detail {
     width: 35%; }
+  .view-change-2.expanded-3rd-view .second-view {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  .view-change-2.expanded-3rd-view .third-view {
+    width: 100%;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
   .view-change-2 .expanded-view-with-detail .floor-labels {
     display: none; }
   .view-change-2 .third-view {

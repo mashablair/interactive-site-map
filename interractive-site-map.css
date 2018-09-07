@@ -906,6 +906,15 @@ h1, h2, h3, p, select, button, input, label, a {
 		width: 35%
 	}
 	
+	.view-change-2.expanded-3rd-view .second-view {
+		transform: translateX(-100%)
+	}
+	
+	.view-change-2.expanded-3rd-view .third-view {
+		width: 100%;
+		transform: translateX(0);
+	}
+	
 	.view-change-2 .expanded-view-with-detail .floor-labels {
 		display: none;
 	}
