@@ -1142,6 +1142,14 @@ h1, h2, h3, p, select, button, input, label, a {
   color: black;
   font-size: 15px; }
 
+.expanded-view-with-detail .pin--text-price {
+  font-size: 11px;
+  left: 5%;
+  background: #515158;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 3px; }
+
 /* Pins for floor 1 */
 .pin--1-1 {
   top: 91%;

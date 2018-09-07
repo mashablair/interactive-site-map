@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levelsContainer, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount;
 	
 	
 	function init() {
@@ -60,7 +60,6 @@
 		levelStackedCtrl = $('.levelnav__button--all-levels');
 		isExpanded = false;
 		isNavigating = false;
-		levelsContainer = $('.levels');
 		levels = $('.level');
 		
 		pins = $('.pin');
@@ -291,22 +290,23 @@
 				firstViewPopovers.popover('hide');
 			},
 			
+			// 'thisLevel' argument comes from click event handler: levels.on('click')
 			showLevel: function(thisLevel) {
 				
 				// current .level should receive .level--current
 				$(thisLevel).addClass('level--current');
 				
-				// get last digit
-				selectedLevel = parseInt($(thisLevel).attr('data-levelnum'), 10);
+				// get level number
+				selectedLevel = parseInt($(thisLevel).attr('data-levelnum'), 10); // --> e.g. 3
 				
 				// add pins to floorplate
 				$(thisLevel).find('.level__pins').addClass('level__pins--active');
 				
 				// calculate levelsTotal for THIS stack (b/c in future, stacks might contain different # of floors)
-				levelsTotal = $('.level--current').closest('.svg-container').find('[data-levelnum]').length;
+				levelsTotal = $('.level--current').closest('.svg-container').find('[data-levelnum]').length; // --> 4
 
-				// .levels should receive classes: levels--selected-4 levels--open
-				levelsContainer.addClass('levels--open levels--selected-' + selectedLevel);
+				// parent .levels should receive classes: levels--selected-4 levels--open
+				$(thisLevel).closest('.levels').addClass('levels--open levels--selected-' + selectedLevel);
 
 				// activate 3rd tab
 				commands.navigateTabs();
@@ -328,8 +328,6 @@
 				// means only 1 floor plate is visible (we are in 2nd Expanded View)
 				isExpanded = true;
 				
-				// hide other stacks?
-
 			},
 			
 			// Control navigation ctrls state for single plates. Add disable class to the respective ctrl when the current level is either the first or the last.
@@ -368,7 +366,7 @@
 				}
 				isExpanded = false;
 
-				levelsContainer.removeClass('levels--open levels--selected-' + selectedLevel);
+				$('.levels--open').removeClass('levels--open levels--selected-' + selectedLevel);
 				var currentLevel = $('.level--current');
 				// hide pins from floorplate
 				$('.level__pins').removeClass('level__pins--active');
@@ -400,53 +398,58 @@
 				if( !isExpanded ) {
 					return false;
 				}
-				isNavigating = true;
+				//isNavigating = true; // why need this??
 
-				var prevSelectedLevel = selectedLevel;
+				var prevSelectedLevel = selectedLevel; // --> e.g. 4
 
 				// current level
-				var currentLevel = $('.level--' + selectedLevel);
-				console.log(currentLevel); // --> .level.level--4
+				var currentStack = $('.levels--open');
+				var currentLevel = currentStack.find('.level--' + selectedLevel); // --> e.g. .level.level--4.level--current (only 1 elem)
+				var nextLevel;
 
 				if( direction === 'Up' && prevSelectedLevel > 1 ) {
 					--selectedLevel;
-					console.log("selectedLevel-- is " + selectedLevel); // --> 3
+					console.log(selectedLevel); // --> 3
+					nextLevel = $('.level--current').prev('.level');
+					console.log(nextLevel); // --> only 1 elem: e.g. .level.level--3.level--current
 				}
 				else if( direction === 'Down' && prevSelectedLevel < levelsTotal ) {
 					++selectedLevel;
+					nextLevel = $('.level--current').next('.level');
+					console.log(nextLevel); // --> only 1 elem
 				}
 				else {
-					isNavigating = false;	
+					//isNavigating = false;	
 					return false;
 				}
 
-				// control navigation controls state (enabled/disabled)
-				commands.setNavigationState();
+				commands.setNavigationState(); // controls navigation controls state (enabled/disabled)
 				// transition direction class
-				currentLevel.addClass('level--moveOut' + direction);
-				// next level element
-				var nextLevelNum = selectedLevel; // --> ??? should be '3'
-				var nextLevel = $('.level--' + nextLevelNum); 
-				// ..becomes the current one
-				nextLevel.addClass('level--current');
-				// add pins to floorplate
-				nextLevel.find('.level__pins').addClass('level__pins--active');
+				// currentLevel.addClass('level--moveOut' + direction);
 
-				// moves levels out of view, updates the container's classes
-				currentLevel.removeClass('level--moveOut' + direction);
-				// solves rendering bug for the SVG opacity-fill property
+				// nextLevel becomes the current one
+				nextLevel.addClass('level--current');
 				setTimeout(function() {
 					currentLevel.removeClass('level--current');
 				}, 60);
+				
+				// add pins to current floorplate and remove from last one
+				nextLevel.find('.level__pins').addClass('level__pins--active');
+				currentLevel.find('.level__pins').removeClass('level__pins--active');
 
-				levelsContainer.removeClass('levels--selected-' + prevSelectedLevel);
-				levelsContainer.addClass('levels--selected-' + selectedLevel);
+				// moves levels out of view, updates the container's classes
+				//currentLevel.removeClass('level--moveOut' + direction);
+				// solves rendering bug for the SVG opacity-fill property
 
-				// update header
-				secondViewHeader.text('Floor ' + selectedLevel);
+				// update the container class
+				currentStack.removeClass('levels--selected-' + prevSelectedLevel).addClass('levels--selected-' + selectedLevel);
 
-				isNavigating = false;
-				currentLevel.removeClass('level__pins--active');
+				// update header using floor number
+				var floorNum = nextLevel.attr('data-floor');
+				secondViewHeader.text('Floor ' + floorNum);
+
+				//isNavigating = false; // why need this??
+				
 
 			},
 			
