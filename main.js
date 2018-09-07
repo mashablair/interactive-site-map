@@ -361,7 +361,7 @@
 			
 			// show the stacked view 
 			showStackedLevels: function() {
-				if( !isExpanded ) {
+				if( isNavigating || !isExpanded ) {
 					return false;
 				}
 				isExpanded = false;
@@ -398,7 +398,8 @@
 				if( !isExpanded ) {
 					return false;
 				}
-				//isNavigating = true; // why need this??
+
+				isNavigating = true; // why need this??
 
 				var prevSelectedLevel = selectedLevel; // --> e.g. 4
 
@@ -419,38 +420,35 @@
 					console.log(nextLevel); // --> only 1 elem
 				}
 				else {
-					//isNavigating = false;	
+					isNavigating = false;	
 					return false;
 				}
 
 				commands.setNavigationState(); // controls navigation controls state (enabled/disabled)
-				// transition direction class
-				// currentLevel.addClass('level--moveOut' + direction);
+				
+				// moves levels out of view
+				currentLevel.addClass('level--moveOut' + direction);
 
 				// nextLevel becomes the current one
 				nextLevel.addClass('level--current');
-				setTimeout(function() {
-					currentLevel.removeClass('level--current');
-				}, 60);
 				
-				// add pins to current floorplate and remove from last one
-				nextLevel.find('.level__pins').addClass('level__pins--active');
+				// when transition ends:
+				setTimeout(function() {
+					currentLevel.removeClass('level--moveOut' + direction);
+					currentLevel.removeClass('level--current');
+					// updates container class
+					currentStack.removeClass('levels--selected-' + prevSelectedLevel).addClass('levels--selected-' + selectedLevel);
+					// add pins to current floorplate
+					nextLevel.find('.level__pins').addClass('level__pins--active');
+					isNavigating = false;
+				}, 1000);
+				
+				//  and remove pins from last floorplate
 				currentLevel.find('.level__pins').removeClass('level__pins--active');
 
-				// moves levels out of view, updates the container's classes
-				//currentLevel.removeClass('level--moveOut' + direction);
-				// solves rendering bug for the SVG opacity-fill property
-
-				// update the container class
-				currentStack.removeClass('levels--selected-' + prevSelectedLevel).addClass('levels--selected-' + selectedLevel);
-
 				// update header using floor number
-				var floorNum = nextLevel.attr('data-floor');
-				secondViewHeader.text('Floor ' + floorNum);
-
-				//isNavigating = false; // why need this??
-				
-
+				secondViewHeader.text('Floor ' + nextLevel.attr('data-floor'));
+	
 			},
 			
 			// more filters button
@@ -851,7 +849,7 @@
 		
 		// clicking on building blocks brings correct stack
 		blockLinks.on('click', function() {
-			// if 1 floor is expanded
+			// if single floor is expanded
 			if (isExpanded) {
 				commands.showStackedLevels();
 			}
