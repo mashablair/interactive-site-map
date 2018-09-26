@@ -611,7 +611,8 @@ h1, h2, h3, p, select, button, input, label, a {
 .map__outline {
   -webkit-transition: fill 0.3s;
   transition: fill 0.3s;
-  fill: #bbb; }
+  fill: #bbb;
+  fill: #908d92; }
 
 .level:hover .map__outline {
   fill: #04b5fd; }
@@ -845,6 +846,13 @@ h1, h2, h3, p, select, button, input, label, a {
   /* when detail view is open, expanded plate should become small */
   .view-change-2 .expanded-view-with-detail {
     width: 35%; }
+  .view-change-2.expanded-3rd-view .second-view {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  .view-change-2.expanded-3rd-view .third-view {
+    width: 100%;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
   .view-change-2 .expanded-view-with-detail .floor-labels {
     display: none; }
   .view-change-2 .third-view {
@@ -1142,6 +1150,14 @@ h1, h2, h3, p, select, button, input, label, a {
   color: black;
   font-size: 15px; }
 
+.expanded-view-with-detail .pin--text-price {
+  font-size: 11px;
+  left: 5%;
+  background: #515158;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 3px; }
+
 /* Pins for floor 1 */
 .pin--1-1 {
   top: 91%;
@@ -1260,7 +1276,7 @@ h1, h2, h3, p, select, button, input, label, a {
 
 .pin--8-3 {
   top: 41%;
-  right: 32%; }
+  right: 28%; }
 
 .pin--8-4 {
   top: 25%;
@@ -1287,6 +1303,10 @@ h1, h2, h3, p, select, button, input, label, a {
 .pin--10-1 {
   top: 25%;
   right: 7%; }
+
+.pin--10-2 {
+  top: 52%;
+  right: 86%; }
 
 /* No pins on floor 11 */
 /* Pins for floor 12 */

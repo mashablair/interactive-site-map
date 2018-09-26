@@ -1,5 +1,6 @@
 /* mobile view layout to 100vw FOR CIRRUS THEME ONLY */
 
+
 body #interactive-map-container {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -26,8 +27,8 @@ h1, h2, h3, p, select, button, input, label, a {
 		width: calc(100% - 48px);
 		padding-left: 48px;
 	}
-	
 }
+
 
 .hidden-sprite {
 	position: absolute;
@@ -614,11 +615,27 @@ h1, h2, h3, p, select, button, input, label, a {
 	background: #04b5fd;
 }
 
+.floor-availability-label {
+	font-size: 13px;
+    position: absolute;
+    z-index: 100;
+    top: -12px;
+    left: -72px;
+    white-space: nowrap;
+    color: #7d7d86;
+    transform: rotateZ(45deg) rotateX(-56deg) translateZ(5vmin);
+    letter-spacing: 1px;
+}
+
 .level:hover::after {
 	color: #04b5fd;
 }
 
 .level--current .floor-labels {
+	display: none;
+}
+
+.level--current .floor-availability-label {
 	display: none;
 }
 
@@ -642,6 +659,12 @@ h1, h2, h3, p, select, button, input, label, a {
 
 
 /* Level map */
+.boxShadow {
+    /* Use -webkit- only if supporting: Chrome < 54, iOS < 9.3, Android < 4.4.4 */
+    -webkit-filter: drop-shadow( -3px 4px 13px #3c3b3b ); 
+            filter: drop-shadow( -3px 4px 13px #3c3b3b );
+}
+
 .map__ground {
 	fill: #d7d7dc;
 }
@@ -649,6 +672,7 @@ h1, h2, h3, p, select, button, input, label, a {
 .map__outline {
 	transition: fill 0.3s;
 	fill: #bbb;
+	fill: #908d92;
 }
 
 .level:hover .map__outline {
@@ -678,7 +702,7 @@ h1, h2, h3, p, select, button, input, label, a {
  }
 
 [data-filter] {
-	fill: #6ed2fb;
+	fill: #04b5fd;
 	transition: fill .3s;
 }
 
@@ -696,6 +720,18 @@ h1, h2, h3, p, select, button, input, label, a {
 .svg-container--content-open [data-filter] {
 	cursor: pointer;
 	fill: #6ed2fb;
+}
+
+.noAvailableUnits .map__ground {
+	fill: #908d92;
+}
+
+.noAvailableUnits .map__space {
+	fill: #7d7c7c;
+}
+
+.noAvailableUnits .map__outline {
+	fill: #7d7c7c;
 }
 
 

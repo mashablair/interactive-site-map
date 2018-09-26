@@ -6,6 +6,7 @@
 <html lang="en-gb">
 <!--<![endif]-->
 
+	
 <head>
     <title>Interactive Site Map</title>
     <meta name="description" content="Check out photos, floor plans, amenities, rental rates & availability and submit your lease application today!" />
@@ -18,8 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" />
-<!--    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />-->
-<!--    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdngeneral.rentcafe.com/css/bootstrap3-grid.min.css" />
@@ -406,18 +407,13 @@
 	<!--  INTERACTIVE MAP  -->
 	<section id="interactive-site-map">
 		
-		<!-- hidden sprite map -->
+		<!-- hidden sprite map for some SVGs used on a page -->
 		<svg class="hidden-sprite">
 			<defs>
 				<!-- pin -->
 				<symbol id="icon-pin" viewBox="0 0 200 300">
 					<title>pin</title>
 					<path d="M100,21.78A85,85,0,0,0,15.18,106.6c0,18.85,12.08,49.52,36.76,93.9,17.48,31.36,34.7,57.49,35.47,58.6L100,278.22l12.59-19.11c0.69-1.11,18-27.25,35.47-58.6,24.76-44.38,36.76-75.06,36.76-93.9A85,85,0,0,0,100,21.78Z" />
-				</symbol>
-				<symbol id="icon-appleheart" viewBox="0 0 32 32">
-					<title>appleheart</title>
-					<path class="path1" d="M17.428 8.953h0c1.078 0 4.549-0.553 5.979-1.799 1.455-1.269 2.040-2.842 2.274-3.938 0.226-1.061 0.252-2.369-0.202-2.9-0.193-0.225-0.501-0.317-1.063-0.317-1.354 0-4.171 0.56-5.966 2.062-1.551 1.298-2.179 3.505-2.246 5-0.054 1.219 0.266 1.539 0.371 1.644 0.217 0.217 0.539 0.247 0.854 0.247z"></path>
-					<path class="path2" d="M29.197 17.412c-0.056-2.204-0.93-4.165-2.595-5.831-1.25-1.25-2.68-1.858-4.371-1.858-1.509 0-2.912 0.495-4.151 0.933-0.803 0.284-1.563 0.552-2.080 0.574-0.517-0.022-1.277-0.29-2.082-0.574-1.238-0.437-2.64-0.933-4.149-0.933-1.691 0-3.121 0.608-4.371 1.858-1.665 1.665-2.538 3.627-2.595 5.831-0.047 1.84 0.47 3.5 0.847 4.712l0.038 0.124c0.374 1.203 1.192 3.532 2.471 5.62 1.68 2.742 3.579 4.132 5.644 4.132 2.441 0 3.289-0.437 3.909-0.757 0.199-0.103 0.236-0.119 0.291-0.123 0.099 0.007 0.155 0.031 0.396 0.149 0.633 0.309 1.499 0.731 3.797 0.731 2.065 0 3.964-1.39 5.644-4.132 1.279-2.088 2.097-4.417 2.47-5.618l0.038-0.124c0.378-1.213 0.895-2.874 0.848-4.713zM21.117 21.223c-0.807 1.228-4.492 4.302-5.038 4.302-0.54 0-4.247-3.085-5.049-4.302-0.402-0.61-0.687-1.282-0.639-2.167 0.084-1.565 1.364-2.858 2.931-2.858 1.611 0 2.403 1.394 2.752 1.394 0.326 0 1.21-1.394 2.752-1.394 1.568 0 2.847 1.293 2.931 2.858 0.047 0.884-0.237 1.554-0.64 2.167z"></path>
 				</symbol>
 			</defs>
 		</svg>
@@ -435,7 +431,7 @@
 						  data-container=".first-view" 
 						  data-toggle="popover" 
 						  data-placement="right" 
-						  data-original-title="Upper Third" 
+						  data-original-title="Floors 9 - 12" 
 						  data-trigger="manual"
 						  data-html="true"
 						  data-content='<button class="btn-link blue popover-availability"><span>X</span> Available</button><p class="popover-price">$<span class="min-rent">0 </span> - $<span class="max-rent">0</span></p>' 
@@ -449,7 +445,7 @@
 						  data-container=".first-view" 
 						  data-toggle="popover" 
 						  data-placement="right" 
-						  data-original-title="Middle Third" 
+						  data-original-title="Floors 5 - 8" 
 						  data-trigger="manual"
 						  data-html="true"
 						  data-content='<button class="btn-link blue popover-availability"><span>X</span> Available</button><p class="popover-price">$<span class="min-rent">0 </span> - $<span class="max-rent">0 </span></p>'
@@ -463,7 +459,7 @@
 						 data-container=".first-view" 
 						 data-toggle="popover" 
 						 data-placement="right" 
-						 data-original-title="Lower Third" 
+						 data-original-title="Floor 1 - 4" 
 						 data-trigger="manual"
 						 data-html="true"
 						 data-content='<button class="btn-link blue popover-availability"><span>X</span> Available</button><p class="popover-price">$<span class="min-rent">0 </span> - $<span class="max-rent">0</span></p>'
@@ -480,7 +476,10 @@
 			<header>
 				<button class="back-to-single-plate__btn slider-btns btn-inverse boxbutton m-r-lg"><i class="iconm-arrow-left4"></i></button>
 				<button class="slider-btns back-btn btn-inverse"><i class="iconm-arrow-left4"></i></button>
-				<h2 class="second-view-header m-l-lg">Floors <span class="floors-range">1 - 4</span> <span class="building-portion"><small>(bottom first)</small></span></h2>
+				<div>
+					<h2 class="second-view-header m-l-lg m-b-none">Floors <span class="floors-range">1 - 4</span> <span class="building-portion">(bottom first)</span></h2>
+					<p class="units-availability m-l-lg m-b-none darker-gray"><span>4</span> units available</p>
+				</div>
 			</header>
 			
 			<nav class="levelnav">
@@ -494,84 +493,74 @@
 				
 				<!-- levels -->
 				<div class="levels">
-					
-					<!-- level 1, Floor 9 -->
-					<div class="level level--1" aria-label="Level 1" data-levelnum="1" data-floor="9">
-						<svg class="map map--1" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-							<title>Floor 9</title>
-							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
-							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
-							<path d="M425.68,198.63c-6.85-14.83-46.38-30.35-58-11.24-41.24,67.9-83.63,118.16-65.12,124.22,7.55,2.48,56.77.11,94.11-54.39,21.35-31.13,31.71-52.74,29-58.59h0Z" class="map__lake" />
-							<ellipse cx="389.64" cy="214.94" rx="13.95" ry="13.8" class="map__tree" />
-							<ellipse cx="369.54" cy="191.71" rx="13.95" ry="13.8" class="map__tree" />
-							<ellipse cx="354.59" cy="220.27" rx="13.95" ry="13.8" class="map__tree" />
-							<path d="M724.87,696.45c14.61,7.58,42.34-6.42,52.85-26.15,24.57-46.13-43.25-126.94-61.66-120.57-7.5,2.6-6.47,29.34-4.4,82.81C713.74,686.25,719.12,693.46,724.87,696.45Z" class="map__lake" />
-							<ellipse cx="738.82" cy="595.48" rx="13.95" ry="13.8" class="map__tree" />
-							<ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
-							<ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
-							<polygon points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
-							<rect data-space="901" x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="4200" data-filter="true" />
-							<rect data-space="902" x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="1" data-rentprice="5200" data-filter="true" />
-							<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
-							<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
-							<rect x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
-							<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
-							
-							<path data-space="903" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units" data-bedroom="2" data-rentprice="4200" data-filter="true" />
-							<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
-							<rect x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
-							<rect x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
-							<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
-							<rect x="991.9" y="12" width="195.4" height="339.1" class="map__space" />
-							<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
-							<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
-							<rect x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
-							
-							<rect x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
-							<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
-							<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
-							<polygon points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space" />
-							<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
-							<rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
-							<rect x="139.5" y="501.73" width="35.61" height="35.23" class="map__space" />
-							<rect x="48.3" y="547.25" width="35.61" height="35.23" class="map__space" />
-							<rect x="94.24" y="547.25" width="35.61" height="35.23" class="map__space" />
-							<rect x="139.72" y="547.25" width="35.61" height="35.23" class="map__space" />
-							<rect x="282.3" y="478.13" width="26.26" height="25.99" class="map__space" />
-							<polygon points="218.01 585.07 239.2 597.17 239.2 621.38 218.01 633.49 196.82 621.38 196.82 597.17 218.01 585.07" class="map__space" />
-							<polygon points="410.01 601.42 358.8 778.44 320.06 767.07 372.92 591.6 410.01 601.42" class="map__space" />
-							<polygon points="561.3,603.9 624,777 661.9,763.2 597.7,591.5" class="map__space" />
-						</svg>
-						<div class="level__pins">
-							<a class="pin pin--9-1" data-space="901" href="#" aria-label="pin for unit">
-								<span class="pin__icon">
-									<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
-									<span class="pin--text pin--studio">Studio</span>
-									<span class="pin--text-price">$4,200+</span>
-								</span>
-							</a>
-							<a class="pin pin--9-2" data-space="902" href="#" aria-label="pin for unit">
-								<span class="pin__icon">
-									<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
-									<span class="pin--text">1 Bed</span>
-									<span class="pin--text-price">$5,200+</span>
-								</span>
-							</a>
-							<a class="pin pin--9-3" data-space="903" href="#" aria-label="pin for unit">
-								<span class="pin__icon">
-									<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
-									<span class="pin--text">2 Bed</span>
-									<span class="pin--text-price">$4,200+</span>
-								</span>
-							</a>
-						</div>
-						<button class="btn-link floor-labels">Floor 9 -- <span>0</span></button>
+				<!-- level 1, Floor 9 -->
+				<div class="level level--1" aria-label="Level 1" data-levelnum="1" data-floor="9">
+					<svg class="map map--1 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<title>Floor 9</title>
+						<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
+						<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
+						<rect data-space="901" x="854.08" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="0" data-rentprice="4200" data-filter="true" />
+						<polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
+						<rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
+						<rect x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
+						<rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
+						<path data-space="903" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space all-available-units" data-bedroom="2" data-rentprice="4200" data-filter="true" />
+						<path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
+						<rect x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
+						<rect x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
+						<rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
+						<rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
+						<rect x="991.9" y="12" width="195.4" height="339.1" class="map__space" />
+						<rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
+						<rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
+						<rect x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
+						<rect x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
+						<polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
+						<polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
+						<polygon points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space" />
+						<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
+						<rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
+						<rect x="139.5" y="501.73" width="35.61" height="35.23" class="map__space" />
+						<rect x="48.3" y="547.25" width="35.61" height="35.23" class="map__space" />
+						<rect x="94.24" y="547.25" width="35.61" height="35.23" class="map__space" />
+						<rect x="139.72" y="547.25" width="35.61" height="35.23" class="map__space" />
+						<rect x="282.3" y="478.13" width="26.26" height="25.99" class="map__space" />
+						<polygon points="218.01 585.07 239.2 597.17 239.2 621.38 218.01 633.49 196.82 621.38 196.82 597.17 218.01 585.07" class="map__space" />
+						<polygon points="410.01 601.42 358.8 778.44 320.06 767.07 372.92 591.6 410.01 601.42" class="map__space" />
+						<polygon points="561.3,603.9 624,777 661.9,763.2 597.7,591.5" class="map__space" />
+						<rect data-space="902" x="947.85" y="639.79" width="88.09" height="147.62" class="map__space all-available-units" data-bedroom="1" data-rentprice="5200" data-filter="true" />
+					</svg>
+
+					<div class="level__pins">
+						<a class="pin pin--9-1" data-space="901" href="#" aria-label="pin for unit">
+							<span class="pin__icon">
+								<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+								<span class="pin--text pin--studio">Studio</span>
+								<span class="pin--text-price">$4,200+</span>
+							</span>
+						</a>
+						<a class="pin pin--9-2" data-space="902" href="#" aria-label="pin for unit">
+							<span class="pin__icon">
+								<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+								<span class="pin--text">1 Bed</span>
+								<span class="pin--text-price">$5,200+</span>
+							</span>
+						</a>
+						<a class="pin pin--9-3" data-space="903" href="#" aria-label="pin for unit">
+							<span class="pin__icon">
+								<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+								<span class="pin--text">2 Bed</span>
+								<span class="pin--text-price">$4,200+</span>
+							</span>
+						</a>
 					</div>
+					<button class="btn-link floor-labels">Floor 9 -- <span>0</span></button>
+					<p class="floor-availability-label"><span>X</span> available</p>
+				</div>
 				
 					<!-- level 2, Floor 10 -->
 					<div class="level level--2" aria-label="Level 2" data-levelnum="2" data-floor="10">
-						<svg class="map map--2" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--2 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 10</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -605,7 +594,6 @@
 							
 							<!-- changed -->
 							<polygon data-space="1002" points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space all-available-units" data-bedroom="2" data-rentprice="4995" data-filter="true" />
-
 							<rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
 							<polygon points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space" />
 							<rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
@@ -636,11 +624,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 10 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 
 					<!-- level 3, Floor 11 -->
-					<div class="level level--3" aria-label="Level 3" data-levelnum="3" data-floor="11">
-						<svg class="map map--3" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+					<div class="level level--3 noAvailableUnits" aria-label="Level 3" data-levelnum="3" data-floor="11">
+						<svg class="map map--3 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 11</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -688,11 +677,12 @@
 							<!-- no available units here -->
 						</div>
 						<button class="btn-link floor-labels">Floor 11 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 					<!-- level 4, Floor 12 -->
 					<div class="level level--4" aria-label="Level 4" data-levelnum="4" data-floor="12">
-						<svg class="map map--4" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--4 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 12</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -761,6 +751,7 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 12 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 				</div><!-- /levels -->
@@ -768,13 +759,12 @@
 			
 			<!-- Middle Third Stack -->
 			<div class="svg-container svg-container__part2">
-				
 				<!-- levels -->
 				<div class="levels">
 					
 					<!-- level 1, Floor 5 -->
 					<div class="level level--1" aria-label="Level 1" data-levelnum="1" data-floor="5">
-						<svg class="map map--1" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--1 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 5</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -842,11 +832,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 5 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 					<!-- level 2, Floor 6 -->
 					<div class="level level--2" aria-label="Level 2" data-levelnum="2" data-floor="6">
-						<svg class="map map--2" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--2 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 6</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -894,11 +885,12 @@
 							<!-- no available units here -->
 						</div>
 						<button class="btn-link floor-labels">Floor 6 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 
 					<!-- level 3, Floor 7 -->
 					<div class="level level--3" aria-label="Level 3" data-levelnum="3" data-floor="7">
-						<svg class="map map--3" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--3 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 7</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -965,11 +957,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 7 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 					<!-- level 4, Floor 8 -->
 					<div class="level level--4" aria-label="Level 4" data-levelnum="4" data-floor="8">
-						<svg class="map map--4" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--4 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 8</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -1051,6 +1044,7 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 8 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 				</div><!-- /levels -->
@@ -1058,13 +1052,12 @@
 			
 			<!-- Lower Third Stack -->
 			<div class="svg-container svg-container__part1">
-				
 				<!-- levels -->
 				<div class="levels">
 					
 					<!-- level 1, Floor 1 -->
 					<div class="level level--1" aria-label="Floor plate 1" data-levelnum="1" data-floor="1">
-						<svg class="map map--1" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--1 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 1</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -1153,11 +1146,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 1 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 					<!-- level 2, Floor 2 -->
 					<div class="level level--2" aria-label="Floor plate 2" data-levelnum="2" data-floor="2">
-						<svg class="map map--2" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--2 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 2</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -1239,11 +1233,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 2 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 
 					<!-- level 3, Floor 3 -->
 					<div class="level level--3" aria-label="Floor plate 3" data-levelnum="3" data-floor="3">
-						<svg class="map map--3" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--3 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 3</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -1310,11 +1305,12 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 3 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 					<!-- level 4, Floor 4 -->
 					<div class="level level--4" aria-label="Floor plate 4" data-levelnum="4" data-floor="4">
-						<svg class="map map--4" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+						<svg class="map map--4 boxShadow" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 							<title>Floor 4</title>
 							<polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
 							<path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
@@ -1375,12 +1371,11 @@
 							</a>
 						</div>
 						<button class="btn-link floor-labels">Floor 4 -- <span>0</span></button>
+						<p class="floor-availability-label"><span>X</span> available</p>
 					</div>
 				
 				</div><!-- /levels -->
 			</div><!-- /svg-container -->
-			
-	
 		</div><!-- /second-view -->
 		
 		<div class="views third-view">			
@@ -1500,14 +1495,9 @@
 						<li>Breakfast Bar</li>
 					</ul>
 				</div>
-				
-				
-			
 			</div>
 		</div>
-
 	</section>
-											
 </main>
 
                                         
