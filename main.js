@@ -11,7 +11,7 @@
 	"use strict";
 	
 	// ### 1. Declare our local/private vars:
-	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, views, firstView, secondView, buildingBlocks, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelNav, firstLevel, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount, expandDetailViewBtn;
+	var moreFilters, tabsBtns, expandBtn, filtersContainer, clearFiltersBtn, applyFiltersBtn, filterBedrooms, thirdStackUnitsAll, secondStackUnitsAll, firstStackUnitsAll, thirdStackUnitsFiltered, secondStackUnitsFiltered, firstStackUnitsFiltered, thirdMinRentFiltered, secondMinRentFiltered, firstMinRentFiltered, thirdMaxRentFiltered, secondMaxRentFiltered, firstMaxRentFiltered, filterSelectionSection, filterSelectionUl, filterMaxRent, firstMinRentAll, secondMinRentAll, thirdMinRentAll, firstMaxRentAll, secondMaxRentAll, thirdMaxRentAll, filterBathrooms, filterMoveInDate, filterCounter, mapsContainer, firstViewBtn, secondViewBtn, secondExpandedViewBtn, thirdViewBtn, firstView, secondView, blockLinks, firstViewPopovers, backToFirstViewBtn, backToSecondExpandedViewBtn, secondViewHeader, levelUpCtrl, levelDownCtrl, levelStackedCtrl, selectedLevel, levelsTotal, isExpanded, isNavigating, numberViewPopovers, levels, secondViewStackedHeader, filteredUnit, allAvailableUnits, pins, spaceref, unitNumber, unitFloor, unitBedCount, unitBathCount, unitSqFt, unitPrice, unitDepositAmount, expandDetailViewBtn, unitsAvailability;
 	
 	
 	function init() {
@@ -27,6 +27,7 @@
 		thirdStackUnitsAll = $('.svg-container__part3 .all-available-units').length; 
 		secondStackUnitsAll = $('.svg-container__part2 .all-available-units').length; 
 		firstStackUnitsAll = $('.svg-container__part1 .all-available-units').length; 
+		unitsAvailability = $('.units-availability');
 
 		filterBedrooms = $('#filter-bedrooms');
 		filterSelectionSection = $('.filter-selections');
@@ -42,10 +43,8 @@
 		secondViewBtn = $('.second-view-btn');
 		secondExpandedViewBtn = $('.second-expanded-view-btn');
 		thirdViewBtn = $('.third-view-btn');
-		views = $('.views');
 		firstView = $('.first-view');
 		secondView = $('.second-view');
-		buildingBlocks = $('.first-view svg');
 		blockLinks = $('.link-for-blocks');
 		firstViewPopovers = $('.first-view .link-for-blocks');
 		backToFirstViewBtn = $('.back-btn');
@@ -53,8 +52,6 @@
 		secondViewHeader = $('.second-view-header');
 		
 		// levels and navigation up/down ctrls
-		firstLevel = $('.level--1');
-		levelNav = $('.levelnav');
 		levelUpCtrl = $('.levelnav__button--up');
 		levelDownCtrl = $('.levelnav__button--down');
 		levelStackedCtrl = $('.levelnav__button--all-levels');
@@ -80,7 +77,7 @@
 		
 		
 		// ### 2. Some initial tasks e.g. load, initialize popovers & tabs, etc. 
-		loadData();
+		//loadData();
 		
 		// make all interactive elems inside 'more filters' not focusable
 		moreFilters.find(":focusable" ).attr( "tabindex", "-1" );
@@ -88,11 +85,6 @@
 
 		// initialize and show all popovers
 		$('[data-toggle="popover"]').popover('show'); 
-
-		// DELETE LATER -- for testing only 
-		$('.first-view h2').on('click', function() {
-			commands.showPopovers();
-		});
 
 		// to reposition popovers on screen resize
 		// needed b/c popovers are set on SVG parts, and not on regular elems
@@ -104,15 +96,7 @@
 			}, 800);  
 		}); 
 
-		// initialize tabs in 3rd View
-		$('#unitDetailTabs a').click(function (e) {
-		  e.preventDefault();
-		  $(this).tab('show');
-		});
-
-		// initialize carousel in 3rd View
-		$('.carousel').carousel();
-
+		
 		
 		
 		// ### 3. Object with all reusable commands
@@ -186,6 +170,9 @@
 				firstView.addClass('first-stack-displayed');
 				firstView.removeClass('second-stack-displayed third-stack-displayed');
 				secondViewHeader.text('Floors 1 - 4 (Lower Third)');
+				// insert units availability from popovers to 2nd View header
+				var availabilityNum = $('#popover2 .popover-availability span').text();
+				unitsAvailability.find('span').text(availabilityNum);
 			},
 			
 			showSecondStack: function() {
@@ -196,6 +183,9 @@
 				firstView.addClass('second-stack-displayed');
 				firstView.removeClass('first-stack-displayed third-stack-displayed');
 				secondViewHeader.text('Floors 5 - 8 (Middle Third)');
+				// insert units availability from popovers to 2nd View header
+				var availabilityNum = $('#popover1 .popover-availability span').text();
+				unitsAvailability.find('span').text(availabilityNum);
 			},
 			
 			showThirdStack: function() {
@@ -206,6 +196,9 @@
 				firstView.addClass('third-stack-displayed');
 				firstView.removeClass('first-stack-displayed second-stack-displayed');
 				secondViewHeader.text('Floors 9 - 12 (Upper Third)');
+				// insert units availability from popovers to 2nd View header
+				var availabilityNum = $('#popover0 .popover-availability span').text();
+				unitsAvailability.find('span').text(availabilityNum);
 			},
 			
 			// set up popovers
@@ -234,6 +227,7 @@
 				} else {
 					commands.setInitialPopoversNumbers();
 				}
+				commands.updateHeaderFilteredNumbers();
 			},
 			
 			getInitialRentPricesRange: function() {
@@ -318,6 +312,10 @@
 				secondViewStackedHeader = secondViewHeader.text();
 				var floorNum = $('.level--current').attr('data-floor');
 				secondViewHeader.text('Floor ' + floorNum).css('color', '#04b5fd');
+				
+				// update header using floor availability from floor label 
+				var floorLabelNum = $(thisLevel).find('.floor-labels span').text();
+				unitsAvailability.find('span').text(floorLabelNum);
 
 				// navigation arrows
 				backToFirstViewBtn.addClass('hidden');
@@ -383,13 +381,21 @@
 				secondExpandedViewBtn.addClass('boxbutton--disabled');
 				commands.setNavigationStateStacks();
 
-				// update header back to stacked
+				// update header back to stacked and total availability numbers
+				var availabilityNum;
 				if (secondView.hasClass('second-view__part1')) {
 					secondViewHeader.text('Floors 1 - 4 (Lower Third)');
+					// and insert units availability from popovers
+					availabilityNum = $('#popover2 .popover-availability span').text();
+					unitsAvailability.find('span').text(availabilityNum);
 				} else if (secondView.hasClass('second-view__part2')) {
 					secondViewHeader.text('Floors 5 - 8 (Middle Third)');
+					availabilityNum = $('#popover1 .popover-availability span').text();
+					unitsAvailability.find('span').text(availabilityNum);
 				} else if (secondView.hasClass('second-view__part3')) {
 					secondViewHeader.text('Floors 9 - 12 (Upper Third)');
+					availabilityNum = $('#popover0 .popover-availability span').text();
+					unitsAvailability.find('span').text(availabilityNum);
 				}
 				secondViewHeader.css('color', '');
 			},
@@ -400,27 +406,24 @@
 					return false;
 				}
 
-				isNavigating = true; // why need this??
+				isNavigating = true;
 
 				var prevSelectedLevel = selectedLevel; // --> e.g. 4
-
 				// current level
 				var currentStack = $('.levels--open');
-				var currentLevel = currentStack.find('.level--' + selectedLevel); // --> e.g. .level.level--4.level--current (only 1 elem)
+				var currentLevel = currentStack.find('.level--' + selectedLevel); // --> .level.level--4.level--current (only 1 elem)
 				var nextLevel;
 
-				if( direction === 'Up' && prevSelectedLevel > 1 ) {
+				if ( direction === 'Up' && prevSelectedLevel > 1 ) {
 					--selectedLevel;
 					console.log(selectedLevel); // --> 3
 					nextLevel = $('.level--current').prev('.level');
 					console.log(nextLevel); // --> only 1 elem: e.g. .level.level--3.level--current
-				}
-				else if( direction === 'Down' && prevSelectedLevel < levelsTotal ) {
+				} else if( direction === 'Down' && prevSelectedLevel < levelsTotal ) {
 					++selectedLevel;
 					nextLevel = $('.level--current').next('.level');
 					console.log(nextLevel); // --> only 1 elem
-				}
-				else {
+				} else {
 					isNavigating = false;	
 					return false;
 				}
@@ -449,6 +452,9 @@
 
 				// update header using floor number
 				secondViewHeader.text('Floor ' + nextLevel.attr('data-floor'));
+				// update header using floor availability from floor label 
+				var floorLabelNum = nextLevel.find('.floor-labels span').text();
+				unitsAvailability.find('span').text(floorLabelNum);
 	
 			},
 			
@@ -600,6 +606,7 @@
 					} 		
 				}
 				commands.updatePopoversFilteredNumbers();
+				commands.updateHeaderFilteredNumbers();
 				commands.setFloorLabelAvailabilityNumber();
 			}, 
 			
@@ -644,6 +651,7 @@
 					} 
 				}
 				commands.updatePopoversFilteredNumbers();
+				commands.updateHeaderFilteredNumbers();
 				commands.setFloorLabelAvailabilityNumber();
 			},
 			
@@ -713,16 +721,35 @@
 				}			
 			},
 			
+			updateHeaderFilteredNumbers: function() {
+				$('#popover0 .popover-availability span').text(thirdStackUnitsFiltered.length);
+				$('#popover1 .popover-availability span').text(secondStackUnitsFiltered.length);
+				$('#popover2 .popover-availability span').text(firstStackUnitsFiltered.length);
+				
+				// update header by inserting units availability from popovers
+				if (secondView.hasClass('second-view__part1')) {
+					unitsAvailability.find('span').text(firstStackUnitsFiltered.length);
+				} else if (secondView.hasClass('second-view__part2')) {
+					unitsAvailability.find('span').text(secondStackUnitsFiltered.length);
+				} else if (secondView.hasClass('second-view__part3')) {
+					unitsAvailability.find('span').text(thirdStackUnitsFiltered.length);
+				}
+			},
+			
 			setFloorLabelAvailabilityNumber: function() {
 				// check each .level for available units and update the label
 				$('.level').each(function() {
-					var availableUnitsTotal = $(this).find('[data-filter]').length;
+					var availableUnitsLevelTotal = $(this).find('[data-filter]').length;
 					var floorLabel = $(this).find('.floor-labels');
-					floorLabel.find('span').text(availableUnitsTotal);
-					if (availableUnitsTotal === 0) {
+					floorLabel.find('span').text(availableUnitsLevelTotal);
+					$(this).find('.floor-availability-label span').text(availableUnitsLevelTotal);
+					
+					if (availableUnitsLevelTotal === 0) {
 						floorLabel.removeClass('available-units');
+						$(this).addClass('noAvailableUnits');
 					} else {
 						floorLabel.addClass('available-units');
+						$(this).removeClass('noAvailableUnits');
 					}
 				});
 			}
@@ -752,6 +779,15 @@
 				$(this).attr('data-deposit', 1500);
 			}
 		});
+		
+		// initialize tabs in 3rd View
+		$('#unitDetailTabs a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		});
+
+		// initialize carousel in 3rd View
+		$('.carousel').carousel();
 		
 		
 		
@@ -991,40 +1027,35 @@
 			}
 			
 		});
-		
+	
 		
 		// ### 6. Some more init functions and commands
 
-		// Loads data from JSON to create 1st view.  Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
-		function loadData() {
-
-		//        // loops through each plans.js object:
-		//        $.each(plans, function (key, cardData) {
-		//
-		//            // first creates html card for each plans.js objects
-		//            var CARD = _makeCard();
-		//            // personalizes each card:
-		//            CARD.title.text(typeToString(cardData.type) + ' | ' + cardData.size);
-		//            CARD.name.text(cardData.name);
-		//            CARD.image.attr({src: cardData.image});
-		//            CARD.pre.text(cardData.price.pre);
-		//            CARD.price.text('$' + cardData.price.usd);
-		//            CARD.post.text(cardData.price.post);
-		//            CARD.note.text(cardData.note);
-		//            // add the 'specials' banner:
-		//            if (cardData.specials) CARD.item.addClass('special');
-		//            cards.append(CARD.card);
-		//
-		//        });
-		}
+//		// Loads data from JSON to create 1st view.  Some initial tasks e.g. load data, initialize popovers & tabs, etc. 
+//		function loadData() {
+//
+//		//        // loops through each plans.js object:
+//		//        $.each(plans, function (key, cardData) {
+//		//
+//		//            // first creates html card for each plans.js objects
+//		//            var CARD = _makeCard();
+//		//            // personalizes each card:
+//		//            CARD.title.text(typeToString(cardData.type) + ' | ' + cardData.size);
+//		//            CARD.name.text(cardData.name);
+//		//            CARD.image.attr({src: cardData.image});
+//		//            CARD.pre.text(cardData.price.pre);
+//		//            CARD.price.text('$' + cardData.price.usd);
+//		//            CARD.post.text(cardData.price.post);
+//		//            CARD.note.text(cardData.note);
+//		//            // add the 'specials' banner:
+//		//            if (cardData.specials) CARD.item.addClass('special');
+//		//            cards.append(CARD.card);
+//		//
+//		//        });
+//		}
 
 	} // end of 'init' function
-	
-	
-	
-
 	
 	$(document).ready(init);
 
 })(jQuery);
-
