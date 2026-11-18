@@ -2,9 +2,15 @@
 
 A front-end prototype for apartment discovery. Instead of opening a separate listing for each unit, prospective renters can start with the building, choose a group of floors, and see which units are available directly on an interactive floor plan.
 
-![Building overview and SVG floor plan with sample availability](Screen%20Shot%202018-09-05%20at%201.57.50%20PM.png)
+**[Explore the live prototype](https://musical-gnome-22e64f.netlify.app/)** · [Run locally](#run-locally)
 
-*Original 2018 prototype screenshot. Availability and prices are illustrative, not current listings.*
+**JavaScript · jQuery · SVG · CSS transitions**
+
+Built by **[Maria Blair](https://github.com/mashablair)**. A real-estate UI study in making spatial information, availability, and filtering understandable in one interface.
+
+![Working property explorer showing the building and stacked SVG floor plans](docs/screenshots/property-explorer.jpg)
+
+*Captured from the working local preview in November 2026, after verifying the deployed prototype. The original project dates to 2018; availability and prices are illustrative.*
 
 ## What to look at
 
@@ -22,7 +28,7 @@ cd interactive-site-map
 python3 -m http.server 8000
 ```
 
-Open [localhost:8000](http://localhost:8000/). Choose a building section, move between floors, then try a bedroom or rent filter. Some styles and scripts reference legacy external CDNs and may not load in every environment.
+Open [localhost:8000](http://localhost:8000/). Choose a building section, move between floors, then try a bedroom or rent filter. The prototype uses legacy libraries and externally hosted styles/assets, so internet access is needed even for local preview.
 
 ## Code map
 
@@ -32,4 +38,8 @@ Open [localhost:8000](http://localhost:8000/). Choose a building section, move b
 | [`main.js`](main.js) | View changes, floor navigation, filtering, and availability counts |
 | [`interractive-site-map.css`](interractive-site-map.css) | Layout, map styling, and transitions |
 
-This is an archived front-end prototype, not a live leasing or inventory system.
+## Scope
+
+The working interactions are building-section selection, floor navigation, bedroom filtering, and maximum-rent filtering. Other controls and leasing links belong to the original UI mockup; this is not a connected inventory or leasing system.
+
+[Verification notes](docs/PORTFOLIO_CHECK.md) describe the current browser checks.
