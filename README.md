@@ -8,9 +8,15 @@ A front-end prototype for apartment discovery. Instead of opening a separate lis
 
 Built by **[Maria Blair](https://github.com/mashablair)**. A real-estate UI study in making spatial information, availability, and filtering understandable in one interface.
 
-![Working property explorer showing the building and stacked SVG floor plans](docs/screenshots/property-explorer.jpg)
+### Stacked floor view
 
-*Captured from the working local preview in November 2026, after verifying the deployed prototype. The original project dates to 2018; availability and prices are illustrative.*
+[![Community viewer showing building availability and stacked floor plans for floors one through four](docs/screenshots/stacked-view.jpeg)](docs/screenshots/stacked-view.jpeg)
+
+### Single-floor view
+
+[![Single-floor view showing available apartments, bedroom counts, and illustrative rents on floor three](docs/screenshots/one-floor-view.jpeg)](docs/screenshots/one-floor-view.jpeg)
+
+*Screenshots captured by Maria Blair from the working prototype in November 2026. The original project dates to 2018; availability and prices are illustrative. Click an image to view it at full size.*
 
 ## What to look at
 
